@@ -1,0 +1,9 @@
+{
+	"passes" : 
+	[
+		{
+			"shader" : "genericimage2",
+			"textures" : [ "util/white" ]
+		}
+	]
+}

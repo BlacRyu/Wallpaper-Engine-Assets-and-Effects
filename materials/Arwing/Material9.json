@@ -1,0 +1,9 @@
+{
+	"passes" : 
+	[
+		{
+			"shader" : "generic2",
+			"textures" : [ "Arwing/Material9" ]
+		}
+	]
+}

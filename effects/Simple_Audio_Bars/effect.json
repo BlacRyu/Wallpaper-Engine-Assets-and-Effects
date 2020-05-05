@@ -1,0 +1,21 @@
+{
+	"dependencies" : 
+	[
+		"materials/effects/Simple_Audio_Bars.json",
+		"shaders/effects/Simple_Audio_Bars.frag",
+		"shaders/effects/Simple_Audio_Bars.vert"
+	],
+	"description" : "Adds a cusomizable audio bar effect to the layer. Supports various positions (left, right, both, center, etc.) and as many bars as you'd like.",
+	"editable" : true,
+	"group" : "localeffects",
+	"name" : "Simple Audio Bars",
+	"passes" : 
+	[
+		{
+			"material" : "materials/effects/Simple_Audio_Bars.json"
+		}
+	],
+	"preview" : "preview/project.json",
+	"replacementkey" : "Simple_Audio_Bars",
+	"version" : 1
+}

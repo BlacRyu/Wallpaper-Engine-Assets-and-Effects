@@ -1,0 +1,6 @@
+{
+	"height" : 256,
+	"material" : "materials/preview.json",
+	"nopadding" : true,
+	"width" : 256
+}

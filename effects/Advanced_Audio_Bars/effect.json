@@ -1,0 +1,65 @@
+{
+	"dependencies" : 
+	[
+		"materials/effects/Advanced_Audio_Bars.json",
+		//"materials/effects/Advanced_Audio_Bars_copy.json",
+		"shaders/effects/Advanced_Audio_Bars.frag",
+		"shaders/effects/Advanced_Audio_Bars.vert",
+		// "shaders/effects/Advanced_Audio_Bars_copy.frag",
+		// "shaders/effects/Advanced_Audio_Bars_copy.vert"
+		"shaders/passthrough.frag",
+		"shaders/passthrough.vert"
+	],
+	"description" : "Adds a cusomizable audio bar effect to the layer. Supports various positions (left, right, both, center, etc.) and as many bars as you'd like.",
+	"editable" : true,
+	"fbos" :
+	[
+		{
+			"name" : "_rt_AudioBuffer1",
+			"format" : "rgba8888"
+		},
+		{
+			"name" : "_rt_AudioBuffer2",
+			"format" : "rgba8888"
+		}
+	],
+	"group" : "localeffects",
+	"name" : "Advanced Audio Bars",
+	"passes" : 
+	[
+		// {
+		// 	"material" : "materials/effects/Advanced_Audio_Bars_copy.json",
+		// 	"target" : "_rt_AudioBuffer1",
+		// 	"bind" :
+		// 	[
+		// 		{
+		// 			"name" : "_rt_AudioBuffer2",
+		// 			"index" : 0
+		// 		}
+		// 	]
+		// },
+		{
+			"material" : "materials/effects/Advanced_Audio_Bars.json",
+			"target" : "_rt_AudioBuffer2",
+			"bind" :
+			[
+				{
+					"name" : "_rt_AudioBuffer1",
+					"index" : 0
+				}
+			]
+		}
+		// {
+		// 	"material" : "materials/effects/Advanced_Audio_Bars_copy.json",
+		// 	"bind" :
+		// 	[
+		// 		{
+		// 			"name" : "_rt_AudioBuffer2",
+		// 			"index" : 0
+		// 		}
+		// 	]
+		// },
+	],
+	"replacementkey" : "Advanced_Audio_Bars",
+	"version" : 1
+}

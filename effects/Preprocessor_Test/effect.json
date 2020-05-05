@@ -1,0 +1,19 @@
+{
+	"dependencies" : 
+	[
+		"materials/effects/Preprocessor_Test.json",
+		"shaders/effects/Preprocessor_Test.frag",
+		"shaders/effects/Preprocessor_Test.vert"
+	],
+	"editable" : true,
+	"group" : "localeffects",
+	"name" : "Preprocessor Test",
+	"passes" : 
+	[
+		{
+			"material" : "materials/effects/Preprocessor_Test.json"
+		}
+	],
+	"replacementkey" : "Preprocessor_Test",
+	"version" : 1
+}

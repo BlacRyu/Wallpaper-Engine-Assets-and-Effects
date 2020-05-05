@@ -1,0 +1,94 @@
+{
+	"animationmode" : null,
+	"children" : 
+	[
+		{
+			"id" : 3,
+			"name" : "particles/ice_breath_short.json",
+			"type" : "eventspawn"
+		}
+	],
+	"controlpoint" : 
+	[
+		{
+			"flags" : 0,
+			"id" : 0,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 1,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 2,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 3,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 4,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 5,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 6,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 7,
+			"offset" : "0 0 0"
+		}
+	],
+	"emitter" : 
+	[
+		{
+			"directions" : "1 1 0",
+			"distancemax" : 0,
+			"distancemin" : 0,
+			"id" : 2,
+			"name" : "sphererandom",
+			"origin" : "0 0 0",
+			"rate" : 0.33000000000000002
+		}
+	],
+	"flags" : null,
+	"initializer" : 
+	[
+		{
+			"id" : 1,
+			"max" : 1,
+			"min" : 1,
+			"name" : "lifetimerandom"
+		},
+		{
+			"id" : 5,
+			"max" : 500,
+			"min" : 500,
+			"name" : "sizerandom"
+		}
+	],
+	"material" : "materials/particle/halo_2.json",
+	"maxcount" : 500,
+	"operator" : [],
+	"renderer" : 
+	[
+		{
+			"id" : 4,
+			"name" : "sprite"
+		}
+	],
+	"sequencemultiplier" : null,
+	"starttime" : 0
+}

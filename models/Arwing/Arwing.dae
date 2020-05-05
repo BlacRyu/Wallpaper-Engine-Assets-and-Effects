@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.82.5 commit date:2019-12-14, commit time:00:47, hash:9b871683b1d1</authoring_tool>
+    </contributor>
+    <created>2020-03-15T15:01:24</created>
+    <modified>2020-03-15T15:01:24</modified>
+    <unit name="decimeter" meter="0.1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Material15-effect">
+      <profile_COMMON>
+        <newparam sid="Material15_png-surface">
+          <surface type="2D">
+            <init_from>Material15_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material15_png-sampler">
+          <sampler2D>
+            <source>Material15_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material15_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material9-effect">
+      <profile_COMMON>
+        <newparam sid="Material9_png-surface">
+          <surface type="2D">
+            <init_from>Material9_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material9_png-sampler">
+          <sampler2D>
+            <source>Material9_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material9_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material8-effect">
+      <profile_COMMON>
+        <newparam sid="Material8_png-surface">
+          <surface type="2D">
+            <init_from>Material8_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material8_png-sampler">
+          <sampler2D>
+            <source>Material8_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material8_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material6-effect">
+      <profile_COMMON>
+        <newparam sid="Material6_png-surface">
+          <surface type="2D">
+            <init_from>Material6_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material6_png-sampler">
+          <sampler2D>
+            <source>Material6_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material6_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material7-effect">
+      <profile_COMMON>
+        <newparam sid="Material7_png-surface">
+          <surface type="2D">
+            <init_from>Material7_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material7_png-sampler">
+          <sampler2D>
+            <source>Material7_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material7_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material3-effect">
+      <profile_COMMON>
+        <newparam sid="Material3_png-surface">
+          <surface type="2D">
+            <init_from>Material3_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material3_png-sampler">
+          <sampler2D>
+            <source>Material3_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material3_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="M_7CF8406C_c-effect">
+      <profile_COMMON>
+        <newparam sid="M_7CF8406C_c_png-surface">
+          <surface type="2D">
+            <init_from>M_7CF8406C_c_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="M_7CF8406C_c_png-sampler">
+          <sampler2D>
+            <source>M_7CF8406C_c_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="M_7CF8406C_c_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material10-effect">
+      <profile_COMMON>
+        <newparam sid="Material10_png-surface">
+          <surface type="2D">
+            <init_from>Material10_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material10_png-sampler">
+          <sampler2D>
+            <source>Material10_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material10_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material2-effect">
+      <profile_COMMON>
+        <newparam sid="Material2_png-surface">
+          <surface type="2D">
+            <init_from>Material2_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material2_png-sampler">
+          <sampler2D>
+            <source>Material2_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material2_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material1-effect">
+      <profile_COMMON>
+        <newparam sid="Material1_png-surface">
+          <surface type="2D">
+            <init_from>Material1_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material1_png-sampler">
+          <sampler2D>
+            <source>Material1_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material1_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material12-effect">
+      <profile_COMMON>
+        <newparam sid="Material12_png-surface">
+          <surface type="2D">
+            <init_from>Material12_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material12_png-sampler">
+          <sampler2D>
+            <source>Material12_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material12_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material11-effect">
+      <profile_COMMON>
+        <newparam sid="Material11_png-surface">
+          <surface type="2D">
+            <init_from>Material11_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material11_png-sampler">
+          <sampler2D>
+            <source>Material11_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material11_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material4-effect">
+      <profile_COMMON>
+        <newparam sid="Material4_png-surface">
+          <surface type="2D">
+            <init_from>Material4_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material4_png-sampler">
+          <sampler2D>
+            <source>Material4_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material4_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material5-effect">
+      <profile_COMMON>
+        <newparam sid="Material5_png-surface">
+          <surface type="2D">
+            <init_from>Material5_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material5_png-sampler">
+          <sampler2D>
+            <source>Material5_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material5_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material14-effect">
+      <profile_COMMON>
+        <newparam sid="Material14_png-surface">
+          <surface type="2D">
+            <init_from>Material14_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material14_png-sampler">
+          <sampler2D>
+            <source>Material14_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="Material14_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="M_7CF8406C_c_png" name="M_7CF8406C_c_png">
+      <init_from>M_7CF8406C_c.png</init_from>
+    </image>
+    <image id="Material10_png" name="Material10_png">
+      <init_from>Material10.png</init_from>
+    </image>
+    <image id="Material11_png" name="Material11_png">
+      <init_from>Material11.png</init_from>
+    </image>
+    <image id="Material12_png" name="Material12_png">
+      <init_from>Material12.png</init_from>
+    </image>
+    <image id="Material14_png" name="Material14_png">
+      <init_from>Material14.png</init_from>
+    </image>
+    <image id="Material15_png" name="Material15_png">
+      <init_from>Material15.png</init_from>
+    </image>
+    <image id="Material1_png" name="Material1_png">
+      <init_from>Material1.png</init_from>
+    </image>
+    <image id="Material2_png" name="Material2_png">
+      <init_from>Material2.png</init_from>
+    </image>
+    <image id="Material3_png" name="Material3_png">
+      <init_from>Material3.png</init_from>
+    </image>
+    <image id="Material4_png" name="Material4_png">
+      <init_from>Material4.png</init_from>
+    </image>
+    <image id="Material5_png" name="Material5_png">
+      <init_from>Material5.png</init_from>
+    </image>
+    <image id="Material6_png" name="Material6_png">
+      <init_from>Material6.png</init_from>
+    </image>
+    <image id="Material7_png" name="Material7_png">
+      <init_from>Material7.png</init_from>
+    </image>
+    <image id="Material8_png" name="Material8_png">
+      <init_from>Material8.png</init_from>
+    </image>
+    <image id="Material9_png" name="Material9_png">
+      <init_from>Material9.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="Material15-material" name="Material15">
+      <instance_effect url="#Material15-effect"/>
+    </material>
+    <material id="Material9-material" name="Material9">
+      <instance_effect url="#Material9-effect"/>
+    </material>
+    <material id="Material8-material" name="Material8">
+      <instance_effect url="#Material8-effect"/>
+    </material>
+    <material id="Material6-material" name="Material6">
+      <instance_effect url="#Material6-effect"/>
+    </material>
+    <material id="Material7-material" name="Material7">
+      <instance_effect url="#Material7-effect"/>
+    </material>
+    <material id="Material3-material" name="Material3">
+      <instance_effect url="#Material3-effect"/>
+    </material>
+    <material id="M_7CF8406C_c-material" name="M_7CF8406C_c">
+      <instance_effect url="#M_7CF8406C_c-effect"/>
+    </material>
+    <material id="Material10-material" name="Material10">
+      <instance_effect url="#Material10-effect"/>
+    </material>
+    <material id="Material2-material" name="Material2">
+      <instance_effect url="#Material2-effect"/>
+    </material>
+    <material id="Material1-material" name="Material1">
+      <instance_effect url="#Material1-effect"/>
+    </material>
+    <material id="Material12-material" name="Material12">
+      <instance_effect url="#Material12-effect"/>
+    </material>
+    <material id="Material11-material" name="Material11">
+      <instance_effect url="#Material11-effect"/>
+    </material>
+    <material id="Material4-material" name="Material4">
+      <instance_effect url="#Material4-effect"/>
+    </material>
+    <material id="Material5-material" name="Material5">
+      <instance_effect url="#Material5-effect"/>
+    </material>
+    <material id="Material14-material" name="Material14">
+      <instance_effect url="#Material14-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Arwing-mesh" name="Arwing">
+      <mesh>
+        <source id="Arwing-mesh-positions">
+          <float_array id="Arwing-mesh-positions-array" count="369">-0.157674 0.658789 0.636509 0.1572819 1.19168 -0.64882 -0.157674 1.19168 -0.64882 0.1572819 0.658789 0.63651 0.354133 0.7358 -0.273302 -0.354524 0.7358 -0.273302 -1.22067 0.477053 -0.584587 -0.866336 0.08917695 -0.448857 -1.88996 -0.03071647 -0.482857 -0.630116 0.4804 -0.506169 -0.354524 0.008688569 -0.484527 -1.95773e-4 0.1106899 -0.844209 -1.95815e-4 0.244741 -0.495345 0.629724 0.4804 -0.506169 -1.95811e-4 0.75586 -0.518657 -1.95624e-4 0.804545 -2.0578 -0.354524 0.727271 -0.280933 -0.1572819 0.687595 0.588189 0.1576769 0.687601 0.587795 1.97441e-4 0.687598 3.18898 -0.275391 0.517739 2.05394 -0.157283 0.321096 2.06269 -0.354133 0.01216548 0.460955 -0.550983 0.167731 0.414467 -0.866335 1.4049 -1.84841 -1.22027 0.167731 0.414467 -0.865944 0.2372609 1.9486 0.354133 0.008695483 -0.484921 0.865944 0.08917695 -0.448856 1.22027 0.47706 -0.58498 0.865944 1.40491 -1.8488 0.550985 0.167731 0.414467 0.866338 0.237268 1.94821 1.22067 0.167731 0.414467 0.354527 0.01216548 0.460955 -0.07854098 0.16012 1.99135 0.07893717 0.16012 1.99135 0.157676 0.321096 2.06269 0.275787 0.517739 2.05394 0.354133 0.727271 -0.280933 0.1572819 1.22255 -0.658122 -0.157674 1.22255 -0.658122 1.88957 -0.03070956 -0.48325 0.846655 -0.240109 0.117496 1.20098 -0.161432 1.84828 1.51555 -0.240109 0.117496 1.20059 -0.643821 -0.10065 1.20059 -0.3005 -1.2196 1.12185 0.173013 -0.334768 1.23996 -0.220274 -0.316868 1.12185 -0.220274 -0.316868 1.23996 0.173013 -0.334768 1.23996 0.190914 0.05852007 1.23996 -0.191557 0.312473 1.12185 -0.191557 0.312473 1.12185 0.190914 0.05852007 0.839568 -0.08341008 -1.2717 1.36988 0.04631388 -0.945355 1.06595 -0.450375 -1.94557 1.36791 -0.06982409 -0.924162 1.49232 -0.406907 -1.66287 1.4935 -0.329482 -1.67687 0.845866 -0.09342998 -1.28408 1.37894 -0.08128726 -0.944052 1.06476 -0.45752 -1.94215 1.35413 -0.152573 -0.898446 1.50098 -0.495096 -1.66363 1.50256 -0.417671 -1.67763 1.35768 0.03087204 -0.962951 1.80413 0.1300539 -0.1532109 1.49705 -0.342761 -1.68301 1.33996 0.425713 -0.553593 0.901772 0.303041 -0.832956 1.33366 0.07730555 -0.49041 1.35413 -0.162688 -0.927762 1.02618 -0.0772801 -1.14992 1.49429 -0.498002 -1.65502 1.09232 -0.458329 -1.91854 1.37343 -0.52054 -2.23267 1.60768 -0.519131 -2.20075 1.76791 -0.457576 -1.62517 1.89075 -0.636746 -1.9386 1.7624 -0.742832 -3.63325 -1.51594 -0.239722 0.117897 -1.20059 -0.161432 1.84828 -0.846652 -0.239722 0.117897 -1.20098 -0.643828 -0.100256 -1.20098 -0.3005 -1.2196 -1.24035 0.1730059 -0.334375 -1.12224 -0.220281 -0.316475 -1.24035 -0.220281 -0.316475 -1.12224 0.1730059 -0.334375 -1.12224 0.190907 0.05891346 -1.12224 -0.191557 0.312473 -1.24035 0.190907 0.05891346 -1.24035 -0.191557 0.312473 -1.50295 -0.417284 -1.67723 -1.37894 -0.08129417 -0.943658 -0.845863 -0.09343689 -1.28369 -1.35453 -0.152972 -0.89806 -1.06476 -0.45752 -1.94215 -1.50138 -0.494709 -1.66323 -1.49389 -0.329489 -1.67648 -1.37027 0.04630696 -0.944961 -0.839565 -0.08341699 -1.27131 -1.36791 -0.06982409 -0.924163 -1.06634 -0.450382 -1.94518 -1.49232 -0.406914 -1.66248 -1.80452 0.130047 -0.152818 -1.49704 -0.342768 -1.68262 -1.76791 -0.457583 -1.62478 -1.35807 0.03087204 -0.962952 -1.33996 0.425713 -0.553593 -1.33366 0.0772987 -0.490016 -1.35453 -0.162688 -0.927762 -1.49429 -0.498009 -1.65463 -1.89114 -0.636746 -1.9386 -1.37382 -0.520547 -2.23228 -1.76279 -0.742839 -3.63285 -1.60767 -0.519131 -2.20075 -1.09271 -0.458329 -1.91854 -1.02618 -0.07728695 -1.14953 -0.90177 0.303041 -0.832956</float_array>
+          <technique_common>
+            <accessor source="#Arwing-mesh-positions-array" count="123" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Arwing-mesh-normals">
+          <float_array id="Arwing-mesh-normals-array" count="369">-0.3015071 0.8807868 0.3651136 0.3014674 0.8807773 0.3651695 -0.4589025 0.820739 0.3402881 0.4588803 0.8207508 0.3402896 0.8154314 0.5347191 0.2216917 -0.8154326 0.5347174 0.2216912 -0.4693291 0.009666502 -0.8829704 -0.1153301 -0.8668297 -0.485083 -0.4602357 -0.5605684 -0.6884375 -0.4216102 0.2213922 -0.8793352 -0.208233 -0.8492373 -0.4852164 -1.23832e-4 0.01312577 -0.9999139 1.15574e-5 0.7151244 -0.6989973 0.4215235 0.2217765 -0.8792799 3.05846e-6 -0.871436 -0.4905092 -2.28331e-4 0.7966511 -0.6044395 -0.4110675 0.8656332 0.2858371 -0.4021888 0.9126856 0.07245177 0.3356332 0.9395022 0.06845539 -4.52995e-6 0.5535693 0.8328031 -0.9615329 0.2166914 0.1688173 -0.6890535 -0.609075 0.3927252 -0.3916614 -0.900022 0.1912116 0.7779075 -0.5177344 0.3561055 0.2434239 0.9664785 -0.08163529 -0.832776 -0.4388282 0.3375112 0.07868498 0.1038337 0.9914774 0.1711527 -0.9012407 -0.3980857 0.11545 -0.866822 -0.4850682 0.4690062 0.008854031 -0.8831505 -0.2427434 0.9666559 -0.08156031 -0.777957 -0.5172913 0.3566409 -0.0790047 0.1052592 0.9913017 0.8329616 -0.4389994 0.3368299 0.3907431 -0.896559 0.208571 -0.2562024 -0.8811118 0.397495 0.3500534 -0.7901386 0.5031338 0.6892255 -0.608907 0.3926838 0.9615895 0.2165452 0.1686828 0.5674562 0.8016058 0.1882067 0.3372272 0.8531267 0.3980612 -0.4608664 0.8730348 0.1594129 0.4597665 -0.5609585 -0.6884333 -0.9006602 0.4303707 -0.05993682 0.08790147 -0.7757957 0.6248316 0.8900104 0.4526434 -0.0547316 0.02969062 -0.9995461 -0.005131244 0.07915377 -0.3339713 -0.9392539 -0.8944397 -0.02049559 -0.4467188 0.8944396 -0.02032941 -0.4467267 -0.7070807 -0.03215098 -0.7064017 0.7071074 -0.03214985 -0.706375 0.8944339 0.2473605 0.3725599 0.7071024 0.3911464 0.5890761 -0.8944306 0.2473926 0.3725463 -0.7070896 0.3911455 0.5890921 -0.5432328 -0.4539718 0.7062633 -0.2245935 0.9734151 -0.04495531 0.2976212 0.4667378 -0.832813 -0.4789687 -0.4623189 0.746224 0.07498681 -0.9971196 -0.01137596 0.3728967 0.4653654 -0.8027348 -0.6521922 -0.2104982 0.7282418 -0.02162617 0.9984533 -0.05121928 0.3774276 0.476665 -0.7939389 -0.6056321 -0.2218528 0.7641931 -0.07499718 -0.994701 -0.07032424 0.4246323 0.469764 -0.773957 0.2653596 0.5964047 -0.7575525 0.7140372 0.5283923 0.4592956 -0.2627503 0.9412688 -0.2120741 -0.1205379 0.948143 0.2941013 -0.9611978 0.1478945 0.2328651 -0.5970667 -0.3650042 0.7143412 -0.5449189 -0.8173964 0.1868864 0.1703771 -0.1292828 -0.9768611 -0.4072665 -0.818593 0.4050182 -0.7778812 0.1246587 0.6159231 -0.8184009 -0.02111595 -0.5742596 0.3046375 0.9294815 -0.2079911 0.9407871 -0.1012101 0.3235372 0.4291189 -0.8575763 0.2835841 0.2159891 0.9613188 -0.1709235 -0.8899289 0.4528279 -0.05452919 -0.08814108 -0.7752234 0.6255075 0.9006801 0.4303073 -0.06009256 -0.0298736 -0.9995412 -0.005010426 -0.07990896 -0.3335372 -0.9393442 -0.894438 -0.02032965 -0.4467297 0.8944339 -0.02045106 -0.4467324 -0.7070717 -0.03215146 -0.7064106 0.7071073 -0.03214979 -0.706375 0.8944226 0.2471249 0.3727434 0.7071034 0.3907278 0.5893528 -0.7071034 0.390721 0.5893572 -0.8944156 0.2471397 0.3727502 -0.3696866 0.6530397 -0.6609623 0.1482899 0.9689452 0.1978773 0.2634657 0.954006 0.1430335 0.5237786 -0.5520485 0.6487669 -0.03153991 -0.8734698 -0.4858557 -0.1911464 -0.8882794 -0.4176396 -0.2678289 0.6578204 -0.7039461 0.4003396 0.8630594 0.3079884 0.5302435 0.813347 0.2393922 0.3824875 -0.6578769 0.648769 -0.1643983 -0.8949975 -0.4146718 -0.3241961 -0.8778831 -0.3524461 -0.7143518 0.5285502 0.4586244 0.06313639 0.9813706 -0.1814536 -0.9407099 -0.1009556 0.3238411 -0.03365492 0.5946674 -0.8032671 0.1203776 0.9482586 0.2937938 0.5971616 -0.3648402 0.7143456 0.3863605 -0.8898002 0.2428609 0.5764163 -0.7475603 0.3299971 -0.4286596 -0.8578389 0.2834846 0.8183713 -0.02113699 -0.5743011 -0.2151961 0.9614927 -0.1709458 -0.3042134 0.9296458 -0.2078769 0.7786386 0.1245401 0.6149892 -0.169308 -0.1296736 -0.9769952 0.9612619 0.1480861 0.2324785</float_array>
+          <technique_common>
+            <accessor source="#Arwing-mesh-normals-array" count="123" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Arwing-mesh-map-0">
+          <float_array id="Arwing-mesh-map-0-array" count="1068">0 -0.01659995 1 1 1 0 0 -0.01659995 0 1 1 1 0.999023 1 -1.12402 0.10742 -2.47949 1 -2.58008 1 0.999023 0.999023 -0.39355 0.08105999 1 0.999023 0 0.999023 1 0 1 1 0 1 1 0 1 1 0 1 0.56934 1.77832 0 0.999023 1 0 1 0.999023 -0.06786996 -0.34619 0 0.5 0.5 0.5 -0.08007997 0.208483 0.581055 0.2094579 0.250485 -0.05838328 0.581055 0.2094579 -0.08007997 0.208483 0.25049 0.521468 0.5 0.5 -0.03027498 -0.66211 0 0.5 0 0.25 0.5 0.25 -0.15918 -0.743165 2.14648 2.72363 1 1 0 1 0 0.999023 0.28613 2.31152 0.71387 2.31152 1 0.1 0.5 -0.811816 0 0.1 1 0.999023 1 0 0 0.999023 1 0 1 0.999023 0 0.999023 0 1 1 1 1 0 0.859537 0.4209 -0.801433 0.55127 0.15267 -0.03271496 1 0 0 0.999023 1 0.999023 0 1 0.05272996 1.76953 0.21777 1.83691 0.5 0.249756 0.52832 0.459718 0.635255 0.78418 1 1 0.66602 -1.64941 0 1 0.499025 -0.497315 -0.45508 1.3435 0.501465 0.253907 0.60156 -1.19238 0.2832 4.76563 1.00879 1.04785 0.60156 -1.19238 0 1 0.2832 4.76563 0 1 1 1 0.5166 -1.27344 0.5 0.333333 0.23584 -0.09472668 0 0.333333 1 0 0 0.999023 1 1 1 0.999023 0 0.999023 1 0 1 0 0 0.999023 1 0.999023 0 1 1 0.999023 1 0 1.03906 -0.3916 -0.03808999 -0.3916 1 1 1 0.999023 0.5 0.50879 0 0.999023 0 1 0.9834 0.98926 1 0 0 1 0.43066 1.77832 0.99805 1.00391 1 0.999023 1 0 0 0.999023 1 1 0.33398 -1.64941 0 0.999023 0 0.249756 -0.134765 0.78418 -0.02783 0.459717 -2.03711 -1.31934 -2.28223 4.6416 -1.66504 0.91895 -2.03711 -1.31934 -2.67383 0.87012 -2.28223 4.6416 0 0.999023 1 0.999023 0.4834 -1.27344 0.5 0.333008 0.26416 -0.09472668 0 0.333008 0 0.999023 1 0 1 0.999023 0.99512 0.999023 0 1 1 0 1 1 -0.03808999 -0.3916 0 1 1 1 0 1 0.625 3.21777 0.625 3.21777 0 1 0.375 3.21777 0 1 1 1 1 0 0.75 0.007814943 0 0.499511 0.499751 0.499511 0 0.499511 0.75 0.007814943 -0.24951 0.007814943 0 0.249756 0.5 0.249756 0.25 -0.61621 1 0 0 0.999023 1 1 0 0.999023 1 0 1 0.999023 1 0 1 0.999023 0 0.999023 0.78027 1.83496 0.94629 1.76758 0.99512 0.99805 0.15267 -0.03271496 -0.801433 0.55127 0.859537 0.4209 1 0 1 1 0 1 2.14648 -0.72363 0 1 1 1 0.65967 -0.743165 0 0.249756 0.5 0.249756 -0.141927 1.06152 0.801107 0.7373 0.04638665 -0.18164 0 0.999023 1 0.999023 0.52637 -0.004879891 0 0.333333 0.5 0.333333 0.833985 0.00162661 -0.141927 1.06152 0.04638665 -0.18164 0.801107 0.7373 0 0.333333 0.833985 0.00162661 -0.333495 0.00162661 0 0.999023 0.71387 2.31152 1 0.999023 0.547365 -0.663085 0 0.492675 0.5 0.5 0 1 1 0 1 1 0 0.999023 1 0 1.01269 0.9873 1 1 1 0 0 1 1 0 0 0.999023 1 0.999023 0 -0.502442 0 0.25 0.96289 1.34009 0 0.499511 -0.06786996 1.34619 0.5 0.499511 0.5 0.333333 0.25 -0.507487 0 0.333333 1 0.999023 0.5 0.58008 0.5 3.47266 1 0.999023 0.5 -0.91602 0.5 0.58008 0 0.333333 0.5 0.333333 0.25 -0.31836 0 0.999023 0.5 0.58008 0.5 -0.91602 0.5 3.47266 0.5 0.58008 0 0.999023 1 0 -0.03319996 1 1 1 -0.03319996 1 1 0 -0.03319996 0 0 0.39063 1 0.999023 0 0.999023 1 0 1 0.999023 0 0.39063 1 0 0 1 1 1 0 1 1 0 0 0 1 0 0 0.39063 0 0.999023 1 0 0 0.999023 1 0.999023 1.35059 2.38086 2.00293 1 -0.50879 2.08984 0.999023 0.999023 -0.39844 -4.08203 0 1 1.44238 -0.42578 0 1 2.00781 0.99512 1.44238 -0.42578 -0.48145 -0.11426 0 1 1 1 0 1 -0.7627 7.96973 -0.50879 2.08984 2.00293 1 0 1 1.40918 2.43555 1.99707 1.01269 -0.47852 2.1123 0 1 -0.19043 -5.43164 -1 1 0.5293 2.47266 2.02051 1.02148 0 1 0.5293 2.47266 2.43848 2.1709 2.02051 1.02148 0.01172 0.8418 0 1 1 1 -0.47852 2.1123 1.99707 1.01269 0 1 1 1 0 0.999023 1 0 0 1 1 1 1 0 0 1 1 0 1 1 1 1 0.79688 -0.54102 0 1 0 0.999023 0.999023 0.999023 1 0 1 0 1 1 0 1 0.999023 0 0 0.999023 0.999023 0.999023 1 0.999023 0 1 1 0 0 1 0.999023 1 0.999023 0 0.999023 0 0 1 1 1 1 1 0.999023 0 0 1 1 1 0.999023 0 0 1 0 0.999023 1 0 1 1 1 1 0 1 1 0 0.999023 0 0 1 0.999023 0.999023 0 1 1 0 1 1 0 1 1 1 1 0 1 0 0 0.999023 0.999023 0.999023 0.999023 0.999023 0.999023 0 0 0.999023 0 1 1 1 0.999023 0 0.999023 1 0 1 0.999023 0 0 0.999023 1 1 1 0 1 0 0 1 1 1 1 0 0 1 1 1 1 0 1 0.999023 0 1 1 1 0 1 0.07030999 2.55273 0.5 0.333008 0.25 -0.507487 0 0.333008 0.5 3.38184 1 1 0.5 0.89258 1 1 0.5 -0.8457 0.5 0.89258 0 0.333333 0.5 0.333333 0.25 -0.31836 0 1 0.5 0.89258 0.5 -0.8457 0.5 0.89258 0 1 0.5 3.38184 1 0 0 1 1 1 0 1 1 0 0 0 0 0.39063 1 1 0 0.999023 1 0 1 1 0 0.39063 0 0 1 0.999023 1 0 1 0.999023 0 0 0 0.999023 1 0 0 0.39063 0 0.999023 1 0 0 0.999023 1 0.999023 0 1 2.02637 0.99512 1.43652 -0.4502 0 0.999023 1 0.999023 0.19043 -5.43164 2.00977 0.99609 -0.42578 2.13867 1.46973 2.45703 0 1 -0.42578 2.13867 2.00977 0.99609 0 1 0.51563 7.29883 0.999023 0.999023 0 1 1.43652 -0.4502 -0.48047 -0.13184 1.99609 1.00684 0 1 0.64453 2.37793 1 0.999023 0 0.999023 -0.39844 6.08203 0 1 2.5 -0.11816 0.56543 -0.42676 2.0166 1.00195 2.5 -0.11816 0 1 1 0.999023 -0.7627 -5.96973 0 1 1.99609 1.00684 0.64453 2.37793 2.5 2.09473 0 1 1 0 1 1 0 1 1 1 1 0 1 1 1 0 0 0.999023 0 1 0.92871 2.55273 1 1 0 0.999023 0.999023 1 1 0 1 1 0.999023 0 0 1 1 0 1 1 0 1 0 0.999023 1 0.999023 0.63379 0.54297 0.999023 1 0.999023 0 0 0.999023 0 1 0.999023 0 0.999023 1 1 1 0 1 1 0 1 1 0 1 1 0 0 1 1 0.999023 1 0 0.999023 1 0 1 0.999023 0 0 1 1 1 1 0 0.04882997 1.31543 0 1 -0.9502 1.31543 1.69629 0.0634799 0 1 1 0.999023 1 0.999023 1 0 0 0.999023 1 1 1 0 0 1 0 0.999023 0.999023 0 0.999023 0.999023 1 0 1 1 0 1 1 1 0 1 1 0 0 1 1 1 0.20215 -0.54102 0 1 1 0 1 1 0 1 0.999023 0 0.999023 1 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#Arwing-mesh-map-0-array" count="534" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Arwing-mesh-vertices">
+          <input semantic="POSITION" source="#Arwing-mesh-positions"/>
+        </vertices>
+        <triangles material="Material15-material" count="4">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>0 0 0 1 1 1 2 2 2 0 0 3 3 3 4 1 1 5 3 3 6 4 4 7 1 1 8 0 0 9 2 2 10 5 5 11</p>
+        </triangles>
+        <triangles material="Material9-material" count="34">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>6 6 12 7 7 13 8 8 14 8 8 87 7 7 88 25 25 89 8 8 90 25 25 91 6 6 92 10 10 99 27 27 100 22 22 101 22 22 138 27 27 139 34 34 140 22 22 141 34 34 142 35 35 143 35 35 144 34 34 145 36 36 146 28 28 207 42 42 208 33 33 209 29 29 210 42 42 211 28 28 212 29 29 213 33 33 214 42 42 215 56 56 264 57 57 265 58 58 266 57 57 267 56 56 268 59 59 269 56 56 270 60 60 271 59 59 272 56 56 273 58 58 274 60 60 275 61 61 276 60 60 277 58 58 278 58 58 279 57 57 280 61 61 281 62 62 282 63 63 283 64 64 284 63 63 285 62 62 286 65 65 287 62 62 288 66 66 289 65 65 290 62 62 291 64 64 292 66 66 293 67 67 294 66 66 295 64 64 296 64 64 297 63 63 298 67 67 299 96 96 420 97 97 421 98 98 422 97 97 423 99 99 424 98 98 425 99 99 426 100 100 427 98 98 428 101 101 429 100 100 430 99 99 431 96 96 432 100 100 433 101 101 434 96 96 435 98 98 436 100 100 437 102 102 438 103 103 439 104 104 440 103 103 441 105 105 442 104 104 443 105 105 444 106 106 445 104 104 446 107 107 447 106 106 448 105 105 449 102 102 450 106 106 451 107 107 452 102 102 453 104 104 454 106 106 455</p>
+        </triangles>
+        <triangles material="Material8-material" count="76">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>9 9 15 7 7 16 6 6 17 9 9 18 10 10 19 7 7 20 9 9 21 11 11 22 10 10 23 20 20 48 19 19 49 17 17 50 19 19 51 20 20 52 21 21 53 21 21 54 20 20 55 9 9 56 21 21 60 9 9 61 22 22 62 9 9 63 23 23 64 22 22 65 7 7 93 22 22 94 23 23 95 7 7 96 10 10 97 22 22 98 10 10 102 11 11 103 27 27 104 13 13 105 27 27 106 11 11 107 13 13 108 28 28 109 27 27 110 13 13 111 29 29 112 28 28 113 34 34 132 28 28 133 31 31 134 27 27 135 28 28 136 34 34 137 37 37 147 36 36 148 34 34 149 19 19 159 37 37 160 38 38 161 37 37 162 13 13 163 38 38 164 37 37 165 34 34 166 13 13 167 34 34 168 31 31 169 13 13 170 19 19 174 38 38 175 18 18 176 41 41 186 40 40 187 15 15 188 21 21 204 22 22 205 35 35 206 68 68 300 69 69 301 70 70 302 69 69 303 68 68 304 71 71 305 72 72 306 71 71 307 68 68 308 71 71 309 72 72 310 73 73 311 72 72 312 74 74 313 73 73 314 72 72 315 75 75 316 74 74 317 72 72 318 68 68 319 75 75 320 68 68 321 74 74 322 75 75 323 74 74 324 68 68 325 70 70 326 74 74 327 70 70 328 76 76 329 70 70 330 77 77 331 76 76 332 77 77 333 70 70 334 78 78 335 78 78 336 70 70 337 79 79 338 70 70 339 80 80 340 79 79 341 70 70 342 69 69 343 80 80 344 74 74 345 80 80 346 69 69 347 74 74 348 76 76 349 80 80 350 76 76 351 81 81 352 80 80 353 78 78 354 81 81 355 76 76 356 78 78 357 82 82 358 81 81 359 78 78 360 79 79 361 82 82 362 79 79 363 81 81 364 82 82 365 79 79 366 80 80 367 81 81 368 77 77 369 78 78 370 76 76 371 73 73 372 74 74 373 69 69 374 71 71 375 73 73 376 69 69 377 108 108 456 109 109 457 110 110 458 108 108 459 111 111 460 109 109 461 108 108 462 112 112 463 111 111 464 112 112 465 108 108 466 113 113 467 108 108 468 114 114 469 113 113 470 108 108 471 110 110 472 114 114 473 110 110 474 115 115 475 114 114 476 116 116 477 115 115 478 110 110 479 116 116 480 117 117 481 115 115 482 116 116 483 118 118 484 117 117 485 116 116 486 119 119 487 118 118 488 116 116 489 110 110 490 119 119 491 110 110 492 109 109 493 119 119 494 119 119 495 109 109 496 117 117 497 109 109 498 120 120 499 117 117 500 109 109 501 115 115 502 120 120 503 111 111 504 115 115 505 109 109 506 114 114 507 115 115 508 111 111 509 111 111 510 121 121 511 114 114 512 122 122 513 121 121 514 111 111 515 114 114 516 121 121 517 122 122 518 114 114 519 122 122 520 113 113 521 112 112 522 113 113 523 122 122 524 111 111 525 112 112 526 122 122 527 115 115 528 117 117 529 120 120 530 118 118 531 119 119 532 117 117 533</p>
+        </triangles>
+        <triangles material="Material6-material" count="4">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>9 9 24 12 12 25 11 11 26 9 9 33 15 15 34 14 14 35 15 15 201 13 13 202 14 14 203 12 12 219 13 13 220 11 11 221</p>
+        </triangles>
+        <triangles material="Material7-material" count="4">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>9 9 27 13 13 28 12 12 29 13 13 30 9 9 31 14 14 32 37 37 150 35 35 151 36 36 152 35 35 153 37 37 154 21 21 155</p>
+        </triangles>
+        <triangles material="Material3-material" count="3">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>9 9 36 16 16 37 15 15 38 21 21 156 37 37 157 19 19 158 15 15 180 39 39 181 13 13 182</p>
+        </triangles>
+        <triangles material="M_7CF8406C_c-material" count="2">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>17 17 39 16 16 40 9 9 41 18 18 177 13 13 178 39 39 179</p>
+        </triangles>
+        <triangles material="Material10-material" count="2">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>16 16 42 17 17 43 18 18 44 16 16 198 18 18 199 39 39 200</p>
+        </triangles>
+        <triangles material="Material2-material" count="1">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>17 17 45 19 19 46 18 18 47</p>
+        </triangles>
+        <triangles material="Material1-material" count="2">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>9 9 57 20 20 58 17 17 59 18 18 171 38 38 172 13 13 173</p>
+        </triangles>
+        <triangles material="Material12-material" count="4">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>23 23 66 9 9 67 24 24 68 25 25 72 24 24 73 6 6 74 31 31 117 30 30 118 13 13 119 33 33 216 29 29 217 30 30 218</p>
+        </triangles>
+        <triangles material="Material11-material" count="16">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>6 6 69 24 24 70 9 9 71 26 26 75 24 24 76 25 25 77 26 26 78 23 23 79 24 24 80 25 25 81 23 23 82 26 26 83 13 13 114 30 30 115 29 29 116 32 32 120 30 30 121 31 31 122 32 32 123 33 33 124 30 30 125 31 31 126 33 33 127 32 32 128 43 43 225 46 46 226 44 44 227 43 43 228 47 47 229 46 46 230 45 45 234 46 46 235 47 47 236 44 44 237 46 46 238 45 45 239 84 84 381 83 83 382 86 86 383 83 83 384 87 87 385 86 86 386 85 85 390 86 86 391 87 87 392 86 86 393 85 85 394 84 84 395</p>
+        </triangles>
+        <triangles material="Material4-material" count="8">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>25 25 84 7 7 85 23 23 86 31 31 129 28 28 130 33 33 131 40 40 189 41 41 190 16 16 191 40 40 195 16 16 196 39 39 197 43 43 222 44 44 223 45 45 224 43 43 231 45 45 232 47 47 233 83 83 378 84 84 379 85 85 380 83 83 387 85 85 388 87 87 389</p>
+        </triangles>
+        <triangles material="Material5-material" count="2">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>39 39 183 15 15 184 40 40 185 16 16 192 41 41 193 15 15 194</p>
+        </triangles>
+        <triangles material="Material14-material" count="16">
+          <input semantic="VERTEX" source="#Arwing-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Arwing-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Arwing-mesh-map-0" offset="2" set="0"/>
+          <p>48 48 240 49 49 241 50 50 242 49 49 243 48 48 244 51 51 245 52 52 246 49 49 247 51 51 248 53 53 249 49 49 250 52 52 251 52 52 252 54 54 253 53 53 254 54 54 255 52 52 256 55 55 257 54 54 258 55 55 259 48 48 260 54 54 261 48 48 262 50 50 263 88 88 396 89 89 397 90 90 398 89 89 399 88 88 400 91 91 401 92 92 402 89 89 403 91 91 404 93 93 405 89 89 406 92 92 407 94 94 408 93 93 409 92 92 410 93 93 411 94 94 412 95 95 413 95 95 414 94 94 415 88 88 416 95 95 417 88 88 418 90 90 419</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Arwing" name="Arwing" type="NODE">
+        <matrix sid="transform">-4.37114e-8 -0.06715477 -0.9977426 0 -1 6.63629e-12 4.38098e-8 0 -2.93542e-9 0.9977426 -0.06715477 -0.4651101 0 0 0 1</matrix>
+        <instance_geometry url="#Arwing-mesh" name="Arwing">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material15-material" target="#Material15-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material9-material" target="#Material9-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material8-material" target="#Material8-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material6-material" target="#Material6-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material7-material" target="#Material7-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material3-material" target="#Material3-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="M_7CF8406C_c-material" target="#M_7CF8406C_c-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material10-material" target="#Material10-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material2-material" target="#Material2-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material1-material" target="#Material1-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material12-material" target="#Material12-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material11-material" target="#Material11-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material4-material" target="#Material4-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material5-material" target="#Material5-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material14-material" target="#Material14-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

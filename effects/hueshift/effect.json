@@ -1,0 +1,19 @@
+{
+	"version" : 1,
+	"name" : "Hue Shift",
+	"description" : "Shift the hue of the image across the color spectrum.",
+	"group" : "colorize",
+	"preview" : "preview/project.json",
+	"passes" :
+	[
+		{
+			"material" : "materials/effects/hueshift.json"
+		}
+	],
+	"dependencies" :
+	[
+		"materials/effects/hueshift.json",
+		"shaders/effects/hueshift.frag",
+		"shaders/effects/hueshift.vert"
+	]
+}

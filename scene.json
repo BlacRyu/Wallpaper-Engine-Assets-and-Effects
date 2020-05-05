@@ -1,0 +1,1222 @@
+{
+	"camera" : 
+	{
+		"center" : "0.000 0.000 -1.000",
+		"eye" : "0.000 0.000 0.000",
+		"up" : "0.000 1.000 0.000"
+	},
+	"general" : 
+	{
+		"ambientcolor" : "0.300 0.300 0.300",
+		"bloom" : true,
+		"bloomstrength" : 2.0,
+		"bloomthreshold" : 0.89999997615814209,
+		"camerafade" : false,
+		"cameraparallax" : false,
+		"cameraparallaxamount" : 0.5,
+		"cameraparallaxdelay" : 0.10000000149011612,
+		"cameraparallaxmouseinfluence" : 0.0,
+		"camerapreview" : false,
+		"camerashake" : false,
+		"camerashakeamplitude" : 0.5,
+		"camerashakeroughness" : 1.0,
+		"camerashakespeed" : 3.0,
+		"clearcolor" : "0.700 0.700 0.700",
+		"clearenabled" : true,
+		"farz" : 10000.0,
+		"fov" : 50.0,
+		"nearz" : 0.0099999997764825821,
+		"orthogonalprojection" : 
+		{
+			"height" : 1896,
+			"width" : 4096
+		},
+		"skylightcolor" : "0.300 0.300 0.300"
+	},
+	"objects" : 
+	[
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 2,
+			"locktransforms" : true,
+			"maxtime" : 5.0,
+			"mintime" : 1.0,
+			"muteineditor" : false,
+			"name" : "OMGHelpers (shared script module)",
+			"origin" : "0.000 -1.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"playbackmode" : "loop",
+			"scale" : "1.000 1.000 1.000",
+			"sound" : [],
+			"startsilent" : true,
+			"volume" : 
+			{
+				"script" : "'use strict';\n\nlet bEnableDebugText = true;\nlet debugText_Layers = [];\nlet debugText_FlashColor = new Vec3(0.5, 1.0, 1.0);\nlet debugText_Color = new Vec3(1.0, 1.0, 1.0);\nlet debugText_ShowBackground = true;\nlet debugText_BackgroundColor = new Vec3(0.1, 0.1, 0.1);\nlet debugText_Size = 12;\nlet debugText_Alpha = 0.75;\nlet debugText_FlashScale = 1.01;\n/** How many milliseconds to fade from the flash color to the normal \n * \tcolor when the text is updated. */\nlet debugText_FlashTime = 250;\n/** How many milliseconds to display the text before starting to fade out. */\nlet debugText_StickTime = 500;\n/** How many milliseconds to fade out the debug text before removing it. */\nlet debugText_FadeTime = 1500;\n\nexport function update() {\n\tlet currentTime = new Date().getTime();\n\t\n\tdebugText_Layers.forEach(\n\t\tfunction(textLayer, index, array) {\n\t\t\tif (currentTime > textLayer.lastUpdated + (debugText_StickTime + debugText_FadeTime)) {\n\t\t\t\ttextLayer.alpha = 0;\n\t\t\t\tthisScene.destroyLayer(textLayer);\n\t\t\t\tarray.splice(index, 1);\n\t\t\t}\n\t\t\telse if (currentTime > textLayer.lastUpdated + debugText_StickTime) {\n\t\t\t\ttextLayer.color = debugText_Color;\n\t\t\t\tlet fadeLerp = (currentTime - (textLayer.lastUpdated + debugText_StickTime)) / debugText_FadeTime;\n\t\t\t\ttextLayer.alpha = OMGHelpers.lerp(debugText_Alpha, 0, fadeLerp);\n\t\t\t}\n\t\t\telse {\n\t\t\t\tlet flashLerp = OMGHelpers.clamp((currentTime - textLayer.lastChanged) / debugText_FlashTime);\n\t\t\t\ttextLayer.color = OMGHelpers.lerp(debugText_FlashColor, debugText_Color, flashLerp);\n\t\t\t\ttextLayer.scale = new Vec3(OMGHelpers.lerp(debugText_FlashScale, 1, flashLerp));\n\t\t\t\ttextLayer.alpha = debugText_Alpha;\n\t\t\t}\n\n\t\t\tif (engine.canvasSize.x !== 0) {\n\t\t\t\tlet cornerY = engine.canvasSize.y;\n\t\t\t\tlet cornerX = 0;\n\t\t\t\tlet screenAspectRatio = engine.screenResolution.x / engine.screenResolution.y;\n\t\t\t\tlet canvasAspectRatio = engine.canvasSize.x / engine.canvasSize.y;\n\t\t\t\tif (screenAspectRatio > canvasAspectRatio) {\n\t\t\t\t\tcornerY = engine.screenResolution.y * engine.canvasSize.x / engine.screenResolution.x;\n\t\t\t\t\tcornerY += (engine.canvasSize.y - cornerY) / 2;\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tcornerX = engine.screenResolution.x * engine.canvasSize.y / engine.screenResolution.y;\n\t\t\t\t\tcornerX = (engine.canvasSize.x - cornerX) / 2;\n\t\t\t\t}\n\t\t\t\ttextLayer.origin = new Vec3(cornerX, cornerY - index * (debugText_Size * 3 + 10), 0);\n\t\t\t}\n\t\t\telse {\n\t\t\t\tlet aspectRatio = engine.screenResolution.x / engine.screenResolution.y;\n\t\t\t\tlet ct = thisScene.getCameraTransforms();\n\t\t\t\tlet forward = ct.center.subtract(ct.eye).normalize();\n\t\t\t\tlet up = ct.up;\n\t\t\t\tlet right = forward.cross(up);\n\t\t\t\tlet pos = ct.eye.add(forward).add(up.multiply(0.45)).add(right.multiply(-0.45 * aspectRatio));\n\t\t\t\tpos.y -= index * (debugText_Size * .002);\n\t\t\t\ttextLayer.origin = new Vec3(pos.x, pos.y, pos.z);\n\t\t\t\ttextLayer.scale = new Vec3(0.0005);\n\t\t\t}\n\t\t\ttextLayer.pointsize = debugText_Size;\n\t\t\ttextLayer.visible = bEnableDebugText;\n\t\t}\n\t);\n}\n\nclass OMGHelpers {\n\t/** Prints all key/value pairs present on the object to the console. */\n\tstatic printObjectValues(obj){\n\t\tif (typeof(obj) !== 'object' || obj === null)\n\t\t\treturn;\n\n\t\tlet keys = Object.keys(obj);\n\t\tfor (let i = 0; i < keys.length; ++i)\n\t\t\tconsole.log(keys[i] + \" - \" + obj[keys[i]]);\n\t}\n\n\t/** Attempts to add two values together. */\n\tstatic add(v1, v2) {\n\t\tif (!v2)\n\t\t\treturn v1;\n\t\telse if (typeof v1 === 'number' || typeof v1 === 'string')\n\t\t\treturn v1 + v2;\n\t\telse if (v1.add)\n\t\t\treturn v1.add(v2);\n\t\telse\n\t\t\treturn undefined;\n\t}\n\n\t/** Attempts to subtract the second value from the first value. */\n\tstatic subtract(v1, v2) {\n\t\tif (!v2)\n\t\t\treturn v1;\n\t\telse if (typeof v1 === 'number' || typeof v1 === 'string')\n\t\t\treturn v1 - v2;\n\t\telse if (v1.subtract)\n\t\t\treturn v1.subtract(v2);\n\t\telse\n\t\t\treturn undefined;\n\t}\n\n\t/** Attempts to multiply two values together. */\n\tstatic multiply(v1, v2) {\n\t\tif (v2 === undefined)\n\t\t\treturn undefined;\n\t\telse if (typeof v1 === 'number' || typeof v1 === 'string')\n\t\t\treturn v1 * v2;\n\t\telse if (v1.multiply)\n\t\t\treturn v1.multiply(v2);\n\t\telse\n\t\t\treturn undefined;\n\t}\n\n\t/** Attempts to divide the first value by the second value. */\n\tstatic divide(v1, v2) {\n\t\tif (!v2)\n\t\t\treturn undefined;\n\t\telse if (typeof v1 === 'number' || typeof v1 === 'string')\n\t\t\treturn v1 * v2;\n\t\telse if (v1.multiply)\n\t\t\treturn v1.multiply(v2);\n\t\telse\n\t\t\treturn undefined;\n\t}\n\n\t/**\n\t * True if the two parameters are the same type and contain equal values, otherwise false\n\t * @param [epsilon] {number} The minimum difference allowed between number values before they are considered non-equal (helps avoid some floating-point issues)\n\t * @return {boolean}\n\t */\n\tstatic equal(v1, v2, epsilon = 0.0001){\n\t\tif (v1 instanceof Vec3) {\n\t\t\tif (v2 instanceof Vec3)\n\t\t\t\treturn (Math.abs(v1.x - v2.x) < epsilon && Math.abs(v1.y - v2.y) < epsilon && Math.abs(v1.z - v1.z) < epsilon);\n\t\t\telse\n\t\t\t\treturn false;\n\t\t}\n\t\telse if (v1 instanceof Vec2) {\n\t\t\tif (v2 instanceof Vec2)\n\t\t\t\treturn (Math.abs(v1.x - v2.x) < epsilon && Math.abs(v1.y - v2.y) < epsilon);\n\t\t\telse\n\t\t\t\treturn false;\n\t\t}\n\t\telse switch (typeof v1) {\n\t\tcase \"number\":\n\t\t\tif (typeof v2 === \"number\")\n\t\t\t\treturn (Math.abs(v1 - v2) < epsilon);\n\t\t\telse\n\t\t\t\treturn false;\n\t\t\tbreak;\n\t\tdefault:\n\t\t\treturn (v1 === v2);\n\t\t}\n\t}\n\n\t/** Restricts a value to remain between two boundary values. \n\t * @param {number} val - The value to be restricted.\n\t * @param {number} min - The lower bound.\n\t * @param {number} max - The upper bound.\n\t*/\n\tstatic clamp(val, min = 0, max = 1) {\n\t\tswitch (typeof val) {\n\t\tcase \"number\":\n\t\t\treturn Math.min(max, Math.max(min, val));\n\t\t\tbreak;\n\t\tdefault:\n\t\t\treturn 0;\n\t\t\tbreak;\n\t\t}\n\t}\n\n\t/** Interpolate linearly from the first value to the second based on the third (0 to 1) */\n\tstatic lerp(v1, v2, percent) {\n\t\tif (typeof(v1) === \"number\")\n\t\t\treturn v1 + (v2 - v1) * percent;\n\t\telse if (v1 instanceof Vec2) {\n\t\t\tlet x = v1.x + (v2.x - v1.x) * percent;\n\t\t\tlet y = v1.y + (v2.y - v1.y) * percent;\n\t\t\treturn new Vec2(x, y);\n\t\t}\n\t\telse if (v1 instanceof Vec3) {\n\t\t\tlet x = v1.x + (v2.x - v1.x) * percent;\n\t\t\tlet y = v1.y + (v2.y - v1.y) * percent;\n\t\t\tlet z = v1.z + (v2.z - v1.z) * percent;\n\t\t\treturn new Vec3(x, y, z);\n\t\t}\n\t\telse if (v1 instanceof Vec4) {\n\t\t\tlet x = v1.x + (v2.x - v1.x) * percent;\n\t\t\tlet y = v1.y + (v2.y - v1.y) * percent;\n\t\t\tlet z = v1.z + (v2.z - v1.z) * percent;\n\t\t\tlet w = v1.w + (v2.w - v1.w) * percent;\n\t\t\treturn new Vec4(x, y, z, w);\n\t\t}\n\t\telse\n\t\t\treturn undefined;\n\t}\n\n\t/** Prints a stack trace to the console. */\n\tstatic stackTrace() {\n\t\treturn console.log(new Error().stack);\n\t}\n\t\n\t/** Creates or updates a text layer in the corner of the screen. \n\t * @param {string} name - The name of the text layer to create or update.\n\t * @param {string} text - The text that the layer should display.\n\t*/\n\tstatic debugText(name, text) {\n\t\tif (bEnableDebugText && name !== undefined && text !== undefined) {\n\t\t\tlet layer = thisScene.getLayer(name.toString());\n\t\t\tif (layer) {\n\t\t\t\tif (layer.text != text) {\n\t\t\t\t\tlayer.text = text;\n\t\t\t\t\tlayer.lastChanged = layer.lastUpdated = new Date().getTime();\n\t\t\t\t\tlayer.color = debugText_FlashColor;\n\t\t\t\t\tlayer.scale = new Vec3(debugText_FlashScale);\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t\tlayer.lastUpdated = new Date().getTime();\n\t\t\t}\n\t\t\telse {\n\t\t\t\tlet layerSettings = new Object();\n\t\t\t\tif (engine.canvasSize.x !== 0) {\n\t\t\t\t\tlayerSettings.origin = \"0, \" + (engine.canvasSize.y - debugText_Layers.length * (debugText_Size * 3 + 10)) + \", 0\";\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tlet ct = thisScene.getCameraTransforms();\n\t\t\t\t\tlet forward = ct.center.subtract(ct.eye).normalize();\n\t\t\t\t\tlet up = ct.up;\n\t\t\t\t\tlet right = forward.cross(up);\n\t\t\t\t\tlet pos = new Vec3(0, .5, 0);//ct.eye.add(forward);//.add(right);\n\t\t\t\t\tlayerSettings.origin = `${pos.x}, ${pos.y}, ${pos.z}`;\n\t\t\t\t}\n\t\t\t\tlayerSettings.name = name.toString();\n\t\t\t\tlayerSettings.text = text;\n\t\t\t\tlayerSettings.pointsize = debugText_Size;\n\t\t\t\tlayerSettings.font = \"systemfont_consolas\";\n\t\t\t\tlayerSettings.verticalalign = \"top\";\n\t\t\t\tlayerSettings.horizontalalign = \"left\";\n\t\t\t\tlayerSettings.color = debugText_FlashColor.x + \", \" + debugText_FlashColor.y + \", \" + debugText_FlashColor.z;\n\t\t\t\tlayerSettings.opaquebackground = debugText_ShowBackground;\n\t\t\t\tlayerSettings.backgroundcolor = debugText_BackgroundColor;\n\t\t\t\tlayerSettings.padding = 0;\n\t\t\t\tlayerSettings.alpha = debugText_Alpha;\n\t\t\t\tlayer = thisScene.createLayer(layerSettings);\n\t\t\t\tlayer.lastChanged = layer.lastUpdated = new Date().getTime();\n\t\t\t\tdebugText_Layers.push(layer);\n\t\t\t}\n\t\t}\n\t}\n}\n\nshared.OMGHelpers = OMGHelpers;",
+				"value" : 1.0
+			}
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/shake/effect.json",
+					"id" : 29,
+					"name" : "Breathing",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"NOISE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"bounds" : "0 1",
+								"friction" : "1.51 1.51",
+								"speed" : 1,
+								"strength" : 0.050000000000000003
+							},
+							"id" : 30,
+							"textures" : 
+							[
+								null,
+								"masks/shake_mask_681d95af21112ea41fc4cd51aa49d9c553ef1173",
+								"masks/shake_mask_ee0d9bbc6d0516b8583c8fb3e841485c0b7ec4e8",
+								"masks/shake_mask_843377ec5689457129ad9ee2dd9c051f084db05d"
+							]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/nitro/effect.json",
+					"id" : 185,
+					"name" : "Caustics 1",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 11,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"bounds" : "0.2 0.3",
+								"multiply" : 0.75,
+								"scale" : "3 4",
+								"smoothness" : 2,
+								"speed" : "-0.11 0.116 0.1129 -0.0984"
+							},
+							"id" : 186,
+							"textures" : [ null, "util/clouds_256" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/nitro/effect.json",
+					"id" : 869,
+					"name" : "Caustics 2",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 11
+							},
+							"constantshadervalues" : 
+							{
+								"bounds" : "0.3 0.2",
+								"multiply" : 0.75,
+								"scale" : "2.134 3.289",
+								"smoothness" : 3,
+								"speed" : "0.05 -0.1 -0.1 0.1"
+							},
+							"id" : 870,
+							"textures" : [ null, "util/clouds_256" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/vhs/effect.json",
+					"id" : 354,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0,
+								"GREYSCALE" : 0,
+								"INVERTARTIFACTS" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"artifacts" : 1.5,
+								"scale" : 0.10000000000000001
+							},
+							"id" : 355,
+							"textures" : [ null, "noise" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Audio_Bars/effect.json",
+					"id" : 22047,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"SHAPE" : 6
+							},
+							"id" : 22048
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Shift_Hue/effect.json",
+					"id" : 1531,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"shift" : 
+								{
+									"script" : "'use strict';\n\nexport var scriptProperties = createScriptProperties()\n\t.addSlider({\n\t\tname: 'newSlider',\n\t\tlabel: 'New Slider',\n\t\tvalue: 50,\n\t\tmin: 0,\n\t\tmax: 100,\n\t\tinteger: false\n\t})\n\t.finish();\n\n/**\n * @param {Number} value (for property 'shift')\n */\nexport function update(value) {\n\t\n\treturn value;\n}\n",
+									"value" : 0
+								},
+								"shift_speed" : 10.720000000000001
+							},
+							"id" : 1532
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 323,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"TRANSPARENCY" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"Bar count" : 47.700000000000003
+							},
+							"id" : 324
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 13,
+			"image" : "models/derkomai2.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Ice Dragon",
+			"origin" : 
+			{
+				"script" : "'use strict';\n\nlet startingPoint = new Vec3(0, 0, 0);\n\nlet mySoundAsset = engine.registerAsset(\"sounds/noise_low_800.ogg\");\nlet mySound = undefined;\n\n/**\n * @param {Vec3} value (for property 'origin')\n */\nexport function init(value) {\n\t//mySound = thisScene.createLayer(mySoundAsset);\n\t//mySound.volume = 0;\n\tstartingPoint = value;\n\treturn value;\n}\n\n\n/**\n * @param {Vec3} value (for property 'origin')\n */\nexport function update(value) {\n\t//mySound.volume = Math.sin(engine.runtime) * 0.5 + 0.5;\n\t//console.log(mySound.volume);\n\treturn value;\n}\n\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.slide_up)\n\t\tthisLayer.origin = new Vec3(startingPoint.x, startingPoint.y + userProperties.slide_up, startingPoint.z);\n}",
+				"value" : "2048.000 1448.000 0.000"
+			},
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "4096.000 2896.000",
+			"solid" : true,
+			"visible" : 
+			{
+				"script" : "'use strict';\n\nlet myArray = [\"a\", \"b\", \"c\", \"d\", \"e\"];\nexport function cursorClick(event) {\n    //console.log(myArray[Math.trunc(Math.random() * myArray.length)]);\n}",
+				"value" : true
+			}
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 18,
+			"locktransforms" : false,
+			"maxtime" : 5.0,
+			"mintime" : 1.0,
+			"muteineditor" : false,
+			"name" : "audio bars script",
+			"origin" : "2051.447 5.990 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"playbackmode" : "loop",
+			"scale" : "1.000 1.000 1.000",
+			"sound" : [],
+			"startsilent" : false,
+			"volume" : 
+			{
+				"script" : "// 'use strict';\n// let Helpers = shared.OMGHelpers;\n// import * as WEMath from \"WEMath\";\n// shared.WEMath = WEMath;\n\n\n// const barCount = 128;\n// /** Shrinks the bars by the given factor, adding empty space in-between. */\n// const barSpacing = 0.1;\n\n// const totalWidth = \"90%\";\n// const totalHeight = 400;\n// const colorChange = true;\n\n\n\n// const frequencyResolution = 64; // Must be 16, 32 or 64 per channel.\n// shared.audioBuffer = engine.registerAudioBuffers(frequencyResolution);\n\n// let audioScript = function(index, height) {return `\n// 'use strict'\n// let Helpers = shared.OMGHelpers;\n// let WEMath = shared.WEMath;\n\n\n// function HueToRGB(f1, f2, hue)\n// {\n// \twhile (hue < 0.0)\n// \t\thue += 1.0;\n// \twhile (hue > 1.0)\n// \t\thue -= 1.0;\n// \tlet res;\n// \tif ((6.0 * hue) < 1.0)\n// \t\tres = f1 + (f2 - f1) * 6.0 * hue;\n// \telse if ((2.0 * hue) < 1.0)\n// \t\tres = f2;\n// \telse if ((3.0 * hue) < 2.0)\n// \t\tres = f1 + (f2 - f1) * ((2.0 / 3.0) - hue) * 6.0;\n// \telse\n// \t\tres = f1;\n// \treturn res;\n// }\n\n// function HSLToRGB(hsl)\n// {\n// \tlet rgb;\n\t\n// \tif (hsl.y === 0.0)\n// \t\trgb = Vec3(hsl.z); // Luminance\n// \telse\n// \t{\n// \t\tlet f2;\n\t\t\n// \t\tif (hsl.z < 0.5)\n// \t\t\tf2 = hsl.z * (1.0 + hsl.y);\n// \t\telse\n// \t\t\tf2 = (hsl.z + hsl.y) - (hsl.y * hsl.z);\n\t\t\t\n// \t\tlet f1 = 2.0 * hsl.z - f2;\n\t\t\n// \t\trgb = new Vec3(\n// \t\t\tHueToRGB(f1, f2, hsl.x + (1.0/3.0)),\n// \t\t\tHueToRGB(f1, f2, hsl.x),\n// \t\t\tHueToRGB(f1, f2, hsl.x - (1.0/3.0))\n// \t\t);\n// \t}\n\t\n// \treturn rgb;\n// }\n\n// let sourceFrequency = ${index};\n// let minimumScale = 1.0;\n// let maximumScale = ${height};\n// let startHSL = new Vec3(0.8, 1, .4);\n// let endHSL = new Vec3(0.4, 1, .7);\n\n// let audioBuffer = shared.audioBuffer;\n// const scaleDelta = maximumScale - minimumScale;\n// let initialScale, initialOrigin;\n\n// export function update() {\n// \tlet loudness = audioBuffer.average[Math.floor(sourceFrequency)];\n// \tlet fract = sourceFrequency % 1;\n// \tif (fract !== 0) {\n// \t\tloudness *= 1 - fract;\n// \t\tloudness += fract * audioBuffer.average[Math.floor(sourceFrequency + 1)];\n// \t}\n// \t//if (loudness > 1.9)\n// \t//\tconsole.log(loudness);\n// \t//loudness = loudness * loudness;\n// \t//loudness = WEMath.smoothStep(0, 1, loudness);\n// \tthisLayer.scale = new Vec3(initialScale.x, initialScale.y * (loudness * scaleDelta + minimumScale), 1);\n// \tthisLayer.origin = initialOrigin.add(new Vec3(0, thisLayer.scale.y * 0.5, 0));\n// \t${colorChange ? \"\" : \"//\"} thisLayer.getEffect(0).getMaterial(0).color = HSLToRGB(Helpers.lerp(startHSL, endHSL, loudness));\n// }\n\n// export function init() {\n// \tinitialScale = new Vec3(thisLayer.scale);\n// \tinitialOrigin = new Vec3(thisLayer.origin);\n// }\n// `;}\n\n// export function init() {\n// \tlet x = thisLayer.origin.x, y = thisLayer.origin.y, z = thisLayer.origin.z;\n// \tlet w = totalWidth, h = totalHeight;\n\n// \tlet screenWidth = undefined, screenHeight = undefined;\n// \tlet screenAspectRatio = engine.screenResolution.x / engine.screenResolution.y;\n// \tlet canvasAspectRatio = engine.canvasSize.x / engine.canvasSize.y;\n// \tif (screenAspectRatio > canvasAspectRatio) {\n// \t\tscreenHeight = engine.screenResolution.y * engine.canvasSize.x / engine.screenResolution.x;\n// \t\tscreenWidth = engine.canvasSize.x\n// \t}\n// \telse {\n// \t\tscreenHeight = engine.canvasSize.y;\n// \t\tscreenWidth = engine.screenResolution.x * engine.canvasSize.y / engine.screenResolution.y;\n// \t}\n// \tif (typeof w !== \"number\") {\n// \t\tw = Number(w.slice(0, w.length - 1));\n// \t\tw = screenWidth * w / 100;\n// \t}\n// \tif (typeof h !== \"number\") {\n// \t\th = Number(h.slice(0, h.length - 1));\n// \t\th = screenHeight * h / 100;\n// \t}\n\n// \tfor (let i = 0; i < barCount; ++i) {\n// \t\tlet layerSettings = {\n// \t\t\timage: \"models/soundbar.json\",\n// \t\t\tscale: `${(1 - barSpacing) * w / barCount} 1 1`,\n// \t\t\torigin: `${ (x - w / 2.0) + (i * w / barCount) } ${y} ${z}`,\n// \t\t\tvisible: {\n// \t\t\t\tvalue: true,\n// \t\t\t\tscript: audioScript(i * frequencyResolution / barCount, h)\n// \t\t\t}\n// \t\t}\n// \t\tif (colorChange) {\n// \t\t\tlayerSettings.effects = [\n// \t\t\t\t{\n// \t\t\t\t\tfile: \"effects/tint/effect.json\"\n// \t\t\t\t}\n// \t\t\t]\n// \t\t}\n// \t\tlet barLayer = thisScene.createLayer(layerSettings);\n// \t\tthisScene.sortLayer(barLayer, thisScene.getLayerIndex(thisLayer));\n// \t}\n// }",
+				"value" : 1.0
+			}
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 495,
+			"locktransforms" : false,
+			"maxtime" : 5.0,
+			"mintime" : 1.0,
+			"muteineditor" : false,
+			"name" : "audio bars code snippet",
+			"origin" : "982.139 314.502 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"playbackmode" : "loop",
+			"scale" : "1.000 1.000 1.000",
+			"sound" : [],
+			"startsilent" : false,
+			"volume" : 
+			{
+				"script" : "// 'use strict';\n\n// const scale = 100; // Size of the bars\n// shared.audioBuffer = engine.registerAudioBuffers(16); // Must be 16, 32 or 64\n\n// // This script will run on every audio bar. \n// function myBarScript(index) {return `\n// 'use strict';\n\n// export function update(value) {\n//     value.y = shared.audioBuffer.average[${index}] * ${scale};\n//     return value;\n// }\n// `}\n\n// export function init() {\n// \tlet x = thisLayer.origin.x, y = thisLayer.origin.y; // Grab the main layer's x,y coordinates\n// \tfor (let i = 0; i < 16; ++i) {\n// \t\tlet layerSettings = { // You can add any property that you find in scene.json to this\n// \t\t\timage: \"models/soundbar.json\", // You'll need a plain model/material to render.\n// \t\t\tscale: {\n// \t\t\t\tvalue: `${scale} 1 1`, // Set the X scale. Y scale will change dynamically.\n// \t\t\t\tscript: myBarScript(i) // Bind the script to the new audio bar's scale property\n// \t\t\t},\n// \t\t\torigin: `${x + i * scale} ${y} 0` // Lay out the bars from left to right\n// \t\t}\n// \t\tlet barLayer = thisScene.createLayer(layerSettings); // Create a new audio bar layer using our layer settings\n// \t\tthisScene.sortLayer(barLayer, thisScene.getLayerIndex(thisLayer)); // Without this, the bars will show up on top of everything else. With this they are pushed back to match the layer that created them.\n// \t}\n// }",
+				"value" : 1.0
+			}
+		},
+		{
+			"angles" : "0.000 -0.000 -2.175",
+			"id" : 17,
+			"instanceoverride" : 
+			{
+				"id" : 75
+			},
+			"locktransforms" : false,
+			"name" : "Ice breath - child particle system",
+			"origin" : "1811.086 1981.939 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/short_breath_spawner.json",
+			"scale" : "1.000 1.000 1.000",
+			"visible" : false
+		},
+		{
+			"angles" : "0.000 -0.000 -2.175",
+			"id" : 280,
+			"instanceoverride" : 
+			{
+				"id" : 281,
+				"lifetime" : 
+				{
+					"user" : null,
+					"value" : 1
+				}
+			},
+			"locktransforms" : false,
+			"name" : "Ice breath - script",
+			"origin" : "1811.086 1981.939 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/ice_breath_constant.json",
+			"scale" : "1.000 1.000 1.000",
+			"visible" : 
+			{
+				"script" : "'use strict';\n\n// properties\nconst speed = 1.0; // match this to the shake speed\nconst offset = 0.35; // 0 to 1, point in time to start breathing\nconst duration = 0.35; // 0 to 1, percentage of time to breathe\n\n// constants\nconst twoPI = 6.283185307179586476925286766559;\nconst periodTotal = twoPI / speed;\nconst phase = offset / speed * twoPI;\nconst periodOn = duration * periodTotal;\n\n\n/**\n * @param {Number} value (for property 'visible')\n */\nexport function init(value) {\n\tthisLayer.pause();\n\t\n\treturn value;\n}\n\nexport function update(value) {\n\t// Enable the emitter every  seconds for half a second\n\tif ((engine.runtime - phase) % periodTotal < periodOn)\n\t\tthisLayer.play();\n\telse\n\t\tthisLayer.pause();\n\n\tthisObject.speed = 10;\n\tthisObject.colorn = 0.5;\n\tthisObject.lifetime = 0;\n\n\treturn value;\n}\n",
+				"value" : false
+			}
+		},
+		{
+			"alpha" : 0.88999998569488525,
+			"anchor" : "left",
+			"angles" : "0.000 0.000 0.000",
+			"backgroundcolor" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/blurprecise/effect.json",
+					"id" : 111,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 112
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"id" : 113
+						}
+					],
+					"visible" : true
+				}
+			],
+			"font" : "fonts/kust.ttf",
+			"horizontalalign" : "left",
+			"id" : 33,
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Text Layer",
+			"opaquebackground" : true,
+			"origin" : "1167.556 1142.249 0.000",
+			"padding" : 32,
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"pointsize" : 32.0,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "1146.000 199.000",
+			"solid" : true,
+			"text" : "Left Bottom Align",
+			"verticalalign" : "bottom",
+			"visible" : 
+			{
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorClick(event) {\n\tHelpers.debugText(`click`, `clicked`);\n}\n",
+				"value" : false
+			}
+		},
+		{
+			"alpha" : 0.88999998569488525,
+			"anchor" : "left",
+			"angles" : "0.000 0.000 0.000",
+			"backgroundcolor" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/blurprecise/effect.json",
+					"id" : 145,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 147
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"id" : 148
+						}
+					],
+					"visible" : true
+				}
+			],
+			"font" : "fonts/kust.ttf",
+			"horizontalalign" : "center",
+			"id" : 144,
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Text Layer",
+			"opaquebackground" : true,
+			"origin" : "1172.605 1548.715 0.000",
+			"padding" : 32,
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"pointsize" : 32.0,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "795.000 199.000",
+			"solid" : true,
+			"text" : "Center align",
+			"verticalalign" : "center",
+			"visible" : 
+			{
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function update(value) {\n\t\n\treturn value;\n}\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n",
+				"value" : false
+			}
+		},
+		{
+			"alpha" : 0.88999998569488525,
+			"anchor" : "left",
+			"angles" : "0.000 0.000 0.000",
+			"backgroundcolor" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/blurprecise/effect.json",
+					"id" : 293,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 294
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"id" : 295
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 335,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"TRANSPARENCY" : 2
+							},
+							"id" : 336
+						}
+					],
+					"visible" : true
+				}
+			],
+			"font" : "fonts/kust.ttf",
+			"horizontalalign" : "right",
+			"id" : 292,
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Text Layer",
+			"opaquebackground" : true,
+			"origin" : "1778.517 761.029 0.000",
+			"padding" : 32,
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"pointsize" : 32.0,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "957.000 199.000",
+			"solid" : true,
+			"text" : "Right top align",
+			"verticalalign" : "top",
+			"visible" : 
+			{
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n",
+				"value" : false
+			}
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/transform/effect.json",
+					"id" : 810,
+					"name" : "Tile my gif",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"MODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"angle" : 0,
+								"offset" : "0.25 0.25",
+								"scale" : "30 30"
+							},
+							"id" : 811
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 130,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"color" : "0.5882352941176471 1 0.5803921568627451"
+							},
+							"id" : 131
+						}
+					],
+					"visible" : 
+					{
+						"script" : "'use strict';\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorClick(event) {\n\tthisObject.visible = !thisObject.visible;\n}\n",
+						"value" : true
+					}
+				},
+				{
+					"file" : "effects/filmgrain/effect.json",
+					"id" : 214,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 215,
+							"textures" : [ null, "util/noise" ]
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 146,
+			"image" : "models/preview.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "gif grid",
+			"origin" : "2079.593 1346.201 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "50.000 50.000 50.000",
+			"size" : "256.000 256.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"angles" : "0.000 -0.000 -2.170",
+			"id" : 269,
+			"instanceoverride" : 
+			{
+				"id" : 44,
+				"speed" : 0.5
+			},
+			"locktransforms" : false,
+			"name" : "fishes",
+			"origin" : "1886.526 1907.850 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/new_particle_system.json",
+			"scale" : "2.000 2.000 2.000",
+			"visible" : 
+			{
+				"script" : "'use strict';\n\nlet startTime = 0;\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function update(value) {\n\tif (engine.runtime > startTime + 5){\n\t\tthisLayer.stop();\n\t}\n\treturn value;\n}\n\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function init(value) {\n\tstartTime = engine.runtime;\n\treturn value;\n}\n",
+				"value" : true
+			}
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 1248,
+			"image" : null,
+			"instanceoverride" : null,
+			"locktransforms" : false,
+			"model" : null,
+			"name" : "Vapor 0",
+			"origin" : "1708.036 890.682 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/presets/vapor0.json",
+			"scale" : "1.000 1.000 1.000",
+			"visible" : true
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 158,
+			"image" : "models/preview.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "bouncy gif",
+			"origin" : 
+			{
+				"script" : "'use strict';\n\nimport * as WEVector from 'WEVector';\n\nlet bounceSpeed = 0;\n\n/**\n * Attach this script to the 'origin' property of an image layer to make it bounce around the screen.\n * The layer must be smaller than the wallpaper or this script won't work!\n */\n\n\n\n// Choose a random direction in 90 degree steps\nvar direction = new Vec3(WEVector.angleVector2(45 + Math.floor(Math.random() * 4) * 90));\n\n/**\n * @param {Vec3} value\n */\nexport function update(value) {\n\n    let scale = thisLayer.scale;\n    let imageSize = thisLayer.size;\n    let canvasSize = engine.canvasSize;\n\n    // We need the size from the center to the bounds.\n    imageSize.x *= scale.x * 0.5;\n    imageSize.y *= scale.y * 0.5;\n\n\n    value = value.add(direction.multiply(engine.frametime * bounceSpeed));\n\n    // Hit the screen bounds and reflect the direction.\n    if (value.x < imageSize.x) {\n        value.x = imageSize.x;\n        direction = direction.reflect(new Vec3(1, 0));\n    } else if (value.x > canvasSize.x - imageSize.x) {\n        value.x = canvasSize.x - imageSize.x;\n        direction = direction.reflect(new Vec3(-1, 0));\n    }\n\n    if (value.y < imageSize.y) {\n        value.y = imageSize.y;\n        direction = direction.reflect(new Vec3(0, 1));\n    } else if (value.y > canvasSize.y - imageSize.y) {\n        value.y = canvasSize.y - imageSize.y;\n        direction = direction.reflect(new Vec3(0, -1));\n    }\n\n    return value;\n}\n\nexport function applyUserProperties(userProperties) {\n    if (userProperties.bounce_speed != undefined) {\n        bounceSpeed = userProperties.bounce_speed;\n        if (bounceSpeed === 0) {\n\t\t\tconsole.log(thisLayer.origin);\n\t\t\tconsole.log(engine.canvasSize);\n\t\t\tthisLayer.origin = new Vec3(engine.canvasSize.multiply(0.5));\n        }\n    }\n}",
+				"value" : "2048.000 1448.000 0.000"
+			},
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "256.000 256.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 553,
+			"locktransforms" : false,
+			"maxtime" : 5.0,
+			"mintime" : 1.0,
+			"muteineditor" : true,
+			"name" : "901 The Special Pose!.mp3",
+			"origin" : "0.000 0.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"playbackmode" : "single",
+			"scale" : "1.000 1.000 1.000",
+			"sound" : [ "sounds/901 The Special Pose!.mp3" ],
+			"startsilent" : true,
+			"volume" : 0.5
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 561,
+			"locktransforms" : false,
+			"maxtime" : 5.0,
+			"mintime" : 1.0,
+			"muteineditor" : true,
+			"name" : "noise_low_800.ogg",
+			"origin" : 
+			{
+				"script" : "//noise_low_800.ogg - Origin\n'use strict';\n\n// let startTime = undefined;\n// const loopTime = 5.0;\n// let startedLooping = false;\n\n\n// export function init() {\n// \tstartTime = Date.now();\n// }\n\n\n// export function update() {\n// \tif (!startedLooping) {\n// \t\tlet currentTime = Date.now();\n// \t\tif (currentTime - startTime > loopTime * 1000) {\n// \t\t\tconsole.log(`currentTime: ${currentTime} startTime: ${startTime} `)\n// \t\t\tthisLayer.play();\n// \t\t\tstartedLooping = true;\n// \t\t}\n// \t}\n// }",
+				"value" : "0.000 0.000 0.000"
+			},
+			"parallaxDepth" : "1.000 1.000",
+			"playbackmode" : "loop",
+			"scale" : "1.000 1.000 1.000",
+			"sound" : [ "sounds/noise_low_800.ogg" ],
+			"startsilent" : true,
+			"volume" : 0.5
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 448,
+			"image" : "models/preview.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "preview",
+			"origin" : "1999.388 746.930 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "256.000 256.000",
+			"solid" : true,
+			"visible" : 
+			{
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n",
+				"value" : false
+			}
+		},
+		{
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/blurprecise/effect.json",
+					"id" : 259,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"KERNEL" : 1
+							},
+							"id" : 260
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 1,
+								"VERTICAL" : 1
+							},
+							"id" : 261
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 926,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Cursor Move?",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : 
+			{
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMoved`, `Cursor Moved`);\n}\n",
+				"value" : true
+			}
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"id" : 120,
+			"intensity" : 2.0,
+			"light" : "point",
+			"locktransforms" : false,
+			"name" : "",
+			"origin" : 
+			{
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Vec3} value (for property 'origin')\n */\nexport function update(value) {\n\tvalue.x = 1000 + Math.sin(engine.runtime) * 500;\n\tvalue.y = 1000 + Math.cos(engine.runtime) * 500;\n\tHelpers.debugText(`target`, `Target pos: ${value}`)\n\treturn value;\n}\n",
+				"value" : "1859.281 1013.487 -1.000"
+			},
+			"parallaxDepth" : "1.000 1.000",
+			"radius" : 2048.0,
+			"scale" : "1.000 1.000 1.000"
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 406,
+			"instanceoverride" : null,
+			"locktransforms" : false,
+			"name" : "Orbiting Particles",
+			"origin" : "1000.352 996.477 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/orbiting_particles_2.json",
+			"scale" : "0.943 0.943 0.943",
+			"visible" : true
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 307,
+			"locktransforms" : false,
+			"model" : "models/Arwing/Arwing.mdl",
+			"name" : "Arwing",
+			"origin" : "1030.087 1005.618 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1000.000 1000.000 1000.000"
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/pixelate/effect.json",
+					"id" : 11657,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 11658
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/shake/effect.json",
+					"id" : 920,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"AUDIOPROCESSING" : 3,
+								"NOISE" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"audioamount" : 2,
+								"audiobounds" : "0 1.2",
+								"audioexponent" : 1,
+								"frequencymax" : 5,
+								"frequencymin" : 2,
+								"strength" : 0.5
+							},
+							"id" : 921,
+							"textures" : [ null, "masks/shake_mask_1a2257adb44ee124e459745b3d42146f9981bfb0" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/Audio_Bars/effect.json",
+					"id" : 285,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0,
+								"TRANSPARENCY" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Color" : "0.49411764705882355 1 1",
+								"Offset" : 0
+							},
+							"id" : 286
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 317,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 9,
+								"SHAPE" : 0,
+								"TRANSPARENCY" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"Color" : "1 1 1",
+								"Offset" : 0,
+								"Opacity" : 1
+							},
+							"id" : 318
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 226,
+			"image" : "models/StarFox64.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "StarFox64",
+			"origin" : "2816.206 463.466 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : 
+			{
+				"script" : "'use strict';\n\n/**\n * Configure these to control smoothing and the frequency.\n */\nlet frequencyResolution = 16; // Must be 16, 32 or 64 per channel.\nlet sourceFrequency = 4; // Must be smaller than frequencyResolution. Lower values for bass, higher for treble.\nlet smoothingRate = 10;\nlet minimumScale = 0.8;\nlet maximumScale = 2.2;\n\n/**\n * This creates a permanent link to the audio response data.\n */\nlet audioBuffer = engine.registerAudioBuffers(frequencyResolution);\nvar smoothValue = 0;\nvar initialScale;\nconst scaleDelta = maximumScale - minimumScale;\n\n/**\n * @param {Vec3} value\n */\nexport function update() {\n\tlet audioDelta = audioBuffer.average[sourceFrequency] - smoothValue;\n\t\n\tsmoothValue += audioDelta * engine.frametime * smoothingRate;\n\tsmoothValue = Math.min(1.0, smoothValue);\n\n\treturn initialScale.multiply(smoothValue * scaleDelta + minimumScale);\n}\n\n/**\n * @param {Vec3} value\n */\nexport function init(value) {\n\tinitialScale = value;\n}\n",
+				"value" : "3.000 4.000 1.000"
+			},
+			"size" : "128.000 128.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 217,
+			"image" : null,
+			"instanceoverride" : null,
+			"locktransforms" : false,
+			"model" : null,
+			"name" : "Torch",
+			"origin" : "2048.000 948.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/presets/torch.json",
+			"scale" : "1.000 1.000 1.000",
+			"visible" : true
+		},
+		{
+			"alpha" : 1.0,
+			"anchor" : "none",
+			"angles" : "0.000 0.000 0.000",
+			"backgroundcolor" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"font" : "fonts/Monofur-PK7og.ttf",
+			"horizontalalign" : "center",
+			"id" : 1071,
+			"image" : null,
+			"ledsource" : false,
+			"locktransforms" : false,
+			"model" : null,
+			"name" : "3D Clock",
+			"opaquebackground" : false,
+			"origin" : "1965.376 1761.193 0.000",
+			"padding" : 32,
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : null,
+			"perspective" : true,
+			"pointsize" : 32.0,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "661.000 134.000",
+			"solid" : true,
+			"text" : 
+			{
+				"script" : "'use strict';\n\nimport * as WEMath from 'WEMath';\n\n// This will be used to separate each element\nlet delimiter = ':';\n\n// Whether you want to see the seconds or not\nlet showSeconds = true;\n\n// Whether you want a 24h or 12h style format\nlet use24hFormat = true;\n\n/**\n * @param {String} value (for property 'text')\n */\nvar shadowLayer;\nexport function update(value) {\n\tlet time = new Date();\n\tvar hours;\n\tvar suffix = '';\n\tif (use24hFormat) {\n\t\thours = (\"00\" + time.getHours()).slice(-2);\n\t} else {\n\t\thours = time.getHours();\n\t\tsuffix = hours >= 12 ? 'PM' : 'AM';\n\t\thours %= 12;\n\t\tif (hours == 0) {\n\t\t\thours = 12;\n\t\t}\n\t}\n\tlet minutes = (\"00\" + time.getMinutes()).slice(-2);\n\tlet seconds = (\"00\" + time.getSeconds()).slice(-2);\n\tvalue = hours + delimiter + minutes;\n\tif (showSeconds) {\n\t\tvalue += delimiter + seconds;\n\t}\n\tif (!use24hFormat) {\n\t\tvalue += ' ' + suffix;\n\t}\n\n\tvar delta = thisLayer.origin.subtract(input.cursorWorldPosition);\n\tvar shadowOffset = delta.copy();\n\tshadowOffset.z = 0;\n\tdelta = delta.divide(new Vec3(engine.canvasSize, 1));\n\tdelta.z = 0;\n\tvar rotation = new Vec3(delta.y, -delta.x, 4 * WEMath.mix(delta.x, -delta.x, Math.min(1, Math.max(0, delta.y * 0.1 + 0.5)))).multiply(50);\n\tthisLayer.angles = rotation;\n\tshadowLayer.angles = rotation;\n\tshadowLayer.origin = thisLayer.origin.add(shadowOffset.multiply(0.01));\n\tshadowLayer.text = value;\n\treturn value;\n}\n\n/**\n * @param {String} value (for property 'text')\n */\nexport function init() {\n\tshadowLayer = thisScene.createLayer({\n\t\ttext: 'shadow',\n\t\tcolor: '0 0 0',\n\t\talpha: 1,\n\t\tpointsize: thisLayer.pointsize,\n\t\tfont: thisLayer.font,\n\t\tperspective: true\n\t});\n\tshadowLayer.origin = thisLayer.origin;\n\tshadowLayer.angles = thisLayer.angles;\n\tshadowLayer.scale = thisLayer.scale;\n\tthisScene.sortLayer(shadowLayer, thisScene.getLayerIndex(thisLayer));\n}\n",
+				"value" : "<3D Clock>"
+			},
+			"verticalalign" : "center",
+			"visible" : true
+		},
+		{
+			"alpha" : 1.0,
+			"anchor" : "none",
+			"angles" : "0.000 0.000 0.000",
+			"backgroundcolor" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Audio_Bars/effect.json",
+					"id" : 326,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 30,
+								"SHAPE" : 0,
+								"TRANSPARENCY" : 3
+							},
+							"constantshadervalues" : 
+							{
+								"Number of bars" : 21.739999999999998,
+								"Offset" : 0
+							},
+							"id" : 327
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 266,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"TRANSPARENCY" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"Color" : "1 0.5019607843137255 0.5019607843137255"
+							},
+							"id" : 267
+						}
+					],
+					"visible" : true
+				}
+			],
+			"font" : "systemfont_arial",
+			"horizontalalign" : "center",
+			"id" : 3421,
+			"image" : null,
+			"ledsource" : false,
+			"locktransforms" : false,
+			"model" : null,
+			"name" : "Bass Clock",
+			"opaquebackground" : false,
+			"origin" : "2048.000 948.000 0.000",
+			"padding" : 32,
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : null,
+			"perspective" : false,
+			"pointsize" : 55.0,
+			"scale" : 
+			{
+				"script" : "'use strict';\n\n/**\n * Configure these to control smoothing and the frequency.\n */\nlet frequencyResolution = 16; // Must be 16, 32 or 64 per channel.\nlet sourceFrequency = 0; // Must be smaller than frequencyResolution. Lower values for bass, higher for treble.\nlet smoothingRate = 12;\n\n/**\n * This creates a permanent link to the audio response data.\n */\nlet audioBuffer = engine.registerAudioBuffers(frequencyResolution);\nvar smoothValue = 0;\nvar scale;\n\n/**\n * @param {Vec3} value\n */\nexport function update() {\n\tlet audioDelta = audioBuffer.average[sourceFrequency] - smoothValue;\n\tsmoothValue += audioDelta * engine.frametime * smoothingRate;\n\tsmoothValue = Math.min(1.0, smoothValue);\n\tscale.y = 1 + (smoothValue * 0.55)\n\tscale.x = 1 + (smoothValue * 0.75);\n\treturn scale;\n}\n\n/**\n * @param {Vec3} value\n */\nexport function init(value) {\n\tscale = value;\n}\n",
+				"value" : "1.000 1.000 1.000"
+			},
+			"size" : "635.000 328.000",
+			"solid" : true,
+			"text" : 
+			{
+				"script" : "'use strict';\n\n// This will be used to separate each element\nlet delimiter = ':';\n\n// Whether you want to see the seconds or not\nlet showSeconds = false;\n\n// Whether you want a 24h or 12h style format\nlet use24hFormat = true;\n\n/**\n * @param {String} value (for property 'text')\n */\nexport function update(value) {\n\tlet time = new Date();\n\tvar hours;\n\tvar suffix = '';\n\tif (use24hFormat) {\n\t\thours = (\"00\" + time.getHours()).slice(-2);\n\t} else {\n\t\thours = time.getHours();\n\t\thours %= 12;\n\t\tif (hours == 0) {\n\t\t\thours = 12;\n\t\t}\n\t\thours = (\"00\" + hours).slice(-2);\n\t}\n\tlet minutes = (\"00\" + time.getMinutes()).slice(-2);\n\tlet seconds = (\"00\" + time.getSeconds()).slice(-2);\n\tvalue = hours + delimiter + minutes;\n\tif (showSeconds) {\n\t\tvalue += delimiter + seconds;\n\t}\n\treturn value;\n}\n\n\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.intclock) {\n\t\tuse24hFormat = userProperties.intclock;\n\t}\n}\n",
+				"value" : "12:34"
+			},
+			"verticalalign" : "center",
+			"visible" : false
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"config" : 
+			{
+				"passthrough" : true
+			},
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/clouds/effect.json",
+					"id" : 7762,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"PERSPECTIVE" : 0,
+								"SHADING" : 1,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"colorend" : "1 0 0",
+								"colorstart" : "1 1 1",
+								"feather" : 0.48999999999999999
+							},
+							"id" : 7763,
+							"textures" : [ null, "util/clouds_256" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Preprocessor_Test/effect.json",
+					"id" : 9209,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 9210
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Shift_Hue/effect.json",
+					"id" : 9029,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"alpha" : 1,
+								"shift" : 0,
+								"shift_speed" : 0
+							},
+							"id" : 9030
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 305,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"SHAPE" : 6
+							},
+							"constantshadervalues" : 
+							{
+								"Number of bars" : 1
+							},
+							"id" : 306
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 7825,
+			"image" : "models/util/composelayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Compose",
+			"origin" : "2042.355 960.094 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "10.000 10.000 34.217",
+			"size" : "128.000 128.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 356,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"color" : "1.000 0.000 0.000"
+							},
+							"id" : 358
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/godrays/effect.json",
+					"id" : 273,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 274,
+							"textures" : [ null, "util/white", "util/clouds_256" ]
+						},
+						{
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"rayintensity" : 2
+							},
+							"id" : 275
+						},
+						{
+							"id" : 276
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"id" : 277
+						},
+						{
+							"id" : 278
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Advanced_Audio_Bars/effect.json",
+					"id" : 251,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 252
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 248,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0,
+								"RESOLUTION" : 64,
+								"SHAPE" : 4,
+								"TRANSPARENCY" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Bounds" : "0 1",
+								"Bar Color" : "1 0.48627450980392156 0.48627450980392156",
+								"Bar Opacity" : 1,
+								"Bar count" : 30
+							},
+							"id" : 249
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 247,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Fullscreen",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : true
+		}
+	]
+}

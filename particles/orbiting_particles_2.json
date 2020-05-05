@@ -1,0 +1,136 @@
+{
+	"animationmode" : null,
+	"children" : [],
+	"controlpoint" : 
+	[
+		{
+			"flags" : 0,
+			"id" : 0,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 1,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 2,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 3,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 4,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 5,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 6,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 7,
+			"offset" : "0 0 0"
+		}
+	],
+	"emitter" : 
+	[
+		{
+			"directions" : "1 1 0",
+			"distancemax" : 100,
+			"distancemin" : 100,
+			"id" : 6,
+			"name" : "sphererandom",
+			"origin" : "0 0 0",
+			"rate" : 0.31900000000000001
+		},
+		{
+			"distancemax" : 100,
+			"distancemin" : 100,
+			"id" : 7,
+			"name" : "sphererandom",
+			"rate" : 0.438
+		}
+	],
+	"flags" : null,
+	"initializer" : 
+	[
+		{
+			"id" : 3,
+			"max" : 5,
+			"min" : 3,
+			"name" : "lifetimerandom"
+		},
+		{
+			"id" : 4,
+			"max" : 60,
+			"min" : 20,
+			"name" : "sizerandom"
+		},
+		{
+			"id" : 5,
+			"max" : "94 96 186",
+			"min" : "76 143 172",
+			"name" : "colorrandom"
+		}
+	],
+	"material" : "materials/particle/halo_4_1.json",
+	"maxcount" : 500,
+	"operator" : 
+	[
+		{
+			"drag" : 0.10000000000000001,
+			"gravity" : "0 0 0",
+			"id" : 8,
+			"name" : "movement"
+		},
+		{
+			"fadeintime" : 0.25,
+			"fadeouttime" : 0.75,
+			"id" : 9,
+			"name" : "alphafade"
+		},
+		{
+			"axis" : "0 0 1",
+			"distanceinner" : 100,
+			"distanceouter" : 150,
+			"flags" : 1,
+			"id" : 10,
+			"name" : "vortex",
+			"speedinner" : 2000
+		},
+		{
+			"id" : 11,
+			"name" : "controlpointattract",
+			"origin" : "0 0 0",
+			"scale" : 3500,
+			"threshold" : 10000
+		}
+	],
+	"renderer" : 
+	[
+		{
+			"id" : 1,
+			"name" : "sprite"
+		},
+		{
+			"id" : 2,
+			"name" : "ropetrail",
+			"segments" : 5,
+			"subdivision" : 2
+		}
+	],
+	"sequencemultiplier" : null,
+	"starttime" : 5
+}

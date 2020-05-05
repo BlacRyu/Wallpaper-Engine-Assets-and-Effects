@@ -1,0 +1,21 @@
+{
+	"dependencies" : 
+	[
+		"materials/effects/hueshift.json",
+		"shaders/effects/hueshift.frag",
+		"shaders/effects/hueshift.vert"
+	],
+	"description" : "Shifts each pixel's color along the color spectrum.",
+	"editable" : true,
+	"group" : "colorize",
+	"name" : "Shift Hue",
+	"passes" : 
+	[
+		{
+			"material" : "materials/effects/hueshift.json"
+		}
+	],
+	//"preview" : "preview/project.json",
+	"replacementkey" : "Shift_Hue",
+	"version" : 1
+}

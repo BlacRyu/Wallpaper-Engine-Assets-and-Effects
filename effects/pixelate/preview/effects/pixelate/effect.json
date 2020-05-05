@@ -1,0 +1,24 @@
+{
+	"name" : "Pixelate",
+	"description" : "Selectively lower the resolution of the image.",
+	"group" : "blur",
+	"passes" :
+	[
+		{
+			"material" : "materials/effects/pixelate.json",
+			"bind" :
+			[
+				{
+					"name" : "previous",
+					"index" : 0
+				}
+			]
+		}
+	],
+	"dependencies" :
+	[
+		"materials/effects/pixelate.json",
+		"shaders/effects/pixelate.frag",
+		"shaders/effects/pixelate.vert"
+	]
+}

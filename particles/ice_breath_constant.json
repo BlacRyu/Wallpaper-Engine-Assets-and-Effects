@@ -1,0 +1,144 @@
+{
+	"animationmode" : null,
+	"children" : null,
+	"controlpoint" : 
+	[
+		{
+			"flags" : 0,
+			"id" : 0,
+			"locktopointer" : false,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 1,
+			"id" : 1,
+			"locktopointer" : true,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 2,
+			"locktopointer" : false,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 3,
+			"locktopointer" : false,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 4,
+			"locktopointer" : false,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 5,
+			"locktopointer" : false,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 6,
+			"locktopointer" : false,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 7,
+			"locktopointer" : false,
+			"offset" : "0 0 0"
+		}
+	],
+	"emitter" : 
+	[
+		{
+			"directions" : "1 1 0",
+			"distancemax" : 50,
+			"distancemin" : 0,
+			"duration" : 0,
+			"flags" : 0,
+			"id" : 5,
+			"name" : "sphererandom",
+			"rate" : 40000
+		}
+	],
+	"flags" : 1,
+	"initializer" : 
+	[
+		{
+			"id" : 2,
+			"max" : 2,
+			"min" : 1,
+			"name" : "lifetimerandom"
+		},
+		{
+			"exponent" : 50,
+			"id" : 3,
+			"max" : 500,
+			"min" : 10,
+			"name" : "sizerandom"
+		},
+		{
+			"exponent" : 0.75,
+			"id" : 4,
+			"max" : "800 4000 0",
+			"min" : "-800 1000 0",
+			"name" : "velocityrandom"
+		}
+	],
+	"material" : "materials/particle/halo_1_1.json",
+	"maxcount" : 50000,
+	"operator" : 
+	[
+		{
+			"drag" : 1,
+			"gravity" : "0 0 0",
+			"id" : 6,
+			"name" : "movement"
+		},
+		{
+			"fadeintime" : 0.5,
+			"id" : 7,
+			"name" : "alphafade"
+		},
+		{
+			"id" : 8,
+			"mask" : "1 1 0",
+			"name" : "turbulence",
+			"phasemax" : 0,
+			"scale" : 0.0053000000026077031,
+			"speedmax" : 1000,
+			"speedmin" : 500,
+			"timescale" : -50
+		},
+		{
+			"endtime" : 0.80000000000000004,
+			"endvalue" : "0.00392156862745098 0.2549019607843137 1",
+			"id" : 9,
+			"name" : "colorchange",
+			"starttime" : 0.20000000000000001,
+			"startvalue" : "0.49019607843137253 0.7764705882352941 1"
+		},
+		{
+			"endtime" : 0.75,
+			"endvalue" : 2,
+			"id" : 10,
+			"name" : "sizechange",
+			"startvalue" : 0
+		}
+	],
+	"renderer" : 
+	[
+		{
+			"id" : 1,
+			"length" : 0.050000000000000003,
+			"maxlength" : 3,
+			"name" : "spritetrail"
+		}
+	],
+	"sequencemultiplier" : null,
+	"starttime" : 0
+}
