@@ -78,8 +78,11 @@ uniform float g_AudioSpectrum64Right[64];
 
 
 void main() {
+	// Get the existing pixel color
 	vec4 scene = texSample2D(g_Texture0, v_TexCoord);
-	
+
+
+	// Map the coordinates to the selected shape
 #if SHAPE == BOTTOM
 	vec2 shapeCoord = v_TexCoord;
 #endif
@@ -106,8 +109,6 @@ void main() {
 	vec2 shapeCoord = v_TexCoord.xy;
 #endif
 
-//TODO: Move duplicate circle code into a "#if SHAPE == CIRCLE_INNER || SHAPE == CIRCLE_OUTER" when logical operators are supported
-
 #if SHAPE == CIRCLE_INNER || SHAPE == CIRCLE_OUTER
 	vec2 circleCoord = (v_TexCoord - 0.5) * 2;
 	vec2 shapeCoord;
@@ -120,19 +121,20 @@ void main() {
 
 
 
-
+	// Get the frequency for this pixel
 	float frequency = floor(shapeCoord.x * g_BarCount) / g_BarCount * RESOLUTION + 0.5;
 	uint barFreq1 = frequency % RESOLUTION;
 	uint barFreq2 = (barFreq1 + 1) % RESOLUTION;
 
 
 
+	// Get the height of the bar
+#if SHAPE == STEREO_H || SHAPE == STEREO_V
 
-#define BARSTEREO	\
-	int bar = step(shapeCoord.y, 0.5 * lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, fract(frequency))))); \
-	bar = max(bar, step(1 - shapeCoord.y, 0.5 * lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, fract(frequency))))));
-
-#if SHAPE == STEREO_H
+	// float barVolume1L = g_AudioSpectrumLeft[barFreq1];
+	// float barVolume2L = g_AudioSpectrumLeft[barFreq2];
+	// float barVolume1R = g_AudioSpectrumRight[barFreq1];
+	// float barVolume2R = g_AudioSpectrumRight[barFreq2];
 
 #if RESOLUTION == 16
 	float barVolume1L = g_AudioSpectrum16Left[barFreq1];
@@ -155,33 +157,9 @@ void main() {
 	float barVolume2R = g_AudioSpectrum64Right[barFreq2];
 #endif
 	
-	BARSTEREO
-
-#else
-#if SHAPE == STEREO_V
-
-#if RESOLUTION == 16
-	float barVolume1L = g_AudioSpectrum16Left[barFreq1];
-	float barVolume2L = g_AudioSpectrum16Left[barFreq2];
-	float barVolume1R = g_AudioSpectrum16Right[barFreq1];
-	float barVolume2R = g_AudioSpectrum16Right[barFreq2];
-#endif
-
-#if RESOLUTION == 32
-	float barVolume1L = g_AudioSpectrum32Left[barFreq1];
-	float barVolume2L = g_AudioSpectrum32Left[barFreq2];
-	float barVolume1R = g_AudioSpectrum32Right[barFreq1];
-	float barVolume2R = g_AudioSpectrum32Right[barFreq2];
-#endif
-
-#if RESOLUTION == 64
-	float barVolume1L = g_AudioSpectrum64Left[barFreq1];
-	float barVolume2L = g_AudioSpectrum64Left[barFreq2];
-	float barVolume1R = g_AudioSpectrum64Right[barFreq1];
-	float barVolume2R = g_AudioSpectrum64Right[barFreq2];
-#endif
-
-	BARSTEREO
+	// bar = 1 if this pixel is inside a bar, 0 if outside
+	int bar = step(shapeCoord.y, 0.5 * lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, fract(frequency)))));
+	bar = max(bar, step(1 - shapeCoord.y, 0.5 * lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, fract(frequency))))));
 
 #else // NON-STEREO
 
@@ -203,15 +181,16 @@ void main() {
 	float barVolume2 = (g_AudioSpectrum64Left[barFreq2] + g_AudioSpectrum64Right[barFreq2]) * 0.5;
 #endif
 
+	// bar = 1 if this pixel is inside a bar, 0 if outside
 	int bar = step(1 - shapeCoord.y, lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1, barVolume2, smoothstep(0, 1, fract(frequency)))));
 
-#endif
 #endif
 
 
 
 	vec3 finalColor = bar * g_BarColor;
 	finalColor = ApplyBlending(BLENDMODE, scene.rgb, finalColor.rgb, bar * g_BarOpacity);
+
 
 
 //TODO: Replace else if with elif when supported

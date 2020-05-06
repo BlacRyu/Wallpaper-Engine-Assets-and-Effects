@@ -64,7 +64,7 @@
 	"preview" : "preview.jpg",
 	"tags" : [ "Fantasy" ],
 	"title" : "Experimenting",
-	"type" : "Scene",
+	"type" : "scene",
 	"version" : 0,
 	"visibility" : "private"
 }
