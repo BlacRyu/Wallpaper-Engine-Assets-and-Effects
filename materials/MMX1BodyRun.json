@@ -1,0 +1,22 @@
+{
+	"passes" : 
+	[
+		{
+			"blending" : "translucent",
+			"combos" : 
+			{
+				"spritesheet" : 1
+			},
+			"constantshadervalues" : 
+			{
+				"Alpha" : 1,
+				"Brightness" : 1
+			},
+			"cullmode" : "nocull",
+			"depthtest" : "disabled",
+			"depthwrite" : "disabled",
+			"shader" : "genericimage2",
+			"textures" : [ "MMX1BodyRun" ]
+		}
+	]
+}

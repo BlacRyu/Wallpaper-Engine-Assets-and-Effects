@@ -1,5 +1,6 @@
 {
 	"version" : 1,
+	"replacementkey" : "shine",
 	"name" : "ui_editor_effect_shine_title",
 	"description" : "ui_editor_effect_shine_description",
 	"group" : "enhance",

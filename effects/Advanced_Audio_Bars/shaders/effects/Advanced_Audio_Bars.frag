@@ -7,6 +7,9 @@
 #include "common_blending.h"
 
 
+uniform float g_Time;
+uniform float g_DeltaTime; // {"material":"Delta Time","default":0}
+
 
 varying vec2 v_TexCoord;
 
@@ -239,6 +242,8 @@ void main() {
 #endif
 #endif
 
-	gl_FragColor = vec4(finalColor, alpha);
+	// gl_FragColor = vec4(finalColor, alpha);
+	// gl_FragColor = frac(g_Time);
+	gl_FragColor = g_DeltaTime * 50;
 	
 }

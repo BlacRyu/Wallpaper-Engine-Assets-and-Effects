@@ -2,6 +2,7 @@
 // [COMBO] {"material":"Transparency","combo":"TRANSPARENCY","type":"options","default":2,"options":{"Preserve original":0,"Replace original":1,"Add to original":2,"Subtract from original":3,"Intersect original":4,"Remove all transparency":5}}
 // [COMBO] {"material":"Frequency Resolution","combo":"RESOLUTION","type":"options","default":32,"options":{"16":16,"32":32,"64":64}}
 // [COMBO] {"material":"ui_editor_properties_blend_mode","combo":"BLENDMODE","type":"imageblending","default":0}
+// [COMBO] {"material":"Simulate audio (preview)","combo":"AUDIO_SIMULATE","type":"options","default":0}
 
 #include "common.h"
 #include "common_blending.h"
@@ -16,37 +17,27 @@ uniform vec3 g_BarColor; // {"default":"1 1 1","material":"Bar Color","type":"co
 uniform float g_BarOpacity; // {"default":"1","material":"Bar Opacity"}
 
 uniform sampler2D g_Texture0; // {"material":"previous","label":"Prev","hidden":true}
+#if AUDIO_SIMULATE == 1
+uniform float g_Time;
+uniform sampler2D g_Texture1; // {"material":"noise","default":"util/noise","hidden":false}
+#endif
 
-
-
-
-//TODO: Replace all "#if RESOLUTION" blocks with token concatenation when supported
-// #define g_AudioSpectrumLeft g_AudioSpectrum ## RESOLUTION ## Left
-// #define g_AudioSpectrumRight g_AudioSpectrum ## RESOLUTION ## Right
-
+#if AUDIO_SIMULATE == 0
 #if RESOLUTION == 16
-// #define g_AudioSpectrumLeft g_AudioSpectrum16Left
-// #define g_AudioSpectrumRight g_AudioSpectrum16Right
 uniform float g_AudioSpectrum16Left[16];
 uniform float g_AudioSpectrum16Right[16];
 #endif
 
 #if RESOLUTION == 32
-// #define g_AudioSpectrumLeft g_AudioSpectrum32Left
-// #define g_AudioSpectrumRight g_AudioSpectrum32Right
 uniform float g_AudioSpectrum32Left[32];
 uniform float g_AudioSpectrum32Right[32];
 #endif
 
 #if RESOLUTION == 64
-// #define g_AudioSpectrumLeft g_AudioSpectrum64Left
-// #define g_AudioSpectrumRight g_AudioSpectrum64Right
 uniform float g_AudioSpectrum64Left[64];
 uniform float g_AudioSpectrum64Right[64];
 #endif
-
-// uniform float g_AudioSpectrumLeft[RESOLUTION];
-// uniform float g_AudioSpectrumRight[RESOLUTION];
+#endif
 
 
 
@@ -78,6 +69,25 @@ uniform float g_AudioSpectrum64Right[64];
 
 
 void main() {
+	
+#if AUDIO_SIMULATE == 0
+#if RESOLUTION == 16
+	float g_AudioSpectrumLeft[] = g_AudioSpectrum16Left;
+	float g_AudioSpectrumRight[] = g_AudioSpectrum16Right;
+#endif
+
+#if RESOLUTION == 32
+	float g_AudioSpectrumLeft[] = g_AudioSpectrum32Left;
+	float g_AudioSpectrumRight[] = g_AudioSpectrum32Right;
+#endif
+
+#if RESOLUTION == 64
+	float g_AudioSpectrumLeft[] = g_AudioSpectrum64Left;
+	float g_AudioSpectrumRight[] = g_AudioSpectrum64Right;
+#endif
+#endif
+
+
 	// Get the existing pixel color
 	vec4 scene = texSample2D(g_Texture0, v_TexCoord);
 
@@ -131,30 +141,22 @@ void main() {
 	// Get the height of the bar
 #if SHAPE == STEREO_H || SHAPE == STEREO_V
 
-	// float barVolume1L = g_AudioSpectrumLeft[barFreq1];
-	// float barVolume2L = g_AudioSpectrumLeft[barFreq2];
-	// float barVolume1R = g_AudioSpectrumRight[barFreq1];
-	// float barVolume2R = g_AudioSpectrumRight[barFreq2];
 
-#if RESOLUTION == 16
-	float barVolume1L = g_AudioSpectrum16Left[barFreq1];
-	float barVolume2L = g_AudioSpectrum16Left[barFreq2];
-	float barVolume1R = g_AudioSpectrum16Right[barFreq1];
-	float barVolume2R = g_AudioSpectrum16Right[barFreq2];
-#endif
 
-#if RESOLUTION == 32
-	float barVolume1L = g_AudioSpectrum32Left[barFreq1];
-	float barVolume2L = g_AudioSpectrum32Left[barFreq2];
-	float barVolume1R = g_AudioSpectrum32Right[barFreq1];
-	float barVolume2R = g_AudioSpectrum32Right[barFreq2];
-#endif
-
-#if RESOLUTION == 64
-	float barVolume1L = g_AudioSpectrum64Left[barFreq1];
-	float barVolume2L = g_AudioSpectrum64Left[barFreq2];
-	float barVolume1R = g_AudioSpectrum64Right[barFreq1];
-	float barVolume2R = g_AudioSpectrum64Right[barFreq2];
+#if AUDIO_SIMULATE == 1
+	float yL = frac(g_Time * 0.181);
+	float yR = frac(yL + 0.5);
+	float x1 = barFreq1 / 128.0;
+	float x2 = barFreq2 / 128.0;
+	float barVolume1L = texSample2D(g_Texture1, vec2(x1, yL));
+	float barVolume2L = texSample2D(g_Texture1, vec2(x2, yL));
+	float barVolume1R = texSample2D(g_Texture1, vec2(x1, yR));
+	float barVolume2R = texSample2D(g_Texture1, vec2(x2, yR));
+#else
+	float barVolume1L = g_AudioSpectrumLeft[barFreq1];
+	float barVolume2L = g_AudioSpectrumLeft[barFreq2];
+	float barVolume1R = g_AudioSpectrumRight[barFreq1];
+	float barVolume2R = g_AudioSpectrumRight[barFreq2];
 #endif
 	
 	// bar = 1 if this pixel is inside a bar, 0 if outside
@@ -163,22 +165,15 @@ void main() {
 
 #else // NON-STEREO
 
-	// float barVolume1 = (g_AudioSpectrumLeft[barFreq1] + g_AudioSpectrumRight[barFreq1]) * 0.5;
-	// float barVolume2 = (g_AudioSpectrumLeft[barFreq2] + g_AudioSpectrumRight[barFreq2]) * 0.5;
-
-#if RESOLUTION == 16
-	float barVolume1 = (g_AudioSpectrum16Left[barFreq1] + g_AudioSpectrum16Right[barFreq1]) * 0.5;
-	float barVolume2 = (g_AudioSpectrum16Left[barFreq2] + g_AudioSpectrum16Right[barFreq2]) * 0.5;
-#endif
-
-#if RESOLUTION == 32
-	float barVolume1 = (g_AudioSpectrum32Left[barFreq1] + g_AudioSpectrum32Right[barFreq1]) * 0.5;
-	float barVolume2 = (g_AudioSpectrum32Left[barFreq2] + g_AudioSpectrum32Right[barFreq2]) * 0.5;
-#endif
-
-#if RESOLUTION == 64
-	float barVolume1 = (g_AudioSpectrum64Left[barFreq1] + g_AudioSpectrum64Right[barFreq1]) * 0.5;
-	float barVolume2 = (g_AudioSpectrum64Left[barFreq2] + g_AudioSpectrum64Right[barFreq2]) * 0.5;
+#if AUDIO_SIMULATE == 1
+	float x1 = barFreq1 / 128.0;
+	float x2 = barFreq2 / 128.0;
+	float y = g_Time * 0.181;
+	float barVolume1 = texSample2D(g_Texture1, vec2(x1, y));
+	float barVolume2 = texSample2D(g_Texture1, vec2(x2, y));
+#else
+	float barVolume1 = (g_AudioSpectrumLeft[barFreq1] + g_AudioSpectrumRight[barFreq1]) * 0.5;
+	float barVolume2 = (g_AudioSpectrumLeft[barFreq2] + g_AudioSpectrumRight[barFreq2]) * 0.5;
 #endif
 
 	// bar = 1 if this pixel is inside a bar, 0 if outside

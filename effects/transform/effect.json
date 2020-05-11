@@ -1,6 +1,5 @@
 {
 	"version" : 1,
-	"replacementkey" : "transform",
 	"name" : "ui_editor_effect_transform_title",
 	"description" : "ui_editor_effect_transform_description",
 	"group" : "distort",

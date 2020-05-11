@@ -56,7 +56,10 @@
 			}
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
 			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"effects" : 
@@ -500,7 +503,10 @@
 			}
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
 			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"effects" : 
@@ -609,7 +615,10 @@
 			"visible" : true
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
 			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"id" : 158,
@@ -666,7 +675,10 @@
 			"volume" : 0.5
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
 			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"id" : 448,
@@ -683,10 +695,13 @@
 			"visible" : 
 			{
 				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n",
-				"value" : false
+				"value" : true
 			}
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"effects" : 
@@ -771,7 +786,10 @@
 			"scale" : "1000.000 1000.000 1000.000"
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
 			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"effects" : 
@@ -836,30 +854,6 @@
 						}
 					],
 					"visible" : false
-				},
-				{
-					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 317,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 9,
-								"SHAPE" : 0,
-								"TRANSPARENCY" : 0
-							},
-							"constantshadervalues" : 
-							{
-								"Color" : "1 1 1",
-								"Offset" : 0,
-								"Opacity" : 1
-							},
-							"id" : 318
-						}
-					],
-					"visible" : true
 				}
 			],
 			"id" : 226,
@@ -1012,7 +1006,10 @@
 			"visible" : false
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
 			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"config" : 
 			{
@@ -1079,26 +1076,6 @@
 						}
 					],
 					"visible" : false
-				},
-				{
-					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 305,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"SHAPE" : 6
-							},
-							"constantshadervalues" : 
-							{
-								"Number of bars" : 1
-							},
-							"id" : 306
-						}
-					],
-					"visible" : true
 				}
 			],
 			"id" : 7825,
@@ -1106,7 +1083,7 @@
 			"ledsource" : false,
 			"locktransforms" : false,
 			"name" : "Compose",
-			"origin" : "2042.355 960.094 0.000",
+			"origin" : "2005.643 915.224 0.000",
 			"parallaxDepth" : "1.000 1.000",
 			"perspective" : false,
 			"scale" : "10.000 10.000 34.217",
@@ -1115,6 +1092,9 @@
 			"visible" : false
 		},
 		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"effects" : 
@@ -1176,36 +1156,18 @@
 					"passes" : 
 					[
 						{
+							"constantshadervalues" : 
+							{
+								"Delta Time" : 
+								{
+									"script" : "'use strict';\n\n/**\n * @param {Number} value (for property 'Delta Time')\n */\nexport function update(value) {\n\treturn engine.frametime;\n}\n",
+									"value" : 0
+								}
+							},
 							"id" : 252
 						}
 					],
 					"visible" : false
-				},
-				{
-					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 248,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 0,
-								"RESOLUTION" : 64,
-								"SHAPE" : 4,
-								"TRANSPARENCY" : 2
-							},
-							"constantshadervalues" : 
-							{
-								"Bar Bounds" : "0 1",
-								"Bar Color" : "1 0.48627450980392156 0.48627450980392156",
-								"Bar Opacity" : 1,
-								"Bar count" : 30
-							},
-							"id" : 249
-						}
-					],
-					"visible" : true
 				}
 			],
 			"id" : 247,
@@ -1216,6 +1178,118 @@
 			"parallaxDepth" : "1.000 1.000",
 			"perspective" : false,
 			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/transform/effect.json",
+					"id" : 522,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLAMP" : 1,
+								"MODE" : 0
+							},
+							"id" : 523
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 254,
+			"image" : "models/MMX1BodyRun.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "MMX1BodyRun",
+			"origin" : "2401.873 738.442 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "5.000 5.000 1.000",
+			"size" : "40.000 36.000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "0.494 0.494 0.494",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 440,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"AUDIO_SIMULATE" : 0,
+								"RESOLUTION" : 16,
+								"SHAPE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Bounds" : "0 1",
+								"Bar Color" : "1 1 1",
+								"Bar Opacity" : 1,
+								"Bar count" : 4
+							},
+							"id" : 441
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 469,
+					"name" : "my tint",
+					"passes" : 
+					[
+						{
+							"id" : 470
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 412,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Solid",
+			"origin" : "2048.000 948.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "1024.000 1024.000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 419,
+			"instanceoverride" : null,
+			"locktransforms" : false,
+			"name" : "new particle system",
+			"origin" : "2032.201 1550.105 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/new_particle_system_1.json",
+			"scale" : "5.000 5.000 1.000",
 			"visible" : true
 		}
 	]
