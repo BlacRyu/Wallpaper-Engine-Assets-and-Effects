@@ -597,7 +597,7 @@
 			"visible" : 
 			{
 				"script" : "'use strict';\n\nlet startTime = 0;\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function update(value) {\n\tif (engine.runtime > startTime + 5){\n\t\tthisLayer.stop();\n\t}\n\treturn value;\n}\n\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function init(value) {\n\tstartTime = engine.runtime;\n\treturn value;\n}\n",
-				"value" : true
+				"value" : false
 			}
 		},
 		{
@@ -612,7 +612,7 @@
 			"parallaxDepth" : "1.000 1.000",
 			"particle" : "particles/presets/vapor0.json",
 			"scale" : "1.000 1.000 1.000",
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -772,7 +772,7 @@
 			"parallaxDepth" : "1.000 1.000",
 			"particle" : "particles/orbiting_particles_2.json",
 			"scale" : "0.943 0.943 0.943",
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"angles" : "0.000 0.000 0.000",
@@ -885,7 +885,7 @@
 			"parallaxDepth" : "1.000 1.000",
 			"particle" : "particles/presets/torch.json",
 			"scale" : "1.000 1.000 1.000",
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alpha" : 1.0,
@@ -1004,6 +1004,26 @@
 			},
 			"verticalalign" : "center",
 			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 642,
+			"image" : "models/preview.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "preview",
+			"origin" : "1592.255 774.597 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "256.000 256.000",
+			"solid" : true,
+			"visible" : true
 		},
 		{
 			"alignment" : "center",
@@ -1148,26 +1168,6 @@
 						}
 					],
 					"visible" : false
-				},
-				{
-					"file" : "effects/Advanced_Audio_Bars/effect.json",
-					"id" : 251,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"constantshadervalues" : 
-							{
-								"Delta Time" : 
-								{
-									"script" : "'use strict';\n\n/**\n * @param {Number} value (for property 'Delta Time')\n */\nexport function update(value) {\n\treturn engine.frametime;\n}\n",
-									"value" : 0
-								}
-							},
-							"id" : 252
-						}
-					],
-					"visible" : false
 				}
 			],
 			"id" : 247,
@@ -1184,11 +1184,97 @@
 			"alignment" : "center",
 			"alpha" : 1.0,
 			"angles" : "0.000 0.000 0.000",
+			"color" : "0.910 1.000 0.522",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 440,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"AUDIO_SIMULATE" : 0,
+								"RESOLUTION" : 32,
+								"SHAPE" : 0,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Bounds" : "0 1",
+								"Bar Color" : "0.47058823529411764 0.9764705882352941 1",
+								"Bar Opacity" : 1,
+								"Bar count" : 9999
+							},
+							"id" : 441
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 412,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Simple Audio Bars",
+			"origin" : "2977.040 1630.560 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "512.000 512.000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 674,
+			"image" : "models/MMX1BodyRun.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "MMX1BodyRun",
+			"origin" : "2040.424 940.225 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "5.000 5.000 1.000",
+			"size" : "40.000 36.000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
 			"color" : "1.000 1.000 1.000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"effects" : 
 			[
+				{
+					"file" : "effects/xray/effect.json",
+					"id" : 604,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"size" : 0.5
+							},
+							"id" : 605,
+							"textures" : [ null, "particle/magic/glyph_0", "particle/halo_6" ]
+						}
+					],
+					"visible" : true
+				},
 				{
 					"file" : "effects/transform/effect.json",
 					"id" : 522,
@@ -1204,7 +1290,7 @@
 							"id" : 523
 						}
 					],
-					"visible" : true
+					"visible" : false
 				}
 			],
 			"id" : 254,
@@ -1212,71 +1298,11 @@
 			"ledsource" : false,
 			"locktransforms" : false,
 			"name" : "MMX1BodyRun",
-			"origin" : "2401.873 738.442 0.000",
+			"origin" : "2339.279 1148.333 0.000",
 			"parallaxDepth" : "1.000 1.000",
 			"perspective" : false,
 			"scale" : "5.000 5.000 1.000",
 			"size" : "40.000 36.000",
-			"solid" : true,
-			"visible" : true
-		},
-		{
-			"alignment" : "center",
-			"alpha" : 1.0,
-			"angles" : "0.000 0.000 0.000",
-			"color" : "0.494 0.494 0.494",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 440,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"AUDIO_SIMULATE" : 0,
-								"RESOLUTION" : 16,
-								"SHAPE" : 0
-							},
-							"constantshadervalues" : 
-							{
-								"Bar Bounds" : "0 1",
-								"Bar Color" : "1 1 1",
-								"Bar Opacity" : 1,
-								"Bar count" : 4
-							},
-							"id" : 441
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/tint/effect.json",
-					"id" : 469,
-					"name" : "my tint",
-					"passes" : 
-					[
-						{
-							"id" : 470
-						}
-					],
-					"visible" : false
-				}
-			],
-			"id" : 412,
-			"image" : "models/util/solidlayer.json",
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "Solid",
-			"origin" : "2048.000 948.000 0.000",
-			"parallaxDepth" : "1.000 1.000",
-			"perspective" : false,
-			"scale" : "1.000 1.000 1.000",
-			"size" : "1024.000 1024.000",
 			"solid" : true,
 			"visible" : true
 		},
@@ -1290,6 +1316,607 @@
 			"parallaxDepth" : "1.000 1.000",
 			"particle" : "particles/new_particle_system_1.json",
 			"scale" : "5.000 5.000 1.000",
+			"visible" : false
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 271,
+			"instanceoverride" : null,
+			"locktransforms" : false,
+			"name" : "cherry blossoms on cursor",
+			"origin" : "2048.000 948.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/Cherry_Blossoms_2.json",
+			"scale" : "1.000 1.000 1.000",
+			"visible" : false
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"id" : 270,
+			"instanceoverride" : null,
+			"locktransforms" : false,
+			"name" : "Thunderbolt",
+			"origin" : "2048.000 948.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"particle" : "particles/presets/lightning2.json",
+			"scale" : "1.000 1.000 1.000",
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"dependencies" : [ 298, 298 ],
+			"effects" : 
+			[
+				{
+					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
+					"id" : 299,
+					"name" : "Screen Pixels",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0 0",
+								"multiply" : 
+								{
+									"script" : null,
+									"value" : 0.67000001668930054
+								},
+								"scale" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n// let scale = new Vec2(0.125, 0.125);\n\nlet scale = new Vec2(0.0833333333333333, 0.125);\n\n/**\n * @param {Vec2} value (for property 'scale')\n */\nexport function init(value) {\n\treturn engine.screenResolution.multiply(scale);\n}\n\n/**\n * @param {Vec2} size\n */\nexport function resizeScreen(size) {\n\tthisObject.scale = size.multiply(scale);\n}\n\n// /**\n//  * @param {Object} userProperties\n//  */\n// export function applyUserProperties(userProperties) {\n// \t// if (userProperties.horizontal_pixel_scale !== undefined)\n// \t// \tscale = new Vec2(userProperties.horizontal_pixel_scale, scale.y);\n// \tif (userProperties.vertical_pixel_scale !== undefined)\n// \t\tscale = new Vec2(scale.x, userProperties.vertical_pixel_scale);\n// \tthisObject.scale = engine.screenResolution.multiply(scale);\n// }\n",
+									"user" : null,
+									"value" : "160 90"
+								}
+							},
+							"id" : 0,
+							"textures" : [ null, "workshop/2098598602/rgb_pixel" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blur/effect.json",
+					"id" : 304,
+					"name" : "CRT Glow (Linear Dodge)",
+					"passes" : 
+					[
+						{
+							"id" : 305
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 306
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2,
+								"VERTICAL" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 308
+						},
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 9,
+								"COMPOSITE" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"compositealpha" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.compositealpha = Math.pow(userProperties.crt_effect,2.5) * 3.25;\n}\n",
+									"value" : 3
+								},
+								"compositeoffset" : "0 0"
+							},
+							"id" : 309,
+							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_b" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blur/effect.json",
+					"id" : 316,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 317
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2
+							},
+							"id" : 318
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2,
+								"VERTICAL" : 1
+							},
+							"id" : 319
+						},
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 6,
+								"COMPOSITE" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"compositealpha" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.compositealpha = userProperties.crt_effect * 0.2;\n}\n",
+									"value" : 0.20000000298023224
+								},
+								"compositeoffset" : "0 0"
+							},
+							"id" : 320,
+							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_a" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blend/effect.json",
+					"id" : 329,
+					"name" : "Vignette (Blend)",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"multiply" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.multiply = userProperties.crt_effect * 0.5;\n}\n",
+									"value" : 0.5
+								}
+							},
+							"id" : 330,
+							"textures" : [ null, "workshop/2098598602/Vignette" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/transform/effect.json",
+					"id" : 338,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLAMP" : 1,
+								"MODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"angle" : 0,
+								"offset" : "0 0",
+								"scale" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.scale = new Vec2(1.0 + userProperties.crt_effect * .05);\n}\n",
+									"value" : "1.05 1.05"
+								}
+							},
+							"id" : 339
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/fisheye/effect.json",
+					"id" : 344,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BACKGROUND" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"distortion" : 
+								{
+									"script" : "// Fisheye - Distortion\n'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.distortion = userProperties.crt_effect * .3;\n}\n",
+									"value" : 0.30000001192092896
+								},
+								"size" : 
+								{
+									"script" : "export let __workshopId = '2098598602';\n// // Fisheye - Size\n// 'use strict';\n\n// /**\n//  * @param {Object} userProperties\n//  */\n// export function applyUserProperties(userProperties) {\n// \tif (userProperties.crt_effect !== undefined)\n// \t\tthisObject.size = 1.0 + userProperties.crt_effect * .5;\n// }\n",
+									"value" : 1.5
+								}
+							},
+							"id" : 345
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
+					"id" : 350,
+					"name" : "CRT Screen Border",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"multiply" : 1.0,
+								"scale" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.scale = new Vec2(\n\t\t\t0.75 + userProperties.crt_effect * .225,\n\t\t\t0.7 + userProperties.crt_effect * .25\n\t\t);\n}\n",
+									"value" : "1 1"
+								}
+							},
+							"id" : 351,
+							"textures" : [ null, "workshop/2098598602/CRT Border" ]
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 298,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "CRT v2 (Fullscreen)",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/xray/effect.json",
+					"id" : 405,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"multiply" : 1,
+								"size" : 0.42999999999999999
+							},
+							"id" : 407,
+							"textures" : [ null, "particle/magic/glyph_0", "particle/halo_5" ]
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 401,
+			"image" : "models/derkomai2.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "derkomai2",
+			"origin" : "2048.000 948.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "4096.000 2896.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/shine/effect.json",
+					"id" : 822,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"raythreshold" : 0.29999999999999999
+							},
+							"id" : 823,
+							"textures" : [ null, "util/white", "util/clouds_256" ]
+						},
+						{
+							"combos" : 
+							{
+								"EDGES" : 3
+							},
+							"constantshadervalues" : 
+							{
+								"direction" : 0.71999999999999997,
+								"rayintensity" : 2,
+								"raylength" : 0.14999999999999999
+							},
+							"id" : 824
+						},
+						{
+							"id" : 825
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"id" : 826
+						},
+						{
+							"id" : 827
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 794,
+			"image" : "models/my_bio_inverted_512.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "my_bio_inverted_512",
+			"origin" : "2040.424 940.225 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "512.000 512.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "0.271 0.169 0.071",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"dependencies" : [ 794, 422 ],
+			"effects" : 
+			[
+				{
+					"file" : "effects/xray/effect.json",
+					"id" : 424,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"multiply" : 1,
+								"size" : 0.82999999999999996
+							},
+							"id" : 425,
+							"textures" : [ null, "_rt_imageLayerComposite_794_a", "workshop/2099648933/bar" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/shine/effect.json",
+					"id" : 800,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 801,
+							"textures" : [ null, "util/white", "util/clouds_256" ]
+						},
+						{
+							"id" : 802
+						},
+						{
+							"id" : 803
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"id" : 804
+						},
+						{
+							"id" : 805,
+							"textures" : [ null, "_rt_imageLayerComposite_422_a" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/shake/effect.json",
+					"id" : 564,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 565,
+							"textures" : [ null, "util/noflow", "util/white" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/xray/effect.json",
+					"id" : 574,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 575,
+							"textures" : [ null, "particle/tech/tech_1", "particle/halo_6" ]
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 422,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "X-Ray shine test",
+			"origin" : "2534.823 900.200 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "3.000 3.000 1.000",
+			"size" : "512.000 512.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 461,
+			"image" : "models/Skeleman-R No Alpha.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Skeleman-R No Alpha",
+			"origin" : "2697.495 740.116 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "5.000 5.000 1.000",
+			"size" : "64.000 64.000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "1.000 1.000 1.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/transform/effect.json",
+					"id" : 450,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLAMP" : 1,
+								"MODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"angle" : 0
+							},
+							"id" : 451
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 676,
+			"image" : "models/Skeleman-R.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Skeleman-R",
+			"origin" : "2676.575 627.984 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "5.000 5.000 1.000",
+			"size" : "64.000 47.000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.000 0.000 0.000",
+			"color" : "0.278 0.529 0.275",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Advanced_Audio_Bars/effect.json",
+					"id" : 421,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"Bar Bounds" : "0 1"
+							},
+							"id" : 423
+						},
+						{
+							"id" : 310
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 480,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Advanced Audio Bars",
+			"origin" : "1953.290 815.865 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "1024.000 1024.000",
+			"solid" : true,
 			"visible" : true
 		}
 	]

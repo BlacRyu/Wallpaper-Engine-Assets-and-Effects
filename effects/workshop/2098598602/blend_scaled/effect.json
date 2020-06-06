@@ -1,0 +1,19 @@
+{
+	"dependencies" : 
+	[
+		"materials/workshop/2098598602/effects/blend_scaled.json",
+		"shaders/workshop/2098598602/effects/blend_scaled.frag",
+		"shaders/workshop/2098598602/effects/blend_scaled.vert"
+	],
+	"editable" : true,
+	"group" : "localeffects",
+	"name" : "Blend Scaled",
+	"passes" : 
+	[
+		{
+			"material" : "materials/workshop/2098598602/effects/blend_scaled.json"
+		}
+	],
+	"replacementkey" : "blend_scaled",
+	"version" : 1
+}

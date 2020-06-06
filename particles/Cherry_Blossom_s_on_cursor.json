@@ -1,0 +1,146 @@
+{
+	"animationmode" : "randomframe",
+	"children" : 
+	[
+		{
+			"flags" : 0,
+			"id" : 12,
+			"name" : "particles/Cherry_Blossom_Center.json",
+			"type" : "static"
+		}
+	],
+	"controlpoint" : 
+	[
+		{
+			"flags" : 1,
+			"id" : 0,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 1,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 2,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 3,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 4,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 5,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 6,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 7,
+			"offset" : "0 0 0"
+		}
+	],
+	"emitter" : 
+	[
+		{
+			"directions" : "1 1 0",
+			"distancemax" : 0,
+			"distancemin" : 0,
+			"id" : 6,
+			"name" : "sphererandom",
+			"origin" : "0 0 0",
+			"rate" : 100
+		}
+	],
+	"flags" : null,
+	"initializer" : 
+	[
+		{
+			"exponent" : 2,
+			"id" : 2,
+			"max" : 4,
+			"min" : 2,
+			"name" : "lifetimerandom"
+		},
+		{
+			"id" : 3,
+			"max" : 80,
+			"min" : 40,
+			"name" : "sizerandom"
+		},
+		{
+			"id" : 4,
+			"max" : "249 222 255",
+			"min" : "255 173 169",
+			"name" : "colorrandom"
+		},
+		{
+			"bounds" : "0 1",
+			"count" : 5,
+			"id" : 5,
+			"name" : "mapsequencearoundcontrolpoint",
+			"speedmax" : "20 0 0",
+			"speedmin" : "-20 200 0"
+		}
+	],
+	"material" : "materials/particle/halo_8.json",
+	"maxcount" : 500,
+	"operator" : 
+	[
+		{
+			"drag" : 1,
+			"gravity" : "0 0 0",
+			"id" : 7,
+			"name" : "movement"
+		},
+		{
+			"endtime" : 0.050000000000000003,
+			"endvalue" : 1,
+			"id" : 8,
+			"name" : "sizechange",
+			"startvalue" : 0
+		},
+		{
+			"id" : 9,
+			"name" : "sizechange",
+			"starttime" : 0.20000000000000001
+		},
+		{
+			"id" : 10,
+			"name" : "controlpointattract",
+			"origin" : "0 0 0",
+			"scale" : -750,
+			"threshold" : 50
+		},
+		{
+			"id" : 11,
+			"name" : "controlpointattract",
+			"origin" : "0 0 0",
+			"scale" : 500,
+			"threshold" : 9999
+		}
+	],
+	"renderer" : 
+	[
+		{
+			"id" : 1,
+			"length" : 0.050000000000000003,
+			"maxlength" : 1,
+			"name" : "spritetrail"
+		}
+	],
+	"sequencemultiplier" : null,
+	"starttime" : 0
+}

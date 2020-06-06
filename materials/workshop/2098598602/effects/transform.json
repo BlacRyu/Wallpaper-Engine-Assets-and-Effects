@@ -6,10 +6,7 @@
 			"cullmode" : "nocull",
 			"depthtest" : "disabled",
 			"depthwrite" : "disabled",
-			"shader" : "effects/Advanced_Audio_Bars_copy",
-			"combos": {
-			// "TRANSFORM" : 1
-			}
+			"shader" : "workshop/2098598602/effects/transform"
 		}
 	]
 }

@@ -1,0 +1,108 @@
+{
+	"animationmode" : null,
+	"children" : null,
+	"controlpoint" : 
+	[
+		{
+			"flags" : 1,
+			"id" : 0,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 1,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 2,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 3,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 4,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 5,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 6,
+			"offset" : "0 0 0"
+		},
+		{
+			"flags" : 0,
+			"id" : 7,
+			"offset" : "0 0 0"
+		}
+	],
+	"emitter" : 
+	[
+		{
+			"directions" : "1 1 0",
+			"distancemax" : 0,
+			"distancemin" : 0,
+			"flags" : 2,
+			"id" : 6,
+			"instantaneous" : 0,
+			"name" : "sphererandom",
+			"origin" : "0 0 0",
+			"rate" : 999
+		}
+	],
+	"flags" : 0,
+	"initializer" : 
+	[
+		{
+			"id" : 2,
+			"max" : 80,
+			"min" : 80,
+			"name" : "sizerandom"
+		},
+		{
+			"id" : 3,
+			"max" : 0.01,
+			"min" : 0.01,
+			"name" : "lifetimerandom"
+		},
+		{
+			"id" : 4,
+			"max" : "184 0 81",
+			"min" : "184 0 81",
+			"name" : "colorrandom"
+		}
+	],
+	"material" : "materials/particle/halo_9.json",
+	"maxcount" : 500,
+	"operator" : 
+	[
+		{
+			"id" : 7,
+			"name" : "controlpointattract",
+			"scale" : 99999,
+			"threshold" : 999999
+		},
+		{
+			"drag" : 0.5,
+			"id" : 8,
+			"name" : "movement"
+		}
+	],
+	"renderer" : 
+	[
+		{
+			"id" : 1,
+			"name" : "sprite"
+		}
+	],
+	"sequencemultiplier" : null,
+	"starttime" : 0
+}

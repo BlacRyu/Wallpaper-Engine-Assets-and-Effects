@@ -1,0 +1,36 @@
+{
+	"passes" : 
+	[
+		{
+			"blending" : "translucent",
+			"combos" : 
+			{
+				"version" : 2
+			},
+			"constantshadervalues" : 
+			{
+				" Power" : 1,
+				" \u200f\u200fN/A  \u200f\u200f\u200e  \u200f\u200f\u200e " : 0,
+				" \u200f\u200f\u200e " : 0,
+				"Bright" : 1,
+				"Ignore" : 0,
+				"N/A" : 0,
+				"N/A \u200f\u200f\u200e " : 0,
+				"Power" : 1,
+				"Scroll 1 X" : 0,
+				"Scroll 1 Y" : 0,
+				"color" : 
+				{
+					"user" : null,
+					"value" : "1.000 1.000 1.000"
+				},
+				"dont touch" : 0
+			},
+			"cullmode" : "nocull",
+			"depthtest" : "disabled",
+			"depthwrite" : "disabled",
+			"shader" : "workshop/2099648933/tint",
+			"textures" : [ "workshop/2099648933/bar" ]
+		}
+	]
+}
