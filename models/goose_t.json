@@ -1,0 +1,5 @@
+{
+	"autosize" : true,
+	"material" : "materials/goose_t.json",
+	"puppet" : "models/goose_t_puppet.mdl"
+}

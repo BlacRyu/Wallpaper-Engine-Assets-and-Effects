@@ -2,11 +2,11 @@
 	"dependencies" : 
 	[
 		"materials/effects/Advanced_Audio_Bars.json",
-		// "materials/effects/Advanced_Audio_Bars_copy.json",
+		"materials/effects/Advanced_Audio_Bars_copy.json",
 		"shaders/effects/Advanced_Audio_Bars.frag",
-		"shaders/effects/Advanced_Audio_Bars.vert"
-		// "shaders/effects/Advanced_Audio_Bars_copy.frag",
-		// "shaders/effects/Advanced_Audio_Bars_copy.vert"
+		"shaders/effects/Advanced_Audio_Bars.vert",
+		"shaders/effects/Advanced_Audio_Bars_copy.frag",
+		"shaders/effects/Advanced_Audio_Bars_copy.vert"
 		// "shaders/passthrough.frag",
 		// "shaders/passthrough.vert"
 	],
@@ -15,13 +15,18 @@
 	"fbos" :
 	[
 		{
+			"name" : "_rt_QuarterCompoBuffer1",
+			"scale" : 4,
+			"format" : "rgba8888"
+		},
+		{
 			"name" : "_rt_BGBuffer1",
 			"format" : "rgba8888",
 			"scale" : "1"
 		},
 		{
 			"name" : "_rt_BGBuffer2",
-			"format" : "r8",
+			"format" : "rg88",
 			"width" : 64,
 			"height" : 1
 		}
@@ -44,15 +49,9 @@
 
 		{
 			"material" : "materials/effects/Advanced_Audio_Bars.json",
-			// "target" : "_rt_BGBuffer1",
-			// "bind" :
-			// [
-			// 	{
-			// 		"name" : "_rt_BGBuffer2",
-			// 		"index" : 0
-			// 	}
-			// ]
-		}
+			"target" : "_rt_BGBuffer2"
+		},
+
 		// {
 		// 	"command" : "copy",
 		// 	// "target" : "_rt_BGBuffer2",
@@ -71,15 +70,20 @@
 		// 	]
 		// },
 
+		{
+			"material" : "materials/effects/Advanced_Audio_Bars_copy.json",
+			"bind" :
+			[
+				{
+					"name" : "_rt_BGBuffer2",
+					"index" : 0
+				}
+			]
+		}
+
 		// {
-		// 	"material" : "materials/effects/Advanced_Audio_Bars_copy.json",
-		// 	"bind" :
-		// 	[
-		// 		{
-		// 			"name" : "_rt_BGBuffer1",
-		// 			"index" : 0
-		// 		}
-		// 	]
+		// 	"command" : "copy",
+		// 	"source" : "_rt_BGBuffer2"
 		// }
 	],
 	"replacementkey" : "Advanced_Audio_Bars",

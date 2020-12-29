@@ -25,7 +25,8 @@ void main() {
 	vec4 albedoOld = texSample2D(g_Texture2, v_TexCoord.xy);
 	float mask = texSample2D(g_Texture1, v_TexCoord.zw).r;
 	
-	blurred = ApplyComposite(albedoOld, blurred);
+	float div = mix(blurred.a, 1, step(blurred.a, 0));
+	blurred = ApplyComposite(albedoOld, vec4(blurred.rgb / div, blurred.a));
 	blurred = mix(albedoOld, blurred, mask);
 	
 	gl_FragColor = blurred;

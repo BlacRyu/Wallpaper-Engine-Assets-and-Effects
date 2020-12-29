@@ -11,10 +11,11 @@
 
 varying vec2 v_TexCoord;
 
-uniform float g_BarCount; // {"material":"Bar count","default":16,"range":[1, 1000]}
+uniform float g_BarCount; // {"material":"Bar Count","default":16,"range":[1, 1000]}
 uniform vec2 g_BarBounds; // {"material":"Bar Bounds","default":"0 1"}
 uniform vec3 g_BarColor; // {"default":"1 1 1","material":"Bar Color","type":"color"}
 uniform float g_BarOpacity; // {"default":"1","material":"Bar Opacity"}
+uniform float g_BarSpacing; // {"default":"0","material":"Bar Spacing"}
 
 uniform sampler2D g_Texture0; // {"material":"previous","label":"Prev","hidden":true}
 #if AUDIO_SIMULATE == 1
@@ -132,6 +133,7 @@ void main() {
 
 
 	// Get the frequency for this pixel
+	float barDist = abs((shapeCoord.x * g_BarCount % 1) * 2 - 1);
 	float frequency = floor(shapeCoord.x * g_BarCount) / g_BarCount * RESOLUTION + 0.5;
 	uint barFreq1 = frequency % RESOLUTION;
 	uint barFreq2 = (barFreq1 + 1) % RESOLUTION;
@@ -162,6 +164,7 @@ void main() {
 	// bar = 1 if this pixel is inside a bar, 0 if outside
 	int bar = step(shapeCoord.y, 0.5 * lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, fract(frequency)))));
 	bar = max(bar, step(1 - shapeCoord.y, 0.5 * lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, fract(frequency))))));
+	bar *= step(barDist, 1 - g_BarSpacing);
 
 #else // NON-STEREO
 
@@ -178,6 +181,7 @@ void main() {
 
 	// bar = 1 if this pixel is inside a bar, 0 if outside
 	int bar = step(1 - shapeCoord.y, lerp(g_BarBounds.x, g_BarBounds.y, lerp(barVolume1, barVolume2, smoothstep(0, 1, fract(frequency)))));
+	bar *= step(barDist, 1 - g_BarSpacing);
 
 #endif
 

@@ -1,5 +1,6 @@
 {
 	"version" : 1,
+	"replacementkey" : "blur",
 	"name" : "ui_editor_effect_blur_title",
 	"description" : "ui_editor_effect_blur_description",
 	"group" : "blur",
