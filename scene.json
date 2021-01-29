@@ -1324,268 +1324,6 @@
 		{
 			"alignment" : "center",
 			"alpha" : 1.0,
-			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
-					"id" : 299,
-					"name" : "Screen Pixels",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 2,
-								"WRITEALPHA" : 0
-							},
-							"constantshadervalues" : 
-							{
-								"center" : "0 0",
-								"multiply" : 
-								{
-									"script" : null,
-									"value" : 0.67000001668930054
-								},
-								"scale" : 
-								{
-									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n// let scale = new Vec2(0.125, 0.125);\n\nlet scale = new Vec2(0.0833333333333333, 0.125);\n\n/**\n * @param {Vec2} value (for property 'scale')\n */\nexport function init(value) {\n\treturn engine.screenResolution.multiply(scale);\n}\n\n/**\n * @param {Vec2} size\n */\nexport function resizeScreen(size) {\n\tthisObject.scale = size.multiply(scale);\n}\n\n// /**\n//  * @param {Object} userProperties\n//  */\n// export function applyUserProperties(userProperties) {\n// \t// if (userProperties.horizontal_pixel_scale !== undefined)\n// \t// \tscale = new Vec2(userProperties.horizontal_pixel_scale, scale.y);\n// \tif (userProperties.vertical_pixel_scale !== undefined)\n// \t\tscale = new Vec2(scale.x, userProperties.vertical_pixel_scale);\n// \tthisObject.scale = engine.screenResolution.multiply(scale);\n// }\n",
-									"user" : null,
-									"value" : "160 90"
-								}
-							},
-							"id" : 178,
-							"textures" : [ null, "workshop/2098598602/rgb_pixel" ]
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/workshop/2098598602/blur/effect.json",
-					"id" : 304,
-					"name" : "CRT Glow (Linear Dodge)",
-					"passes" : 
-					[
-						{
-							"id" : 180
-						},
-						{
-							"combos" : 
-							{
-								"KERNEL" : 2
-							},
-							"constantshadervalues" : 
-							{
-								"scale" : "1 1"
-							},
-							"id" : 181
-						},
-						{
-							"combos" : 
-							{
-								"KERNEL" : 2,
-								"VERTICAL" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"scale" : "1 1"
-							},
-							"id" : 182
-						},
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 9,
-								"COMPOSITE" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"compositealpha" : 
-								{
-									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.compositealpha = Math.pow(userProperties.crt_effect,2.5) * 3.25;\n}\n",
-									"value" : 3
-								},
-								"compositeoffset" : "0 0"
-							},
-							"id" : 183,
-							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_b" ]
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/workshop/2098598602/blur/effect.json",
-					"id" : 316,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"id" : 186
-						},
-						{
-							"combos" : 
-							{
-								"KERNEL" : 2
-							},
-							"id" : 187
-						},
-						{
-							"combos" : 
-							{
-								"KERNEL" : 2,
-								"VERTICAL" : 1
-							},
-							"id" : 188
-						},
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 6,
-								"COMPOSITE" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"compositealpha" : 
-								{
-									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.compositealpha = userProperties.crt_effect * 0.2;\n}\n",
-									"value" : 0.20000000298023224
-								},
-								"compositeoffset" : "0 0"
-							},
-							"id" : 189,
-							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_a" ]
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/workshop/2098598602/blend/effect.json",
-					"id" : 329,
-					"name" : "Vignette (Blend)",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 2,
-								"WRITEALPHA" : 0
-							},
-							"constantshadervalues" : 
-							{
-								"multiply" : 
-								{
-									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.multiply = userProperties.crt_effect * 0.5;\n}\n",
-									"value" : 0.5
-								}
-							},
-							"id" : 191,
-							"textures" : [ null, "workshop/2098598602/Vignette" ]
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/workshop/2098598602/transform/effect.json",
-					"id" : 338,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"CLAMP" : 1,
-								"MODE" : 0
-							},
-							"constantshadervalues" : 
-							{
-								"angle" : 0,
-								"offset" : "0 0",
-								"scale" : 
-								{
-									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.scale = new Vec2(1.0 + userProperties.crt_effect * .05);\n}\n",
-									"value" : "1.05 1.05"
-								}
-							},
-							"id" : 193
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/workshop/2098598602/fisheye/effect.json",
-					"id" : 344,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BACKGROUND" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"center" : "0.5 0.5",
-								"distortion" : 
-								{
-									"script" : "// Fisheye - Distortion\n'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.distortion = userProperties.crt_effect * .3;\n}\n",
-									"value" : 0.30000001192092896
-								},
-								"size" : 
-								{
-									"script" : "export let __workshopId = '2098598602';\n// // Fisheye - Size\n// 'use strict';\n\n// /**\n//  * @param {Object} userProperties\n//  */\n// export function applyUserProperties(userProperties) {\n// \tif (userProperties.crt_effect !== undefined)\n// \t\tthisObject.size = 1.0 + userProperties.crt_effect * .5;\n// }\n",
-									"value" : 1.5
-								}
-							},
-							"id" : 194
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
-					"id" : 350,
-					"name" : "CRT Screen Border",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 0,
-								"WRITEALPHA" : 0
-							},
-							"constantshadervalues" : 
-							{
-								"center" : "0.5 0.5",
-								"multiply" : 1.0,
-								"scale" : 
-								{
-									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.scale = new Vec2(\n\t\t\t0.75 + userProperties.crt_effect * .225,\n\t\t\t0.7 + userProperties.crt_effect * .25\n\t\t);\n}\n",
-									"value" : "1 1"
-								}
-							},
-							"id" : 195,
-							"textures" : [ null, "workshop/2098598602/CRT Border" ]
-						}
-					],
-					"visible" : true
-				}
-			],
-			"id" : 298,
-			"image" : "models/util/fullscreenlayer.json",
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "CRT v2 (Fullscreen)",
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"solid" : true,
-			"visible" : false
-		},
-		{
-			"alignment" : "center",
-			"alpha" : 1.0,
 			"angles" : "0.00000 0.00000 0.00000",
 			"brightness" : 1.0,
 			"color" : "1.00000 1.00000 1.00000",
@@ -1832,7 +1570,7 @@
 			"solid" : true,
 			"visible" : 
 			{
-				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Boolean} value - for property 'visible'\n * @return {Boolean} - update current property value\n */\nexport function update(value) {\n\treturn value;\n}\n\n/**\n * @param {Boolean} value - for property 'visible'\n * @return {Boolean} - update current property value\n */\nexport function init(value) {\n\tconsole.log(\"spin values:\");\n\tHelpers.printObjectValues(thisLayer.getEffect(0).getMaterial(0));\n\tconsole.log(\"spin values end\");\n\tthisLayer.getEffect(0).getMaterial(0).speed = 0.1;\n\treturn value;\n}\n",
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Boolean} value - for property 'visible'\n * @return {Boolean} - update current property value\n */\nexport function update(value) {\n\treturn value;\n}\n\n/**\n * @param {Boolean} value - for property 'visible'\n * @return {Boolean} - update current property value\n */\nexport function init(value) {\n\t// console.log(\"spin values:\");\n\t// Helpers.printObjectValues(thisLayer.getEffect(0).getMaterial(0));\n\t// console.log(\"spin values end\");\n\tthisLayer.getEffect(0).getMaterial(0).speed = 0.1;\n\treturn value;\n}\n",
 				"value" : true
 			}
 		},
@@ -1943,7 +1681,7 @@
 							"textures" : [ null, "_rt_FullCompoBuffer1_480_490" ]
 						},
 						{
-							"id" : 248
+							"id" : 379
 						}
 					],
 					"visible" : false
@@ -1997,7 +1735,7 @@
 		},
 		{
 			"alignment" : "center",
-			"alpha" : 0.5,
+			"alpha" : 1.0,
 			"angles" : "0.00000 0.00000 0.00000",
 			"brightness" : 1.0,
 			"color" : "0.91000 1.00000 0.52200",
@@ -2015,17 +1753,17 @@
 							"combos" : 
 							{
 								"AUDIO_SIMULATE" : 0,
-								"RESOLUTION" : 32,
-								"SHAPE" : 4,
+								"RESOLUTION" : 64,
+								"SHAPE" : 5,
 								"TRANSPARENCY" : 4
 							},
 							"constantshadervalues" : 
 							{
 								"Bar Bounds" : "0 0.35",
-								"Bar Color" : "0.47058823529411764 0.9764705882352941 1",
-								"Bar Count" : 20,
+								"Bar Color" : "0.47059 0.97647 1.00000",
+								"Bar Count" : 1000,
 								"Bar Opacity" : 1,
-								"Bar Spacing" : 0.80000000000000004,
+								"Bar Spacing" : 0,
 								"Bar count" : 2
 							},
 							"id" : 153
@@ -2033,7 +1771,7 @@
 					],
 					"visible" : 
 					{
-						"script" : "'use strict';\n\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function update(value) {\n\t// console.log(Object.keys(thisObject));\n\n\tconsole.log(Object.keys(thisObject.getMaterial(0)));\n\t\n\treturn value;\n}\n",
+						"script" : "'use strict';\n\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function update(value) {\n\t// console.log(Object.keys(thisObject));\n\n\t// console.log(Object.keys(thisObject.getMaterial(0)));\n\t\n\treturn value;\n}\n",
 						"value" : true
 					}
 				}
@@ -2050,6 +1788,644 @@
 			"size" : "1920.00000 1080.00000",
 			"solid" : true,
 			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
+					"id" : 428,
+					"name" : "Screen Pixels",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 11,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0 0",
+								"multiply" : 
+								{
+									"user" : "crt_effect",
+									"value" : 1
+								},
+								"scale" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\nlet scale = 0.2;\n\n/**\n * @param {Vec2} value (for property 'scale')\n */\nexport function init(value) {\n\treturn engine.screenResolution.multiply(scale);\n}\n\n/**\n * @param {Vec2} size\n */\nexport function resizeScreen(size) {\n\tthisObject.scale = size.multiply(scale);\n}\n",
+									"user" : null,
+									"value" : "512 256"
+								}
+							},
+							"id" : 0,
+							"textures" : [ null, "workshop/2098598602/pixel" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blur/effect.json",
+					"id" : 432,
+					"name" : "CRT Glow (Lighten)",
+					"passes" : 
+					[
+						{
+							"id" : 433
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 434
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 1,
+								"VERTICAL" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 435
+						},
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 6,
+								"COMPOSITE" : 1,
+								"COMPOSITEMONO" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"compositealpha" : 
+								{
+									"user" : "crt_effect",
+									"value" : 1
+								},
+								"compositecolor" : "1 1 1",
+								"compositeoffset" : "0 0"
+							},
+							"id" : 436,
+							"textures" : [ null, "util/white", "_rt_imageLayerComposite_425_b" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blur/effect.json",
+					"id" : 438,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 439
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2
+							},
+							"id" : 441
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2,
+								"VERTICAL" : 1
+							},
+							"id" : 442
+						},
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 6,
+								"COMPOSITE" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"compositealpha" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.compositealpha = userProperties.crt_effect * 0.15;\n}\n",
+									"value" : 0.14999999999999999
+								},
+								"compositeoffset" : "0 0"
+							},
+							"id" : 443,
+							"textures" : [ null, "util/white", "_rt_imageLayerComposite_425_a" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blend/effect.json",
+					"id" : 445,
+					"name" : "Vignette (Blend)",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"multiply" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.multiply = userProperties.crt_effect * 0.5;\n}\n",
+									"value" : 0.5
+								}
+							},
+							"id" : 446,
+							"textures" : [ null, "workshop/2098598602/Vignette" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/transform/effect.json",
+					"id" : 447,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLAMP" : 1,
+								"MODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"angle" : 0,
+								"offset" : "0 0",
+								"scale" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.scale = new Vec2(1.0 + userProperties.crt_effect * .05);\n}\n",
+									"value" : "1.05000 1.05000"
+								}
+							},
+							"id" : 449
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/fisheye/effect.json",
+					"id" : 451,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BACKGROUND" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"distortion" : 
+								{
+									"script" : "// Fisheye - Distortion\n'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.distortion = userProperties.crt_effect * .3;\n}\n",
+									"value" : 0.30000001192092896
+								},
+								"size" : 
+								{
+									"script" : "export let __workshopId = '2098598602';\n// // Fisheye - Size\n// 'use strict';\n\n// /**\n//  * @param {Object} userProperties\n//  */\n// export function applyUserProperties(userProperties) {\n// \tif (userProperties.crt_effect !== undefined)\n// \t\tthisObject.size = 1.0 + userProperties.crt_effect * .5;\n// }\n",
+									"value" : 1.5
+								}
+							},
+							"id" : 453
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
+					"id" : 454,
+					"name" : "CRT Screen Border",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"multiply" : 1.0,
+								"scale" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.scale = new Vec2(\n\t\t\t0.75 + userProperties.crt_effect * .225,\n\t\t\t0.7 + userProperties.crt_effect * .25\n\t\t);\n}\n",
+									"value" : "1 1"
+								}
+							},
+							"id" : 455,
+							"textures" : [ null, "workshop/2098598602/CRT Border" ]
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 425,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "CRT v1 (Fullscreen)",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/blend/effect.json",
+					"id" : 980,
+					"name" : "Scanline glow",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2,
+								"NUMBLENDTEXTURES" : 1,
+								"TRANSFORMREPEAT" : 1,
+								"TRANSFORMUV" : 1,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"alpha" : 1,
+								"blendangle" : 0,
+								"blendoffset" : 
+								{
+									"script" : "'use strict';\n\n/**\n * @param {Vec2} value - for property 'blendoffset'\n * @return {Vec2} - update current property value\n */\nexport function update(value) {\n\treturn new Vec3(0, value.y + engine.frametime * shared.scanline_speed * 1000);\n\t// return new Vec3(0, value.y + engine.frametime * (Math.sin(Math.cos(engine.runtime * 0.2681) + Math.sin(engine.runtime * .492)) * 4000), 0);\n}",
+									"value" : "0 0"
+								},
+								"blendscale" : 
+								{
+									"script" : "'use strict';\n\n/**\n * @param {Number} value - for property 'blendscale'\n * @return {Number} - update current property value\n */\nexport function update() {\n\treturn shared.scanline_width;\n}\n",
+									"value" : 8
+								},
+								"multiply" : 
+								{
+									"script" : "'use strict';\n\n/**\n * @param {Number} value - for property 'multiply'\n * @return {Number} - update current property value\n */\nexport function update() {\n\treturn shared.scanline_intensity * shared.crt_effect;\n}\n",
+									"value" : 0.5
+								}
+							},
+							"id" : 981,
+							"textures" : [ null, "ScanlineGlow" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/blur/effect.json",
+					"id" : 1115,
+					"name" : "Horizontal Color Bleed",
+					"passes" : 
+					[
+						{
+							"id" : 1116
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : 
+								{
+									"script" : "// Horizontal Color Bleed - Scale\n'use strict';\n\n/**\n * @param {Vec2} value - for property 'scale'\n * @return {Vec2} - update current property value\n */\nexport function update(value) {\n\treturn new Vec2(shared.crt_color_bleed * shared.crt_effect, 0);\n}\n",
+									"value" : "2 0"
+								}
+							},
+							"id" : 1117
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2,
+								"VERTICAL" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : 
+								{
+									"script" : "// Horizontal Color Bleed - Scale\n'use strict';\n\n/**\n * @param {Vec2} value - for property 'scale'\n * @return {Vec2} - update current property value\n */\nexport function update(value) {\n\treturn new Vec2(shared.crt_color_bleed * shared.crt_effect, 0);\n}\n",
+									"value" : "2 0"
+								}
+							},
+							"id" : 1118
+						},
+						{
+							"combos" : 
+							{
+								"COMPOSITEMONO" : 0
+							},
+							"id" : 1119,
+							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_b" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
+					"id" : 299,
+					"name" : "Screen Pixels",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0 0",
+								"multiply" : 
+								{
+									"script" : "'use strict';\n\n/**\n * @param {Number} value - for property 'multiply'\n * @return {Number} - update current property value\n */\nexport function update() {\n\treturn shared.crt_effect;\n}\n",
+									"value" : 0.5
+								},
+								"scale" : 
+								{
+									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n// let scale = new Vec2(0.125, 0.125);\n\nlet scale = new Vec2(0.0833333333333333, 0.125);\n\n/**\n * @param {Vec2} value (for property 'scale')\n */\nexport function init(value) {\n\treturn engine.screenResolution.multiply(scale);\n}\n\n/**\n * @param {Vec2} size\n */\nexport function resizeScreen(size) {\n\tthisObject.scale = size.multiply(scale);\n}\n\n// /**\n//  * @param {Object} userProperties\n//  */\n// export function applyUserProperties(userProperties) {\n// \t// if (userProperties.horizontal_pixel_scale !== undefined)\n// \t// \tscale = new Vec2(userProperties.horizontal_pixel_scale, scale.y);\n// \tif (userProperties.vertical_pixel_scale !== undefined)\n// \t\tscale = new Vec2(scale.x, userProperties.vertical_pixel_scale);\n// \tthisObject.scale = engine.screenResolution.multiply(scale);\n// }\n",
+									"user" : null,
+									"value" : "160 90"
+								}
+							},
+							"id" : 178,
+							"textures" : [ null, "workshop/2098598602/rgb_pixel" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blur/effect.json",
+					"id" : 304,
+					"name" : "CRT Glow (Linear Dodge)",
+					"passes" : 
+					[
+						{
+							"id" : 180
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 181
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2,
+								"VERTICAL" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 182
+						},
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 9,
+								"COMPOSITE" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"compositealpha" : 
+								{
+									"script" : "// CRT Glow (Linear Dodge) - Alpha\n'use strict';\n\n/**\n * @param {Number} value - for property 'compositealpha'\n * @return {Number} - update current property value\n */\nexport function update(value) {\n\tlet crt = shared.crt_effect;\n\treturn (Math.pow(crt,0.6) * 0.3 + Math.pow(crt,6) * 0.7) * 5.0;\n\t//return (crt * 0.5 + Math.pow(crt,6) * 0.5) * 5.0;\n\t//return (Math.sin(Math.pow(crt,0.5) * Math.PI) * 0.6 + Math.pow(crt,6)) * 5.0;\n\t\n\t//thisObject.compositealpha = Math.pow(shared.crt_effect,3.0) * 5.0;\n}\n",
+									"value" : 2
+								},
+								"compositeoffset" : "0 0"
+							},
+							"id" : 183,
+							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_b" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blur/effect.json",
+					"id" : 316,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 186
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2
+							},
+							"id" : 187
+						},
+						{
+							"combos" : 
+							{
+								"KERNEL" : 2,
+								"VERTICAL" : 1
+							},
+							"id" : 188
+						},
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 6,
+								"COMPOSITE" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"compositealpha" : 
+								{
+									"script" : "// Blur - Alpha\n'use strict';\n\n/**\n * @param {Number} value - for property 'compositealpha'\n * @return {Number} - update current property value\n */\nexport function update() {\n\treturn shared.crt_effect * 0.2;\n}\n",
+									"value" : 0.20000000298023224
+								},
+								"compositeoffset" : "0 0"
+							},
+							"id" : 189,
+							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_a" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blend/effect.json",
+					"id" : 329,
+					"name" : "Vignette (Blend)",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"multiply" : 
+								{
+									"script" : "'use strict';\n\n/**\n * @param {Number} value - for property 'multiply'\n * @return {Number} - update current property value\n */\nexport function update(value) {\n\treturn shared.crt_effect * 0.5;\n}\n",
+									"value" : 0.5
+								}
+							},
+							"id" : 191,
+							"textures" : [ null, "workshop/2098598602/Vignette" ]
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/transform/effect.json",
+					"id" : 338,
+					"name" : "Shrink scene to fit inside border",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLAMP" : 1,
+								"MODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"angle" : 0,
+								"offset" : "0 0",
+								"scale" : 
+								{
+									"script" : "// Shrink scene to fit inside border - Scale\n'use strict';\n\n/**\n * @param {Vec2} value - for property 'scale'\n * @return {Vec2} - update current property value\n */\nexport function update(value) {\n\treturn new Vec2(1.0 + shared.crt_effect * .05);\n}\n",
+									"value" : "1.05 1.05"
+								}
+							},
+							"id" : 193
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/fisheye/effect.json",
+					"id" : 344,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BACKGROUND" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"distortion" : 
+								{
+									"script" : "// Fisheye - Distortion\n'use strict';\n\n/**\n * @param {Number} value - for property 'distortion'\n * @return {Number} - update current property value\n */\nexport function update(value) {\n\treturn shared.crt_effect * .3;\n}\n",
+									"value" : 0.30000001192092896
+								},
+								"size" : 
+								{
+									"script" : "export let __workshopId = '2098598602';\n// // Fisheye - Size\n// 'use strict';\n\n// /**\n//  * @param {Object} userProperties\n//  */\n// export function applyUserProperties(userProperties) {\n// \tif (userProperties.crt_effect !== undefined)\n// \t\tthisObject.size = 1.0 + userProperties.crt_effect * .5;\n// }\n",
+									"value" : 1.5
+								}
+							},
+							"id" : 194
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/workshop/2098598602/blend_scaled/effect.json",
+					"id" : 350,
+					"name" : "CRT Screen Border",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0,
+								"WRITEALPHA" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"multiply" : 1.0,
+								"scale" : 
+								{
+									"script" : "'use strict';\n\n/**\n * @param {Vec2} value - for property 'scale'\n * @return {Vec2} - update current property value\n */\nexport function update(value) {\n\tthisObject.scale = new Vec2(\n\t\t0.75 + shared.crt_effect * .225,\n\t\t0.7 + shared.crt_effect * .25\n\t);\n}\n",
+									"value" : "1.00000 1.00000"
+								}
+							},
+							"id" : 195,
+							"textures" : [ null, "workshop/2098598602/CRT Border" ]
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 298,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "CRT v2 (Fullscreen)",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : 
+			{
+				"script" : "'use strict';\n\nexport var scriptProperties = createScriptProperties()\n\t.addSlider({\n\t\tname: 'crt_effect',\n\t\tlabel: 'CRT Strength',\n\t\tvalue: 0.65,\n\t\tmin: 0,\n\t\tmax: 1,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'scanline_intensity',\n\t\tlabel: 'Scanline Intensity',\n\t\tvalue: 0.1,\n\t\tmin: 0,\n\t\tmax: 1,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'scanline_speed',\n\t\tlabel: 'Scanline Speed',\n\t\tvalue: 8,\n\t\tmin: 0,\n\t\tmax: 20,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'scanline_width',\n\t\tlabel: 'Scanline Width',\n\t\tvalue: 3,\n\t\tmin: 0,\n\t\tmax: 8,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'crt_color_bleed',\n\t\tlabel: 'Horizontal Color Bleed',\n\t\tvalue: 1,\n\t\tmin: 0,\n\t\tmax: 4,\n\t\tinteger: false\n\t})\n\t.finish();\n\nexport function update() {\n\tshared.crt_effect = scriptProperties.crt_effect;\n\tshared.scanline_intensity = scriptProperties.scanline_intensity;\n\tshared.scanline_speed = scriptProperties.scanline_speed;\n\tshared.scanline_width = scriptProperties.scanline_width;\n\tshared.crt_color_bleed = scriptProperties.crt_color_bleed;\n\n\tif (shared.crt_effect < 0.01)\n\t\tthisLayer.visible = false;\n\telse\n\t\tthisLayer.visible = true;\n}\n",
+				"scriptproperties" : 
+				{
+					"crt_color_bleed" : 
+					{
+						"user" : "crtcolorbleed",
+						"value" : 4
+					},
+					"crt_effect" : 
+					{
+						"user" : "crtstrength",
+						"value" : 0.5
+					},
+					"scanline_intensity" : 0.20000000000000001,
+					"scanline_speed" : 1,
+					"scanline_width" : 6
+				},
+				"value" : false
+			}
 		}
 	],
 	"version" : 0

@@ -60,12 +60,12 @@
 		{
 			"name" : "_rt_QuarterCompoBuffer1",
 			"scale" : 4,
-			"format" : "rgba8888"
+			"format" : "rgba_backbuffer"
 		},
 		{
 			"name" : "_rt_QuarterCompoBuffer2",
 			"scale" : 4,
-			"format" : "rgba8888"
+			"format" : "rgba_backbuffer"
 		}
 	],
 	"dependencies" :

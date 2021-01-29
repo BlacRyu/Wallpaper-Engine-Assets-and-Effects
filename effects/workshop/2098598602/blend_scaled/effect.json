@@ -5,7 +5,6 @@
 		"shaders/workshop/2098598602/effects/blend_scaled.frag",
 		"shaders/workshop/2098598602/effects/blend_scaled.vert"
 	],
-	"editable" : true,
 	"group" : "localeffects",
 	"name" : "Blend Scaled",
 	"passes" : 

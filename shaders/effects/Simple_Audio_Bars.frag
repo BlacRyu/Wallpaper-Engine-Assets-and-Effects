@@ -134,7 +134,7 @@ void main() {
 
 	// Get the frequency for this pixel
 	float barDist = abs((shapeCoord.x * g_BarCount % 1) * 2 - 1);
-	float frequency = floor(shapeCoord.x * g_BarCount) / g_BarCount * RESOLUTION + 0.5;
+	float frequency = floor(shapeCoord.x * g_BarCount) / g_BarCount * RESOLUTION;
 	uint barFreq1 = frequency % RESOLUTION;
 	uint barFreq2 = (barFreq1 + 1) % RESOLUTION;
 

@@ -8,6 +8,7 @@
 			"bounce_speed" : 
 			{
 				"fraction" : true,
+				"index" : 1,
 				"max" : 1000,
 				"min" : 0,
 				"order" : 101,
@@ -17,8 +18,35 @@
 				"type" : "slider",
 				"value" : 5000
 			},
+			"crtcolorbleed" : 
+			{
+				"fraction" : true,
+				"index" : 4,
+				"max" : 5,
+				"min" : 0,
+				"order" : 104,
+				"precision" : 3,
+				"step" : 0.010000000000000002,
+				"text" : "CRT Color Bleed",
+				"type" : "slider",
+				"value" : 1
+			},
+			"crtstrength" : 
+			{
+				"fraction" : true,
+				"index" : 3,
+				"max" : 1,
+				"min" : 0,
+				"order" : 103,
+				"precision" : 2,
+				"step" : 0.10000000000000001,
+				"text" : "CRT Strength",
+				"type" : "slider",
+				"value" : 1
+			},
 			"music" : 
 			{
+				"index" : 2,
 				"options" : 
 				[
 					{
@@ -49,6 +77,7 @@
 			"slide_up" : 
 			{
 				"fraction" : true,
+				"index" : 0,
 				"max" : 1000,
 				"min" : -1000,
 				"order" : 100,
