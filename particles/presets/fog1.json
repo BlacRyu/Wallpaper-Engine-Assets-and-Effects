@@ -1,6 +1,4 @@
 {
-	"animationmode" : "randomframe",
-	"children" : [],
 	"controlpoint" : 
 	[
 		{
@@ -47,58 +45,61 @@
 	"emitter" : 
 	[
 		{
-			"distancemax" : 64,
-			"distancemin" : 64,
-			"id" : 6,
+			"directions" : "1 0.2 0",
+			"distancemax" : 512,
+			"distancemin" : 0,
+			"id" : 8,
 			"name" : "sphererandom",
-			"rate" : 1
+			"rate" : 1.5
 		}
 	],
 	"initializer" : 
 	[
 		{
 			"id" : 2,
-			"max" : 10,
-			"min" : 10,
+			"max" : 15,
+			"min" : 5,
 			"name" : "lifetimerandom"
 		},
 		{
 			"id" : 3,
-			"max" : 50,
-			"min" : 50,
+			"max" : 2200,
+			"min" : 1000,
 			"name" : "sizerandom"
 		},
 		{
 			"id" : 4,
+			"max" : "80 0 0",
+			"min" : "25 0 0",
+			"name" : "velocityrandom"
+		},
+		{
+			"id" : 5,
 			"min" : "255 255 255",
 			"name" : "colorrandom"
 		},
 		{
-			"count" : 8,
-			"id" : 5,
-			"name" : "mapsequencearoundcontrolpoint"
+			"id" : 6,
+			"name" : "rotationrandom"
 		},
 		{
-			"id" : 10,
-			"min" : "0 0 5",
-			"name" : "angularvelocityrandom"
+			"id" : 7,
+			"max" : 0.80000000298023222,
+			"min" : 0.5,
+			"name" : "alpharandom"
 		}
 	],
-	"material" : "materials/particle/halo_6.json",
-	"maxcount" : 500,
+	"material" : "materials/presets/fog1.json",
+	"maxcount" : 20,
 	"operator" : 
 	[
 		{
-			"id" : 7,
+			"id" : 9,
 			"name" : "movement"
 		},
 		{
-			"id" : 8,
+			"id" : 10,
 			"name" : "alphafade"
-		},
-		{
-			"id" : 11,
-			"name" : "angularmovement"
 		}
 	],
 	"renderer" : 
@@ -108,5 +109,5 @@
 			"name" : "sprite"
 		}
 	],
-	"starttime" : 0
+	"starttime" : 20
 }

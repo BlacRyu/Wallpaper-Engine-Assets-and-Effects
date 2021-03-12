@@ -1,6 +1,5 @@
 
-#include "common.h"
-#include "common_blending.h"
+#include "common_composite.h"
 
 
 
@@ -8,10 +7,13 @@ varying vec2 v_TexCoord;
 
 uniform sampler2D g_Texture0; // {"material":"framebuffer","label":"ui_editor_properties_framebuffer","hidden":true}
 
+uniform vec4 g_Texture0Resolution;
 
 void main() {
 
-	vec4 passthrough = texSample2D(g_Texture0, v_TexCoord);
+	vec2 newCoords = v_TexCoord.xy;
+
+	vec4 passthrough = texSample2D(g_Texture0, newCoords);
 	
 	gl_FragColor = passthrough;
 	gl_FragColor.a = 1;

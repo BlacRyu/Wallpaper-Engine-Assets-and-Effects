@@ -43,5 +43,5 @@ void main() {
 	albedo.a = blend;
 #endif
 	
-	gl_FragColor = albedo;
+	gl_FragColor = vec4(max(0, albedo.rgb), albedo.a);
 }

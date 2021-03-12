@@ -1,5 +1,6 @@
 {
 	"version" : 1,
+	"replacementkey" : "nitro",
 	"name" : "ui_editor_effect_nitro_title",
 	"description" : "ui_editor_effect_nitro_description",
 	"group" : "colorize",

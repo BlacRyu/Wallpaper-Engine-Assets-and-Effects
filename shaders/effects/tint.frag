@@ -16,7 +16,7 @@ void main() {
 	float mask = g_BlendAlpha;
 	
 #if MASK
-	mask = texSample2D(g_Texture1, v_TexCoord.zw).r;
+	mask *= texSample2D(g_Texture1, v_TexCoord.zw).r;
 #endif
 	
 	albedo.rgb = ApplyBlending(BLENDMODE, albedo.rgb, g_TintColor, mask);

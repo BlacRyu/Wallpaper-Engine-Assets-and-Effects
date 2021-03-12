@@ -1,5 +1,6 @@
 {
 	"version" : 1,
+	"replacementkey" : "vhs",
 	"name" : "ui_editor_effect_vhs_title",
 	"description" : "ui_editor_effect_vhs_description",
 	"group" : "colorize",

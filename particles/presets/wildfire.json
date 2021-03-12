@@ -1,6 +1,12 @@
 {
-	"animationmode" : "randomframe",
-	"children" : [],
+	"animationmode" : "sequence",
+	"children" : 
+	[
+		{
+			"id" : 10,
+			"name" : "particles/presets/wildfireembers.json"
+		}
+	],
 	"controlpoint" : 
 	[
 		{
@@ -47,45 +53,44 @@
 	"emitter" : 
 	[
 		{
-			"distancemax" : 64,
-			"distancemin" : 64,
+			"directions" : "1 0.07 0",
+			"distancemax" : 650,
+			"distancemin" : 0,
 			"id" : 6,
 			"name" : "sphererandom",
-			"rate" : 1
+			"rate" : 25
 		}
 	],
+	"flags" : 0,
 	"initializer" : 
 	[
 		{
 			"id" : 2,
-			"max" : 10,
-			"min" : 10,
+			"max" : 3,
+			"min" : 2,
 			"name" : "lifetimerandom"
 		},
 		{
 			"id" : 3,
-			"max" : 50,
-			"min" : 50,
+			"max" : 550,
+			"min" : 450,
 			"name" : "sizerandom"
 		},
 		{
 			"id" : 4,
-			"min" : "255 255 255",
-			"name" : "colorrandom"
+			"name" : "rotationrandom"
 		},
 		{
-			"count" : 8,
 			"id" : 5,
-			"name" : "mapsequencearoundcontrolpoint"
-		},
-		{
-			"id" : 10,
-			"min" : "0 0 5",
-			"name" : "angularvelocityrandom"
+			"name" : "turbulentvelocityrandom",
+			"scale" : 0.20000000000000001,
+			"speedmax" : 120,
+			"speedmin" : 0,
+			"timescale" : 0.20000000000000001
 		}
 	],
-	"material" : "materials/particle/halo_6.json",
-	"maxcount" : 500,
+	"material" : "materials/presets/wildfire.json",
+	"maxcount" : 150,
 	"operator" : 
 	[
 		{
@@ -93,12 +98,17 @@
 			"name" : "movement"
 		},
 		{
+			"fadeintime" : 0,
+			"fadeouttime" : 0.80000000000000004,
 			"id" : 8,
 			"name" : "alphafade"
 		},
 		{
-			"id" : 11,
-			"name" : "angularmovement"
+			"endtime" : 0.59999999999999998,
+			"endvalue" : "1 0 0",
+			"id" : 9,
+			"name" : "colorchange",
+			"startvalue" : "1 0.7490196078431373 0"
 		}
 	],
 	"renderer" : 
@@ -108,5 +118,6 @@
 			"name" : "sprite"
 		}
 	],
-	"starttime" : 0
+	"sequencemultiplier" : 1,
+	"starttime" : 1
 }

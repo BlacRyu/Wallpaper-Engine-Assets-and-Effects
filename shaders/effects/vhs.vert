@@ -14,6 +14,7 @@ attribute vec3 a_Position;
 attribute vec2 a_TexCoord;
 
 varying vec4 v_TexCoord;
+varying vec2 v_TexCoordGlitchBase;
 varying vec4 v_TexCoordGlitch;
 varying vec4 v_TexCoordNoise;
 varying vec4 v_TexCoordVHSNoise;
@@ -50,6 +51,6 @@ void main() {
 	v_TexCoordGlitch.xz += glitchOffset.xy + vec2(0.005, -0.0005) * g_Chromatic;
 	v_TexCoordGlitch.z -= glitchOffset.z + 0.006 * g_Chromatic;
 	v_TexCoordGlitch.w -= 0.0045 * g_Chromatic;
-	v_TexCoord.x += glitchOffset.z * min(1.0, g_NoiseAlpha);
-	v_TexCoord.y -= glitchOffset.z * min(1.0, g_NoiseAlpha);
+	v_TexCoordGlitchBase.x = v_TexCoord.x + glitchOffset.z * min(1.0, g_NoiseAlpha);
+	v_TexCoordGlitchBase.y = v_TexCoord.y - glitchOffset.z * min(1.0, g_NoiseAlpha);
 }

@@ -7,84 +7,46 @@
 		"shaders/effects/Advanced_Audio_Bars.vert",
 		"shaders/effects/Advanced_Audio_Bars_copy.frag",
 		"shaders/effects/Advanced_Audio_Bars_copy.vert"
-		// "shaders/passthrough.frag",
-		// "shaders/passthrough.vert"
 	],
 	"description" : "Adds a cusomizable audio bar effect to the layer. Supports various positions (left, right, both, center, etc.) and as many bars as you'd like.",
 	"editable" : true,
 	"fbos" :
 	[
 		{
-			"name" : "_rt_QuarterCompoBuffer1",
-			"scale" : 4,
+			"name" : "_rt_FullCompoBuffer1",
+			"scale" : 1,
 			"format" : "rgba8888"
+			// ,"unique" : true
 		},
 		{
-			"name" : "_rt_BGBuffer1",
-			"format" : "rgba8888",
-			"scale" : "1"
-		},
-		{
-			"name" : "_rt_BGBuffer2",
-			"format" : "rg88",
-			"width" : 64,
-			"height" : 1
+			"name" : "_rt_FullCompoBuffer2",
+			"scale" : 1,
+			"format" : "rgba8888"
 		}
 	],
 	"group" : "localeffects",
 	"name" : "Advanced Audio Bars",
 	"passes" : 
 	[
-		// {
-		// 	"material" : "materials/effects/Advanced_Audio_Bars_copy.json",
-		// 	"target" : "_rt_BGBuffer1",
-		// 	"bind" :
-		// 	[
-		// 		{
-		// 			"name" : "_rt_BGBuffer2",
-		// 			"index" : 0
-		// 		}
-		// 	]
-		// },
-
 		{
 			"material" : "materials/effects/Advanced_Audio_Bars.json",
-			"target" : "_rt_BGBuffer2"
-		},
-
-		// {
+			"target" : "_rt_FullCompoBuffer1"
+		}
+		// ,{
 		// 	"command" : "copy",
-		// 	// "target" : "_rt_BGBuffer2",
-		// 	"source" : "_rt_BGBuffer1"
+		// 	"target" : "_rt_FullCompoBuffer1",
+		// 	"source" : "_rt_FullCompoBuffer2"
 		// }
-
-		// {
-		// 	"material" : "materials/effects/Advanced_Audio_Bars_copy.json",
-		// 	"target" : "_rt_BGBuffer2",
-		// 	"bind" :
-		// 	[
-		// 		{
-		// 			"name" : "_rt_BGBuffer1",
-		// 			"index" : 0
-		// 		}
-		// 	]
-		// },
-
-		{
+		,{
 			"material" : "materials/effects/Advanced_Audio_Bars_copy.json",
 			"bind" :
 			[
 				{
-					"name" : "_rt_BGBuffer2",
+					"name" : "_rt_FullCompoBuffer1",
 					"index" : 0
 				}
 			]
 		}
-
-		// {
-		// 	"command" : "copy",
-		// 	"source" : "_rt_BGBuffer2"
-		// }
 	],
 	"replacementkey" : "Advanced_Audio_Bars",
 	"version" : 1

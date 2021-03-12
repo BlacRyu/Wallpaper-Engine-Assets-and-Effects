@@ -7,7 +7,7 @@ uniform mat4 g_ModelViewProjectionMatrix;
 
 uniform vec2 g_Offset; // {"material":"offset","label":"ui_editor_properties_offset","default":"0 0"}
 uniform vec2 g_Scale; // {"material":"scale","label":"ui_editor_properties_scale","default":"1 1"}
-uniform float g_Direction; // {"material":"angle","label":"ui_editor_properties_angle","default":0,"range":[0,6.28]}
+uniform float g_Direction; // {"material":"angle","label":"ui_editor_properties_angle","default":0,"range":[0,6.28],"direction":true}
 
 attribute vec3 a_Position;
 attribute vec2 a_TexCoord;
@@ -15,7 +15,7 @@ attribute vec2 a_TexCoord;
 varying vec2 v_TexCoord;
 
 vec2 applyFx(vec2 v) {
-	v = rotateVec2(v - CAST2(0.5), g_Direction);
+	v = rotateVec2(v - CAST2(0.5), -g_Direction);
 	return (v + g_Offset) * g_Scale + CAST2(0.5);
 }
 

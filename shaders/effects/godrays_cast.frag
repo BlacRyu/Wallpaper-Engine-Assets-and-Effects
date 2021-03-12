@@ -15,7 +15,7 @@ uniform vec3 g_ColorRays; // {"material":"color","label":"ui_editor_properties_c
 #if CASTER == 0
 uniform vec2 g_Center; // {"material":"center","label":"ui_editor_properties_center","default":"0.5 0.5","position":true}
 #else
-uniform float g_Direction; // {"material":"direction","label":"ui_editor_properties_direction","default":0,"range":[0,6.28]}
+uniform float g_Direction; // {"material":"direction","label":"ui_editor_properties_direction","default":3.14159265358,"range":[0,6.28],"direction":true}
 #endif
 
 void main() {
@@ -26,7 +26,7 @@ void main() {
 #if CASTER == 0
 	vec2 direction = g_Center - texCoords;
 #else
-	vec2 direction = rotateVec2(vec2(0, -0.5), g_Direction);
+	vec2 direction = rotateVec2(vec2(0, -0.5), g_Direction - M_PI);
 #endif
 	
 	float dist = length(direction);
@@ -54,5 +54,5 @@ void main() {
 	}
 	
 	albedo.rgb *= g_ColorRays;
-	gl_FragColor = g_Intensity * sampleIntensity * albedo;
+	gl_FragColor = vec4(g_Intensity * sampleIntensity * albedo.rgb, saturate(g_Intensity * sampleIntensity * albedo.a));
 }

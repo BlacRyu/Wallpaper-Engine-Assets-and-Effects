@@ -1,6 +1,4 @@
 {
-	"animationmode" : "randomframe",
-	"children" : [],
 	"controlpoint" : 
 	[
 		{
@@ -9,7 +7,7 @@
 			"offset" : "0 0 0"
 		},
 		{
-			"flags" : 0,
+			"flags" : 1,
 			"id" : 1,
 			"offset" : "0 0 0"
 		},
@@ -48,57 +46,62 @@
 	[
 		{
 			"distancemax" : 64,
-			"distancemin" : 64,
-			"id" : 6,
+			"distancemin" : 0,
+			"id" : 7,
 			"name" : "sphererandom",
-			"rate" : 1
+			"rate" : 15
 		}
 	],
 	"initializer" : 
 	[
 		{
 			"id" : 2,
-			"max" : 10,
-			"min" : 10,
+			"max" : 5,
+			"min" : 3,
 			"name" : "lifetimerandom"
 		},
 		{
 			"id" : 3,
-			"max" : 50,
+			"max" : 200,
 			"min" : 50,
 			"name" : "sizerandom"
 		},
 		{
 			"id" : 4,
+			"max" : "50 50 0",
+			"min" : "-50 -50 0",
+			"name" : "velocityrandom"
+		},
+		{
+			"id" : 5,
 			"min" : "255 255 255",
 			"name" : "colorrandom"
 		},
 		{
-			"count" : 8,
-			"id" : 5,
-			"name" : "mapsequencearoundcontrolpoint"
-		},
-		{
-			"id" : 10,
-			"min" : "0 0 5",
-			"name" : "angularvelocityrandom"
+			"id" : 6,
+			"name" : "turbulentvelocityrandom",
+			"scale" : 0.29999999999999999
 		}
 	],
-	"material" : "materials/particle/halo_6.json",
-	"maxcount" : 500,
+	"material" : "materials/presets/bubbles1.json",
+	"maxcount" : 50,
 	"operator" : 
 	[
 		{
-			"id" : 7,
+			"drag" : 0.10000000000000001,
+			"gravity" : "0 50 0",
+			"id" : 8,
 			"name" : "movement"
 		},
 		{
-			"id" : 8,
+			"id" : 9,
 			"name" : "alphafade"
 		},
 		{
-			"id" : 11,
-			"name" : "angularmovement"
+			"controlpoint" : 1,
+			"id" : 10,
+			"name" : "controlpointattract",
+			"scale" : -300
 		}
 	],
 	"renderer" : 
@@ -108,5 +111,6 @@
 			"name" : "sprite"
 		}
 	],
+	"sequencemultiplier" : 2,
 	"starttime" : 0
 }

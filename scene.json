@@ -1,14 +1,14 @@
 {
 	"camera" : 
 	{
-		"center" : "0.00000 0.00000 -1.00000",
-		"eye" : "0.00000 0.00000 0.00000",
+		"center" : "0.00000 0.00000 0.00000",
+		"eye" : "0.00000 0.00000 1.00000",
 		"up" : "0.00000 1.00000 0.00000"
 	},
 	"general" : 
 	{
 		"ambientcolor" : "0.30000 0.30000 0.30000",
-		"bloom" : true,
+		"bloom" : false,
 		"bloomhdr" : false,
 		"bloomhdrfeather" : 0.10000000149011612,
 		"bloomhdrscatter" : 1.6189999580383301,
@@ -212,7 +212,7 @@
 							"id" : 23
 						}
 					],
-					"visible" : true
+					"visible" : false
 				},
 				{
 					"file" : "effects/Simple_Audio_Bars/effect.json",
@@ -332,187 +332,6 @@
 			"visible" : 
 			{
 				"script" : "'use strict';\n\n// properties\nconst speed = 1.0; // match this to the shake speed\nconst offset = 0.35; // 0 to 1, point in time to start breathing\nconst duration = 0.35; // 0 to 1, percentage of time to breathe\n\n// constants\nconst twoPI = 6.283185307179586476925286766559;\nconst periodTotal = twoPI / speed;\nconst phase = offset / speed * twoPI;\nconst periodOn = duration * periodTotal;\n\n\n/**\n * @param {Number} value (for property 'visible')\n */\nexport function init(value) {\n\tthisLayer.pause();\n\t\n\treturn value;\n}\n\nexport function update(value) {\n\t// Enable the emitter every  seconds for half a second\n\tif ((engine.runtime - phase) % periodTotal < periodOn)\n\t\tthisLayer.play();\n\telse\n\t\tthisLayer.pause();\n\n\tthisObject.speed = 10;\n\tthisObject.colorn = 0.5;\n\tthisObject.lifetime = 0;\n\n\treturn value;\n}\n",
-				"value" : false
-			}
-		},
-		{
-			"alpha" : 0.88999998569488525,
-			"anchor" : "left",
-			"angles" : "0.00000 0.00000 0.00000",
-			"backgroundbrightness" : 1.0,
-			"backgroundcolor" : "0.00000 0.00000 0.00000",
-			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/blurprecise/effect.json",
-					"id" : 111,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"id" : 35
-						},
-						{
-							"combos" : 
-							{
-								"VERTICAL" : 1
-							},
-							"id" : 36
-						}
-					],
-					"visible" : true
-				}
-			],
-			"font" : "fonts/kust.ttf",
-			"horizontalalign" : "left",
-			"id" : 33,
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "Text Layer",
-			"opaquebackground" : true,
-			"origin" : "1167.55603 1142.24902 0.00000",
-			"padding" : 32,
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"pointsize" : 32.0,
-			"scale" : "1.00000 1.00000 1.00000",
-			"size" : "1146.00000 199.00000",
-			"solid" : true,
-			"text" : "Left Bottom Align",
-			"verticalalign" : "bottom",
-			"visible" : 
-			{
-				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorClick(event) {\n\tHelpers.debugText(`click`, `clicked`);\n}\n",
-				"value" : false
-			}
-		},
-		{
-			"alpha" : 0.88999998569488525,
-			"anchor" : "left",
-			"angles" : "0.00000 0.00000 0.00000",
-			"backgroundbrightness" : 1.0,
-			"backgroundcolor" : "0.00000 0.00000 0.00000",
-			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/blurprecise/effect.json",
-					"id" : 145,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"id" : 40
-						},
-						{
-							"combos" : 
-							{
-								"VERTICAL" : 1
-							},
-							"id" : 41
-						}
-					],
-					"visible" : true
-				}
-			],
-			"font" : "fonts/kust.ttf",
-			"horizontalalign" : "center",
-			"id" : 144,
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "Text Layer",
-			"opaquebackground" : true,
-			"origin" : "1172.60498 1548.71497 0.00000",
-			"padding" : 32,
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"pointsize" : 32.0,
-			"scale" : "1.00000 1.00000 1.00000",
-			"size" : "795.00000 199.00000",
-			"solid" : true,
-			"text" : "Center align",
-			"verticalalign" : "center",
-			"visible" : 
-			{
-				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Boolean} value (for property 'visible')\n */\nexport function update(value) {\n\t\n\treturn value;\n}\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n",
-				"value" : false
-			}
-		},
-		{
-			"alpha" : 0.88999998569488525,
-			"anchor" : "left",
-			"angles" : "0.00000 0.00000 0.00000",
-			"backgroundbrightness" : 1.0,
-			"backgroundcolor" : "0.00000 0.00000 0.00000",
-			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/blurprecise/effect.json",
-					"id" : 293,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"id" : 44
-						},
-						{
-							"combos" : 
-							{
-								"VERTICAL" : 1
-							},
-							"id" : 45
-						}
-					],
-					"visible" : true
-				},
-				{
-					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 335,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"TRANSPARENCY" : 2
-							},
-							"id" : 46
-						}
-					],
-					"visible" : true
-				}
-			],
-			"font" : "fonts/kust.ttf",
-			"horizontalalign" : "right",
-			"id" : 292,
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "Text Layer",
-			"opaquebackground" : true,
-			"origin" : "1778.51697 761.02899 0.00000",
-			"padding" : 32,
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"pointsize" : 32.0,
-			"scale" : "1.00000 1.00000 1.00000",
-			"size" : "957.00000 199.00000",
-			"solid" : true,
-			"text" : "Right top align",
-			"verticalalign" : "top",
-			"visible" : 
-			{
-				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n",
 				"value" : false
 			}
 		},
@@ -691,79 +510,6 @@
 			"volume" : 0.5
 		},
 		{
-			"alignment" : "center",
-			"alpha" : 1.0,
-			"angles" : "0.00000 0.00000 0.00000",
-			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"id" : 448,
-			"image" : "models/preview.json",
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "preview",
-			"origin" : "1999.38794 746.92999 0.00000",
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"scale" : "1.00000 1.00000 1.00000",
-			"size" : "256.00000 256.00000",
-			"solid" : true,
-			"visible" : 
-			{
-				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMove`, event.localPosition);\n}\n",
-				"value" : true
-			}
-		},
-		{
-			"alignment" : "center",
-			"alpha" : 1.0,
-			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/blurprecise/effect.json",
-					"id" : 259,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"KERNEL" : 1
-							},
-							"id" : 68
-						},
-						{
-							"combos" : 
-							{
-								"KERNEL" : 1,
-								"VERTICAL" : 1
-							},
-							"id" : 69
-						}
-					],
-					"visible" : false
-				}
-			],
-			"id" : 926,
-			"image" : "models/util/fullscreenlayer.json",
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "Cursor Move?",
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"solid" : true,
-			"visible" : 
-			{
-				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {ICursorEvent} event\n */\nexport function cursorMove(event) {\n\tHelpers.debugText(`cursorMoved`, `Cursor Moved`);\n}\n",
-				"value" : true
-			}
-		},
-		{
 			"angles" : "0.00000 0.00000 0.00000",
 			"color" : "1.00000 1.00000 1.00000",
 			"id" : 120,
@@ -773,7 +519,7 @@
 			"name" : "",
 			"origin" : 
 			{
-				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Vec3} value (for property 'origin')\n */\nexport function update(value) {\n\tvalue.x = 1000 + Math.sin(engine.runtime) * 500;\n\tvalue.y = 1000 + Math.cos(engine.runtime) * 500;\n\tHelpers.debugText(`target`, `Target pos: ${value}`)\n\treturn value;\n}\n",
+				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Vec3} value (for property 'origin')\n */\nexport function update(value) {\n\tvalue.x = 1000 + Math.sin(engine.runtime) * 500;\n\tvalue.y = 1000 + Math.cos(engine.runtime) * 500;\n\t// Helpers.debugText(`target`, `Target pos: ${value}`)\n\treturn value;\n}\n",
 				"value" : "1859.28101 1013.48700 -1.00000"
 			},
 			"parallaxDepth" : "1.00000 1.00000",
@@ -1290,8 +1036,8 @@
 			"id" : 419,
 			"instanceoverride" : null,
 			"locktransforms" : false,
-			"name" : "new particle system",
-			"origin" : "2032.20105 1550.10498 0.00000",
+			"name" : "some spinning leaves",
+			"origin" : "3065.87207 1331.01147 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
 			"particle" : "particles/new_particle_system_1.json",
 			"scale" : "5.00000 5.00000 1.00000",
@@ -1639,7 +1385,7 @@
 							"id" : 238
 						},
 						{
-							"id" : 239
+							"id" : 197
 						}
 					],
 					"visible" : true
@@ -1681,7 +1427,7 @@
 							"textures" : [ null, "_rt_FullCompoBuffer1_480_490" ]
 						},
 						{
-							"id" : 379
+							"id" : 357
 						}
 					],
 					"visible" : false
@@ -1698,7 +1444,7 @@
 			"scale" : "1.78400 1.78400 1.78400",
 			"size" : "1024.00000 1024.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -1754,14 +1500,14 @@
 							{
 								"AUDIO_SIMULATE" : 0,
 								"RESOLUTION" : 64,
-								"SHAPE" : 5,
+								"SHAPE" : 0,
 								"TRANSPARENCY" : 4
 							},
 							"constantshadervalues" : 
 							{
 								"Bar Bounds" : "0 0.35",
 								"Bar Color" : "0.47059 0.97647 1.00000",
-								"Bar Count" : 1000,
+								"Bar Count" : 32,
 								"Bar Opacity" : 1,
 								"Bar Spacing" : 0,
 								"Bar count" : 2
@@ -1787,7 +1533,7 @@
 			"scale" : "1.75000 1.75000 1.00000",
 			"size" : "1920.00000 1080.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -2071,7 +1817,7 @@
 						{
 							"combos" : 
 							{
-								"BLENDMODE" : 2,
+								"BLENDMODE" : 12,
 								"NUMBLENDTEXTURES" : 1,
 								"TRANSFORMREPEAT" : 1,
 								"TRANSFORMUV" : 1,
@@ -2410,22 +2156,309 @@
 				"script" : "'use strict';\n\nexport var scriptProperties = createScriptProperties()\n\t.addSlider({\n\t\tname: 'crt_effect',\n\t\tlabel: 'CRT Strength',\n\t\tvalue: 0.65,\n\t\tmin: 0,\n\t\tmax: 1,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'scanline_intensity',\n\t\tlabel: 'Scanline Intensity',\n\t\tvalue: 0.1,\n\t\tmin: 0,\n\t\tmax: 1,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'scanline_speed',\n\t\tlabel: 'Scanline Speed',\n\t\tvalue: 8,\n\t\tmin: 0,\n\t\tmax: 20,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'scanline_width',\n\t\tlabel: 'Scanline Width',\n\t\tvalue: 3,\n\t\tmin: 0,\n\t\tmax: 8,\n\t\tinteger: false\n\t})\n\t.addSlider({\n\t\tname: 'crt_color_bleed',\n\t\tlabel: 'Horizontal Color Bleed',\n\t\tvalue: 1,\n\t\tmin: 0,\n\t\tmax: 4,\n\t\tinteger: false\n\t})\n\t.finish();\n\nexport function update() {\n\tshared.crt_effect = scriptProperties.crt_effect;\n\tshared.scanline_intensity = scriptProperties.scanline_intensity;\n\tshared.scanline_speed = scriptProperties.scanline_speed;\n\tshared.scanline_width = scriptProperties.scanline_width;\n\tshared.crt_color_bleed = scriptProperties.crt_color_bleed;\n\n\tif (shared.crt_effect < 0.01)\n\t\tthisLayer.visible = false;\n\telse\n\t\tthisLayer.visible = true;\n}\n",
 				"scriptproperties" : 
 				{
-					"crt_color_bleed" : 
-					{
-						"user" : "crtcolorbleed",
-						"value" : 4
-					},
+					"crt_color_bleed" : 1,
 					"crt_effect" : 
 					{
 						"user" : "crtstrength",
 						"value" : 0.5
 					},
-					"scanline_intensity" : 0.20000000000000001,
-					"scanline_speed" : 1,
+					"scanline_intensity" : 0.25,
+					"scanline_speed" : 2,
 					"scanline_width" : 6
 				},
 				"value" : false
 			}
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 505,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Solid",
+			"origin" : "2048.00000 948.00000 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "1.00000 1.00000 1.00000",
+			"size" : "4000.00000 2000.00000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 0.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "0.52157 0.52157 0.52157",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 1211,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"AUDIO_SIMULATE" : 0,
+								"BLENDMODE" : 0,
+								"RESOLUTION" : 64,
+								"SHAPE" : 6,
+								"SMOOTH_CURVE" : 0,
+								"SMOOTH_CURVE_AA" : 0,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Bounds" : "0.42 0.69",
+								"Bar Color" : "1 0 0",
+								"Bar Count" : 1000,
+								"Bar Opacity" : 1,
+								"Bar Spacing" : 0,
+								"ui_editor_properties_opacity" : 1
+							},
+							"id" : 1212
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 1217,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"alpha" : 1,
+								"color" : "0 0 0"
+							},
+							"id" : 1218,
+							"textures" : [ null, "masks/tint_mask_6d1422e3852b324749153589499473437f3459c6" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/spin/effect.json",
+					"id" : 1223,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ELLIPTICAL" : 1,
+								"PERSPECTIVE" : 1,
+								"REPEAT" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5"
+							},
+							"id" : 1224
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 1201,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Circle Audio Bars",
+			"origin" : "2037.62390 888.62915 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "4.00000 4.00000 1.00000",
+			"size" : "512.00000 512.00000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"config" : 
+			{
+				"passthrough" : true
+			},
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 482,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 0,
+								"AUDIO_SIMULATE" : 0,
+								"BLENDMODE" : 0,
+								"RESOLUTION" : 16,
+								"SHAPE" : 0,
+								"SMOOTH_CURVE" : 1,
+								"TRANSPARENCY" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Bounds" : "0 1",
+								"Bar Color" : "1 0 0",
+								"Bar Count" : 10,
+								"Bar Opacity" : 1,
+								"Bar Spacing" : 0,
+								"ui_editor_properties_opacity" : 1
+							},
+							"id" : 483
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 485,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"alpha" : 1,
+								"color" : "0 0 0"
+							},
+							"id" : 486,
+							"textures" : [ null, "masks/tint_mask_6d1422e3852b324749153589499473437f3459c6" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/spin/effect.json",
+					"id" : 627,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ELLIPTICAL" : 1,
+								"PERSPECTIVE" : 1,
+								"REPEAT" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5"
+							},
+							"id" : 628
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 479,
+			"image" : "models/util/composelayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Circle audio bars",
+			"origin" : "2048.00000 948.00000 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "32.00000 32.00000 2.10111",
+			"size" : "64.00000 64.00000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/godrays/effect.json",
+					"id" : 407,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 408,
+							"textures" : [ null, "util/white", "util/clouds_256" ]
+						},
+						{
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"color" : "0 0 0"
+							},
+							"id" : 409
+						},
+						{
+							"constantshadervalues" : 
+							{
+								"blurscale" : "1 1"
+							},
+							"id" : 410
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"blurscale" : "1 1"
+							},
+							"id" : 413
+						},
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0
+							},
+							"id" : 414,
+							"textures" : [ null, "_rt_imageLayerComposite_403_a" ]
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 403,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Dark God-rays",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : false
 		}
 	],
 	"version" : 0

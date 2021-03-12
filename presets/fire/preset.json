@@ -9,11 +9,11 @@
 		"droplistOptions" :
 		[
 			{
-				"label" : "Torch",
+				"label" : "ui_editor_preset_fire_variant_1",
 				"value" : 0
 			},
 			{
-				"label" : "Wildfire",
+				"label" : "ui_editor_preset_fire_variant_2",
 				"value" : 1
 			}
 		]
