@@ -1,5 +1,5 @@
 // [COMBO] {"material":"Position","combo":"SHAPE","type":"options","default":0,"options":{"Bottom":0,"Top":1,"Left":2,"Right":3,"Circle - Inner":4,"Circle - Outer":5,"Center - L/R":6,"Center - U/D":7,"Stereo - L/R":8,"Stereo - U/D":9}}
-// [COMBO] {"material":"Transparency","combo":"TRANSPARENCY","type":"options","default":2,"options":{"Preserve original":0,"Replace original":1,"Add to original":2,"Subtract from original":3,"Intersect original":4,"Remove all transparency":5}}
+// [COMBO] {"material":"Transparency","combo":"TRANSPARENCY","type":"options","default":2,"options":{"Preserve original":0,"Replace original":1,"Add to original":2,"Subtract from original":3,"Intersect original":4,"Fully opaque":5}}
 // [COMBO] {"material":"Frequency Resolution","combo":"RESOLUTION","type":"options","default":32,"options":{"16":16,"32":32,"64":64}}
 // [COMBO] {"material":"ui_editor_properties_blend_mode","combo":"BLENDMODE","type":"imageblending","default":0}
 // [COMBO] {"material":"Smooth curve","combo":"A_SMOOTH_CURVE","type":"options","default":0}
@@ -12,8 +12,7 @@
 varying vec2 v_TexCoord;
 
 uniform float u_BarCount; // {"material":"Bar Count","default":16,"range":[1, 200]}
-uniform float u_BarLowerBound; // {"material":"Lower Bar Bound","default":"0"}
-uniform float u_BarUpperBound; // {"material":"Upper Bar Bound","default":"1"}
+uniform vec2 u_BarBounds; // {"material":"Lower/Upper Bar Bounds","linked":true,"default":"0.0, 1.0","range":[0,1]}
 uniform vec3 u_BarColor; // {"default":"1 1 1","material":"Bar Color","type":"color"}
 uniform float u_BarOpacity; // {"default":"1","material":"ui_editor_properties_opacity"}
 uniform float u_BarSpacing; // {"default":"0","material":"Bar Spacing"}
@@ -60,6 +59,10 @@ uniform float g_AudioSpectrum64Right[64];
 #define SUBTRACT 3
 #define INTERSECT 4
 #define REMOVE 5
+
+
+
+
 
 
 
@@ -122,7 +125,6 @@ void main() {
 
 
 
-
 	// Get the frequency for this pixel, ie where we will sample from in the audio spectrum array. 0 == lowest frequency, RESOLUTION == highest frequency.
 #if A_SMOOTH_CURVE == 1
 	float frequency = shapeCoord.x * RESOLUTION;
@@ -135,13 +137,11 @@ void main() {
 	uint barFreq2 = (barFreq1 + 1) % RESOLUTION;
 
 
-
 	
 	// Get the height of the bar
 #if SHAPE == STEREO_H || SHAPE == STEREO_V || SHAPE == CENTER_H || SHAPE == CENTER_V
 
 // STEREO
-
 	float barVolume1L = u_AudioSpectrumLeft[barFreq1];
 	float barVolume2L = u_AudioSpectrumLeft[barFreq2];
 	float barVolume1R = u_AudioSpectrumRight[barFreq1];
@@ -151,29 +151,27 @@ void main() {
 	bool isRightChannel = shapeCoord.y > 0.51;
 	
 	// bar = 1 if this pixel is inside a bar, 0 if outside
-	int barLeft = step(shapeCoord.y, 0.5 * lerp(u_BarLowerBound, u_BarUpperBound, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, frac(frequency)))));
-	int barRight = step(1 - shapeCoord.y, 0.5 * lerp(u_BarLowerBound, u_BarUpperBound, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, frac(frequency)))));
+	int barLeft = step(shapeCoord.y, 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, frac(frequency)))));
+	int barRight = step(1 - shapeCoord.y, 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, frac(frequency)))));
 #if SHAPE == CENTER_H || SHAPE == CENTER_V
 	// Clip the L/R channels for center, so they don't wrap around.
 	barLeft *= isLeftChannel; barRight *= isRightChannel;
 #endif
 	int bar = max(barLeft, barRight);
-
 #else
 
  // NON-STEREO
-
 	float barVolume1 = (u_AudioSpectrumLeft[barFreq1] + u_AudioSpectrumRight[barFreq1]) * 0.5;
 	float barVolume2 = (u_AudioSpectrumLeft[barFreq2] + u_AudioSpectrumRight[barFreq2]) * 0.5;
 
 	// bar = 1 if this pixel is inside a bar, 0 if outside
-	int bar = step(1 - shapeCoord.y, lerp(u_BarLowerBound, u_BarUpperBound, lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency)))));
-
+	int bar = step(1 - shapeCoord.y, lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency)))));
 #endif
 
 
-#if A_SMOOTH_CURVE != 1
+
 	// Bar spacing
+#if A_SMOOTH_CURVE != 1
 	bar *= step(barDist, 1 - u_BarSpacing);
 #endif
 
@@ -182,33 +180,28 @@ void main() {
 	// Get the existing pixel color
 	vec4 scene = texSample2D(g_Texture0, v_TexCoord);
 
+	// Apply blend mode
 	finalColor = ApplyBlending(BLENDMODE, scene.rgb, finalColor.rgb, bar * u_BarOpacity);
 
 
 
-//TODO: Replace else if with elif when supported
 #if TRANSPARENCY == PRESERVE
 	float alpha = scene.a;
-#else
+#endif
 #if TRANSPARENCY == REPLACE
 	float alpha = bar * u_BarOpacity;
-#else
+#endif
 #if TRANSPARENCY == ADD
 	float alpha = max(scene.a, bar * u_BarOpacity);
-#else
+#endif
 #if TRANSPARENCY == SUBTRACT
 	float alpha = max(0, scene.a - bar * u_BarOpacity);
-#else
+#endif
 #if TRANSPARENCY == INTERSECT
 	float alpha = scene.a * bar * u_BarOpacity;
-#else
+#endif
 #if TRANSPARENCY == REMOVE
 	float alpha = u_BarOpacity;
-#endif
-#endif
-#endif
-#endif
-#endif
 #endif
 
 
