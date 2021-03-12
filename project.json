@@ -42,7 +42,7 @@
 				"step" : 0.10000000000000001,
 				"text" : "CRT Strength",
 				"type" : "slider",
-				"value" : 1
+				"value" : 0
 			},
 			"music" : 
 			{

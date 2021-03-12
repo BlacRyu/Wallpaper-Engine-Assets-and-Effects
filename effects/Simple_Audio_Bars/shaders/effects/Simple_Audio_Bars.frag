@@ -2,7 +2,7 @@
 // [COMBO] {"material":"Transparency","combo":"TRANSPARENCY","type":"options","default":2,"options":{"Preserve original":0,"Replace original":1,"Add to original":2,"Subtract from original":3,"Intersect original":4,"Remove all transparency":5}}
 // [COMBO] {"material":"Frequency Resolution","combo":"RESOLUTION","type":"options","default":32,"options":{"16":16,"32":32,"64":64}}
 // [COMBO] {"material":"ui_editor_properties_blend_mode","combo":"BLENDMODE","type":"imageblending","default":0}
-// [COMBO] {"material":"Smooth curve","combo":"SMOOTH_CURVE","type":"options","default":0}
+// [COMBO] {"material":"Smooth curve","combo":"A_SMOOTH_CURVE","type":"options","default":0}
 
 #include "common.h"
 #include "common_blending.h"
@@ -124,7 +124,7 @@ void main() {
 
 
 	// Get the frequency for this pixel, ie where we will sample from in the audio spectrum array. 0 == lowest frequency, RESOLUTION == highest frequency.
-#if SMOOTH_CURVE == 1
+#if A_SMOOTH_CURVE == 1
 	float frequency = shapeCoord.x * RESOLUTION;
 #else
 	// BarDist == How far this pixel is from the center of the bar that it belongs to. 0 = right in the middle, 1 = right on the edge.
@@ -172,7 +172,7 @@ void main() {
 #endif
 
 
-#if SMOOTH_CURVE != 1
+#if A_SMOOTH_CURVE != 1
 	// Bar spacing
 	bar *= step(barDist, 1 - u_BarSpacing);
 #endif

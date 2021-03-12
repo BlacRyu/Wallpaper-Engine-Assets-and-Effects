@@ -2309,8 +2309,10 @@
 						{
 							"combos" : 
 							{
+								"A1_SMOOTH_CURVE" : 1,
 								"ANTIALIAS" : 1,
 								"AUDIO_SIMULATE" : 0,
+								"A_SMOOTH_CURVE" : 1,
 								"BLENDMODE" : 0,
 								"RESOLUTION" : 64,
 								"SHAPE" : 4,
@@ -2334,7 +2336,7 @@
 							"id" : 592
 						}
 					],
-					"visible" : true
+					"visible" : false
 				},
 				{
 					"file" : "effects/tint/effect.json",
@@ -2379,6 +2381,30 @@
 						}
 					],
 					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 1052,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"A_SMOOTH_CURVE" : 1,
+								"RESOLUTION" : 64,
+								"SHAPE" : 4
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Color" : "1 0 0",
+								"Lower Bar Bound" : 0.41999999999999998,
+								"Upper Bar Bound" : 0.68999999999999995
+							},
+							"id" : 1053
+						}
+					],
+					"visible" : true
 				}
 			],
 			"id" : 590,
