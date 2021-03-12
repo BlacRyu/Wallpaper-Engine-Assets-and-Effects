@@ -1,8 +1,8 @@
 {
 	"camera" : 
 	{
-		"center" : "0.00000 0.00000 -1.00000",
-		"eye" : "0.00000 0.00000 0.00000",
+		"center" : "0.00000 0.00000 0.00000",
+		"eye" : "0.00000 0.00000 1.00000",
 		"up" : "0.00000 1.00000 0.00000"
 	},
 	"general" : 
@@ -2224,50 +2224,35 @@
 		},
 		{
 			"alignment" : "center",
-			"alpha" : 0.0,
+			"alpha" : 1.0,
 			"angles" : "0.00000 0.00000 0.00000",
 			"brightness" : 1.0,
-			"color" : "0.52157 0.52157 0.52157",
+			"color" : "0.40392 0.40392 0.40392",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"effects" : 
 			[
 				{
 					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 591,
+					"id" : 1450,
 					"name" : "",
 					"passes" : 
 					[
 						{
 							"combos" : 
 							{
-								"A1_SMOOTH_CURVE" : 1,
 								"ANTIALIAS" : 1,
-								"AUDIO_SIMULATE" : 0,
-								"A_SMOOTH_CURVE" : 0,
-								"BLENDMODE" : 0,
+								"A_SMOOTH_CURVE" : 1,
 								"RESOLUTION" : 64,
 								"SHAPE" : 4,
-								"SMOOTH_CURVE" : 1,
-								"SMOOTH_CURVE_AA" : 0,
-								"TRANSPARENCY" : 5
+								"TRANSPARENCY" : 1
 							},
 							"constantshadervalues" : 
 							{
-								"Bar Bounds" : "0.42 0.69",
-								"Bar Color" : "1 0 0",
-								"Bar Count" : 16,
-								"Bar Opacity" : 1,
-								"Bar Spacing" : 0.25,
-								"Bottom Bar Bound" : 0.45000000000000001,
-								"Lower Bar Bound" : 0.41999999999999998,
-								"Lower/Upper Bar Bounds" : "0.45 0.66",
-								"My new linked sliders" : "0.3 0.7",
-								"Top Bar Bound" : 0.55000000000000004,
-								"Upper Bar Bound" : 0.68999999999999995,
-								"ui_editor_properties_opacity" : 1
+								"Bar Color" : "1 0.4627450980392157 0.4627450980392157",
+								"Lower/Upper Bar Bounds" : "0.42 0.69"
 							},
-							"id" : 592
+							"id" : 1451
 						}
 					],
 					"visible" : true
@@ -2320,12 +2305,12 @@
 			"id" : 590,
 			"image" : "models/util/solidlayer.json",
 			"ledsource" : false,
-			"locktransforms" : true,
+			"locktransforms" : false,
 			"name" : "Circle Audio Bars",
 			"origin" : "2048.00000 948.00000 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
-			"scale" : "3.66679 3.66679 3.66679",
+			"scale" : "3.68058 3.68058 13.49593",
 			"size" : "512.00000 512.00000",
 			"solid" : true,
 			"visible" : true

@@ -3,6 +3,7 @@
 // [COMBO] {"material":"Frequency Resolution","combo":"RESOLUTION","type":"options","default":32,"options":{"16":16,"32":32,"64":64}}
 // [COMBO] {"material":"ui_editor_properties_blend_mode","combo":"BLENDMODE","type":"imageblending","default":0}
 // [COMBO] {"material":"Smooth curve","combo":"A_SMOOTH_CURVE","type":"options","default":0}
+// [COMBO] {"material":"Anti-aliasing","combo":"ANTIALIAS","type":"options","default":0}
 
 #include "common.h"
 #include "common_blending.h"
@@ -16,10 +17,10 @@ uniform vec2 u_BarBounds; // {"material":"Lower/Upper Bar Bounds","linked":true,
 uniform vec3 u_BarColor; // {"default":"1 1 1","material":"Bar Color","type":"color"}
 uniform float u_BarOpacity; // {"default":"1","material":"ui_editor_properties_opacity"}
 uniform float u_BarSpacing; // {"default":"0","material":"Bar Spacing"}
+uniform float u_AASmoothness; // {"default":"0.025","material":"Anti-alias blurring","range":[0.01,0.1]}
 
 
 uniform sampler2D g_Texture0; // {"material":"previous","label":"Prev","hidden":true}
-uniform vec2 g_TexelSizeHalf;
 
 
 #if RESOLUTION == 16
@@ -70,16 +71,16 @@ void main() {
 	
 	// Define the audio sample arrays
 #if RESOLUTION == 16
-	float u_AudioSpectrumLeft[] = g_AudioSpectrum16Left;
-	float u_AudioSpectrumRight[] = g_AudioSpectrum16Right;
+#define u_AudioSpectrumLeft g_AudioSpectrum16Left
+#define u_AudioSpectrumRight g_AudioSpectrum16Right
 #endif
 #if RESOLUTION == 32
-	float u_AudioSpectrumLeft[] = g_AudioSpectrum32Left;
-	float u_AudioSpectrumRight[] = g_AudioSpectrum32Right;
+#define u_AudioSpectrumLeft g_AudioSpectrum32Left
+#define u_AudioSpectrumRight g_AudioSpectrum32Right
 #endif
 #if RESOLUTION == 64
-	float u_AudioSpectrumLeft[] = g_AudioSpectrum64Left;
-	float u_AudioSpectrumRight[] = g_AudioSpectrum64Right;
+#define u_AudioSpectrumLeft g_AudioSpectrum64Left
+#define u_AudioSpectrumRight g_AudioSpectrum64Right
 #endif
 
 
@@ -151,28 +152,38 @@ void main() {
 	bool isRightChannel = shapeCoord.y > 0.51;
 	
 	// bar = 1 if this pixel is inside a bar, 0 if outside
-	int barLeft = step(shapeCoord.y, 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, frac(frequency)))));
-	int barRight = step(1 - shapeCoord.y, 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, frac(frequency)))));
+	float barLeft = smoothstep(shapeCoord.y - u_AASmoothness, shapeCoord.y + u_AASmoothness, 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, frac(frequency)))));
+	float barRight = step(1 - shapeCoord.y, 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, frac(frequency)))));
 #if SHAPE == CENTER_H || SHAPE == CENTER_V
 	// Clip the L/R channels for center, so they don't wrap around.
 	barLeft *= isLeftChannel; barRight *= isRightChannel;
 #endif
-	int bar = max(barLeft, barRight);
+	float bar = max(barLeft, barRight);
 #else
 
  // NON-STEREO
 	float barVolume1 = (u_AudioSpectrumLeft[barFreq1] + u_AudioSpectrumRight[barFreq1]) * 0.5;
 	float barVolume2 = (u_AudioSpectrumLeft[barFreq2] + u_AudioSpectrumRight[barFreq2]) * 0.5;
 
+	// How tall the bar is in the current pixel's column
+	float barHeight = lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency))));
 	// bar = 1 if this pixel is inside a bar, 0 if outside
-	int bar = step(1 - shapeCoord.y, lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency)))));
+#if ANTIALIAS == 1
+	float bar = smoothstep(1 - shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, barHeight);
+#else
+	int bar = step(1 - shapeCoord.y, barHeight);
+#endif
 #endif
 
 
 
 	// Bar spacing
 #if A_SMOOTH_CURVE != 1
+#if ANTIALIAS == 1
+	bar *= smoothstep(barDist - u_AASmoothness, barDist + u_AASmoothness, (1 - u_BarSpacing));
+#else
 	bar *= step(barDist, 1 - u_BarSpacing);
+#endif
 #endif
 
 	vec3 finalColor = bar * u_BarColor;
