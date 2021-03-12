@@ -71,12 +71,12 @@
 		{
 			"name" : "_rt_HalfCompoBuffer1",
 			"scale" : 2,
-			"format" : "rgba8888"
+			"format" : "rgba_backbuffer"
 		},
 		{
 			"name" : "_rt_HalfCompoBuffer2",
 			"scale" : 2,
-			"format" : "rgba8888"
+			"format" : "rgba_backbuffer"
 		}
 	],
 	"dependencies" :

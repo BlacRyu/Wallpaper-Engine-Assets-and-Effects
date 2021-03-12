@@ -1,8 +1,8 @@
 {
 	"camera" : 
 	{
-		"center" : "0.00000 0.00000 0.00000",
-		"eye" : "0.00000 0.00000 1.00000",
+		"center" : "36.18586 -21.71152 0.00000",
+		"eye" : "36.18586 -21.71152 1.00000",
 		"up" : "0.00000 1.00000 0.00000"
 	},
 	"general" : 
@@ -1427,7 +1427,7 @@
 							"textures" : [ null, "_rt_FullCompoBuffer1_480_490" ]
 						},
 						{
-							"id" : 357
+							"id" : 358
 						}
 					],
 					"visible" : false
@@ -2214,15 +2214,15 @@
 								"BLENDMODE" : 0,
 								"RESOLUTION" : 64,
 								"SHAPE" : 6,
-								"SMOOTH_CURVE" : 0,
+								"SMOOTH_CURVE" : 1,
 								"SMOOTH_CURVE_AA" : 0,
-								"TRANSPARENCY" : 1
+								"TRANSPARENCY" : 2
 							},
 							"constantshadervalues" : 
 							{
-								"Bar Bounds" : "0.42 0.69",
-								"Bar Color" : "1 0 0",
-								"Bar Count" : 1000,
+								"Bar Bounds" : "0.5 0.69",
+								"Bar Color" : "0 0 0",
+								"Bar Count" : 20,
 								"Bar Opacity" : 1,
 								"Bar Spacing" : 0,
 								"ui_editor_properties_opacity" : 1
@@ -2241,12 +2241,12 @@
 						{
 							"combos" : 
 							{
-								"BLENDMODE" : 2
+								"BLENDMODE" : 28
 							},
 							"constantshadervalues" : 
 							{
 								"alpha" : 1,
-								"color" : "0 0 0"
+								"color" : "1 0.9686274509803922 0"
 							},
 							"id" : 1218,
 							"textures" : [ null, "masks/tint_mask_6d1422e3852b324749153589499473437f3459c6" ]
@@ -2286,6 +2286,110 @@
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
 			"scale" : "4.00000 4.00000 1.00000",
+			"size" : "512.00000 512.00000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 0.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "0.52157 0.52157 0.52157",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 591,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"AUDIO_SIMULATE" : 0,
+								"BLENDMODE" : 0,
+								"RESOLUTION" : 64,
+								"SHAPE" : 4,
+								"SMOOTH_CURVE" : 1,
+								"SMOOTH_CURVE_AA" : 0,
+								"TRANSPARENCY" : 2
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Bounds" : "0.42 0.69",
+								"Bar Color" : "1 0 0",
+								"Bar Count" : 20,
+								"Bar Opacity" : 1,
+								"Bar Spacing" : 0,
+								"Bottom Bar Bound" : 0.45000000000000001,
+								"Lower Bar Bound" : 0.41999999999999998,
+								"Top Bar Bound" : 0.55000000000000004,
+								"Upper Bar Bound" : 0.68999999999999995,
+								"ui_editor_properties_opacity" : 1
+							},
+							"id" : 592
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 593,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 28
+							},
+							"constantshadervalues" : 
+							{
+								"alpha" : 1,
+								"color" : "1 0.9686274509803922 0"
+							},
+							"id" : 594,
+							"textures" : [ null, "masks/tint_mask_6d1422e3852b324749153589499473437f3459c6" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/spin/effect.json",
+					"id" : 595,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ELLIPTICAL" : 1,
+								"PERSPECTIVE" : 1,
+								"REPEAT" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5"
+							},
+							"id" : 596
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 590,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Circle Audio Bars",
+			"origin" : "2048.00000 948.00000 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "3.66679 3.66679 3.66679",
 			"size" : "512.00000 512.00000",
 			"solid" : true,
 			"visible" : true

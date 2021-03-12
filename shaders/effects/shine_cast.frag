@@ -96,5 +96,5 @@ void main() {
 #endif
 
 	albedo.rgb *= g_ColorRays;
-	gl_FragColor = g_Intensity * sampleIntensity * albedo;
+	gl_FragColor = vec4(g_Intensity * sampleIntensity * albedo.rgb, saturate(g_Intensity * sampleIntensity * albedo.a));
 }
