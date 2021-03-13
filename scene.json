@@ -1359,7 +1359,7 @@
 							"textures" : [ null, "_rt_FullCompoBuffer1_480_490" ]
 						},
 						{
-							"id" : 179
+							"id" : 131
 						}
 					],
 					"visible" : false
@@ -2233,31 +2233,6 @@
 			"effects" : 
 			[
 				{
-					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 1450,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"ANTIALIAS" : 1,
-								"A_SMOOTH_CURVE" : 1,
-								"RESOLUTION" : 64,
-								"SHAPE" : 4,
-								"TRANSPARENCY" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"Bar Color" : "1 0.4627450980392157 0.4627450980392157",
-								"Lower/Upper Bar Bounds" : "0.42 0.69"
-							},
-							"id" : 1451
-						}
-					],
-					"visible" : true
-				},
-				{
 					"file" : "effects/tint/effect.json",
 					"id" : 593,
 					"name" : "",
@@ -2300,6 +2275,31 @@
 						}
 					],
 					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 539,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLIP_LOW" : 0,
+								"RESOLUTION" : 64,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Color" : "1 0.3764705882352941 0.3764705882352941",
+								"Bar Count" : 64,
+								"Bar Spacing" : 0.10000000000000001,
+								"Lower/Upper Bar Bounds" : "0.1 0.6"
+							},
+							"id" : 540
+						}
+					],
+					"visible" : true
 				}
 			],
 			"id" : 590,
