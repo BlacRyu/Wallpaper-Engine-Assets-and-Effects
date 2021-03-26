@@ -1,8 +1,8 @@
 {
 	"camera" : 
 	{
-		"center" : "0.00000 0.00000 0.00000",
-		"eye" : "0.00000 0.00000 1.00000",
+		"center" : "0.00000 0.00000 -1.00000",
+		"eye" : "0.00000 0.00000 0.00000",
 		"up" : "0.00000 1.00000 0.00000"
 	},
 	"general" : 
@@ -1409,7 +1409,7 @@
 			"parallaxDepth" : "1.00000 1.00000",
 			"particle" : "particles/workshop/2093672045/Cherry_Blossoms_2.json",
 			"scale" : "1.00000 1.00000 5.00000",
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -2106,13 +2106,13 @@
 			"alpha" : 1.0,
 			"angles" : "0.00000 0.00000 0.00000",
 			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
+			"color" : "0.26667 0.00000 0.36863",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
 			"id" : 505,
 			"image" : "models/util/solidlayer.json",
 			"ledsource" : false,
-			"locktransforms" : false,
+			"locktransforms" : true,
 			"name" : "Solid",
 			"origin" : "2048.00000 948.00000 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
@@ -2120,7 +2120,7 @@
 			"scale" : "1.00000 1.00000 1.00000",
 			"size" : "4000.00000 2000.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -2148,7 +2148,7 @@
 								"SHAPE" : 6,
 								"SMOOTH_CURVE" : 1,
 								"SMOOTH_CURVE_AA" : 0,
-								"TRANSPARENCY" : 2
+								"TRANSPARENCY" : 3
 							},
 							"constantshadervalues" : 
 							{
@@ -2227,99 +2227,6 @@
 			"alpha" : 1.0,
 			"angles" : "0.00000 0.00000 0.00000",
 			"brightness" : 1.0,
-			"color" : "0.40392 0.40392 0.40392",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/tint/effect.json",
-					"id" : 593,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 28
-							},
-							"constantshadervalues" : 
-							{
-								"alpha" : 1,
-								"color" : "1 0.9686274509803922 0"
-							},
-							"id" : 594,
-							"textures" : [ null, "masks/tint_mask_6d1422e3852b324749153589499473437f3459c6" ]
-						}
-					],
-					"visible" : false
-				},
-				{
-					"file" : "effects/spin/effect.json",
-					"id" : 595,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"ELLIPTICAL" : 1,
-								"PERSPECTIVE" : 1,
-								"REPEAT" : 0
-							},
-							"constantshadervalues" : 
-							{
-								"center" : "0.5 0.5"
-							},
-							"id" : 596
-						}
-					],
-					"visible" : false
-				},
-				{
-					"file" : "effects/Simple_Audio_Bars/effect.json",
-					"id" : 539,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"CLIP_LOW" : 0,
-								"RESOLUTION" : 64,
-								"TRANSPARENCY" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"Bar Color" : "1 0.3764705882352941 0.3764705882352941",
-								"Bar Count" : 64,
-								"Bar Spacing" : 0.10000000000000001,
-								"Lower/Upper Bar Bounds" : "0.1 0.6"
-							},
-							"id" : 540
-						}
-					],
-					"visible" : true
-				}
-			],
-			"id" : 590,
-			"image" : "models/util/solidlayer.json",
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "Circle Audio Bars",
-			"origin" : "2048.00000 948.00000 0.00000",
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"scale" : "3.68058 3.68058 13.49593",
-			"size" : "512.00000 512.00000",
-			"solid" : true,
-			"visible" : true
-		},
-		{
-			"alignment" : "center",
-			"alpha" : 1.0,
-			"angles" : "0.00000 0.00000 0.00000",
-			"brightness" : 1.0,
 			"color" : "1.00000 1.00000 1.00000",
 			"colorBlendMode" : 0,
 			"config" : 
@@ -2338,83 +2245,44 @@
 						{
 							"combos" : 
 							{
-								"ANTIALIAS" : 0,
+								"ANTIALIAS" : 1,
 								"AUDIO_SIMULATE" : 0,
+								"A_SMOOTH_CURVE" : 0,
 								"BLENDMODE" : 0,
-								"RESOLUTION" : 16,
+								"CLIP_HIGH" : 0,
+								"CLIP_LOW" : 1,
+								"RESOLUTION" : 64,
 								"SHAPE" : 0,
 								"SMOOTH_CURVE" : 1,
-								"TRANSPARENCY" : 2
+								"TRANSPARENCY" : 1
 							},
 							"constantshadervalues" : 
 							{
+								"Anti-alias blurring" : 0.025000000000000001,
 								"Bar Bounds" : "0 1",
-								"Bar Color" : "1 0 0",
-								"Bar Count" : 10,
+								"Bar Color" : "0 0 0",
+								"Bar Count" : 32,
 								"Bar Opacity" : 1,
 								"Bar Spacing" : 0,
+								"Lower/Upper Bar Bounds" : "0.4 0.7",
 								"ui_editor_properties_opacity" : 1
 							},
 							"id" : 483
 						}
 					],
 					"visible" : true
-				},
-				{
-					"file" : "effects/tint/effect.json",
-					"id" : 485,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"BLENDMODE" : 2
-							},
-							"constantshadervalues" : 
-							{
-								"alpha" : 1,
-								"color" : "0 0 0"
-							},
-							"id" : 486,
-							"textures" : [ null, "masks/tint_mask_6d1422e3852b324749153589499473437f3459c6" ]
-						}
-					],
-					"visible" : false
-				},
-				{
-					"file" : "effects/spin/effect.json",
-					"id" : 627,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"combos" : 
-							{
-								"ELLIPTICAL" : 1,
-								"PERSPECTIVE" : 1,
-								"REPEAT" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"center" : "0.5 0.5"
-							},
-							"id" : 628
-						}
-					],
-					"visible" : false
 				}
 			],
 			"id" : 479,
 			"image" : "models/util/composelayer.json",
 			"ledsource" : false,
 			"locktransforms" : false,
-			"name" : "Circle audio bars",
-			"origin" : "2048.00000 948.00000 0.00000",
+			"name" : "Compose audio bars",
+			"origin" : "2871.62671 948.00000 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
-			"scale" : "32.00000 32.00000 2.10111",
-			"size" : "64.00000 64.00000",
+			"scale" : "16.00000 16.00000 2.10111",
+			"size" : "128.00000 128.00000",
 			"solid" : true,
 			"visible" : false
 		},
@@ -2484,6 +2352,222 @@
 			"perspective" : false,
 			"solid" : true,
 			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/transform/effect.json",
+					"id" : 607,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLAMP" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 608
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 580,
+			"image" : "models/Acrid Spritesheet.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Acrid Spritesheet",
+			"origin" : "2244.32544 631.70428 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "2.00000 2.00000 1.00000",
+			"size" : "160.00000 68.00000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/transform/effect.json",
+					"id" : 603,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"angle" : 0,
+								"offset" : "0 0",
+								"scale" : "0.99 0.99"
+							},
+							"id" : 605
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 584,
+			"image" : "models/Acrid_No_Transparency.json",
+			"ledsource" : false,
+			"locktransforms" : true,
+			"name" : "Acrid_No_Transparency",
+			"origin" : "2397.14795 802.51862 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "2.00000 2.00000 1.00000",
+			"size" : "160.00000 68.00000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/transform/effect.json",
+					"id" : 610,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLAMP" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"scale" : "1 1"
+							},
+							"id" : 611
+						}
+					],
+					"visible" : false
+				}
+			],
+			"id" : 594,
+			"image" : "models/Acrid_small.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Acrid_small",
+			"origin" : "2069.01440 664.61206 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "8.00000 8.00000 1.00000",
+			"size" : "40.00000 17.00000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 0.0,
+			"angles" : "-0.00000 -0.00000 -0.00303",
+			"brightness" : 1.0,
+			"color" : "0.00000 0.07451 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 507,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"AUDIO_SIMULATE" : 0,
+								"A_SMOOTH_CURVE" : 1,
+								"BLENDMODE" : 0,
+								"CLIP_HIGH" : 0,
+								"CLIP_LOW" : 1,
+								"RESOLUTION" : 64,
+								"SHAPE" : 5,
+								"SMOOTH_CURVE" : 1,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Anti-alias blurring" : "0.5 1",
+								"Bar Bounds" : "0 1",
+								"Bar Color" : "0.10196078431372549 0.6039215686274509 1",
+								"Bar Count" : 64,
+								"Bar Opacity" : 1,
+								"Bar Spacing" : 0.40000000000000002,
+								"Lower/Upper Bar Bounds" : "0.2 0.3",
+								"ui_editor_properties_opacity" : 2.5
+							},
+							"id" : 508
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 473,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"A_SMOOTH_CURVE" : 0,
+								"CLIP_LOW" : 1,
+								"SHAPE" : 6
+							},
+							"constantshadervalues" : 
+							{
+								"Anti-alias blurring" : "0.25 0.25",
+								"Bar Color" : "1 0 0",
+								"Bar Spacing" : 0.25,
+								"Lower/Upper Bar Bounds" : "0.27 0.69"
+							},
+							"id" : 474
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 590,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Solid Audio Bars",
+			"origin" : "2002.91345 906.11035 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "2.00000 1.00000 9.80345",
+			"size" : "1024.00000 1024.00000",
+			"solid" : true,
+			"visible" : true
 		}
 	],
 	"version" : 0
