@@ -1,0 +1,10 @@
+{
+	"bleedtransparentcolors" : true,
+	"clampuvs" : true,
+	"format" : "rgba8888",
+	"halfmip" : true,
+	"nointerpolation" : false,
+	"nomip" : true,
+	"nonpoweroftwo" : true,
+	"spritesheet" : false
+}

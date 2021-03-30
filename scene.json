@@ -1,8 +1,8 @@
 {
 	"camera" : 
 	{
-		"center" : "0.00000 0.00000 -1.00000",
-		"eye" : "0.00000 0.00000 0.00000",
+		"center" : "0.00000 0.00000 0.00000",
+		"eye" : "0.00000 0.00000 1.00000",
 		"up" : "0.00000 1.00000 0.00000"
 	},
 	"general" : 
@@ -2485,11 +2485,11 @@
 		},
 		{
 			"alignment" : "center",
-			"alpha" : 0.0,
+			"alpha" : 1.0,
 			"angles" : "-0.00000 -0.00000 -0.00303",
 			"brightness" : 1.0,
 			"color" : "0.00000 0.07451 1.00000",
-			"colorBlendMode" : 0,
+			"colorBlendMode" : 31,
 			"copybackground" : true,
 			"effects" : 
 			[
@@ -2539,16 +2539,20 @@
 							"combos" : 
 							{
 								"ANTIALIAS" : 1,
-								"A_SMOOTH_CURVE" : 0,
+								"A_SMOOTH_CURVE" : 1,
 								"CLIP_LOW" : 1,
-								"SHAPE" : 6
+								"RESOLUTION" : 32,
+								"SHAPE" : 4,
+								"TRANSPARENCY" : 1
 							},
 							"constantshadervalues" : 
 							{
-								"Anti-alias blurring" : "0.25 0.25",
-								"Bar Color" : "1 0 0",
-								"Bar Spacing" : 0.25,
-								"Lower/Upper Bar Bounds" : "0.27 0.69"
+								"Anti-alias blurring" : "1 1",
+								"Bar Color" : "0.07451 0.91765 1.00000",
+								"Bar Count" : 128,
+								"Bar Spacing" : 0.80000000000000004,
+								"Lower/Upper Bar Bounds" : "0.6 0.8",
+								"ui_editor_properties_opacity" : 1.5
 							},
 							"id" : 474
 						}
@@ -2561,11 +2565,132 @@
 			"ledsource" : false,
 			"locktransforms" : false,
 			"name" : "Solid Audio Bars",
-			"origin" : "2002.91345 906.11035 0.00000",
+			"origin" : "2356.18628 1338.83118 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
-			"scale" : "2.00000 1.00000 9.80345",
+			"scale" : "1.00000 1.00000 9.80345",
 			"size" : "1024.00000 1024.00000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"angles" : "0.00000 0.00000 0.00000",
+			"id" : 427,
+			"instanceoverride" : null,
+			"locktransforms" : false,
+			"name" : "GIF_Emitter",
+			"origin" : "509.07996 145.35999 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"particle" : "particles/GIF_Emitter.json",
+			"scale" : "1.00000 1.00000 1.00000",
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 0.5,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "0.47059 0.47059 0.47059",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/2d_sdf_test/effect.json",
+					"id" : 481,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Color" : "0.6313725490196078 0 1",
+								"Fuzziness" : 0.001,
+								"Smoothness" : 0.10000000149011612
+							},
+							"id" : 484
+						}
+					],
+					"visible" : true
+				},
+				{
+					"file" : "effects/circle_sdf/effect.json",
+					"id" : 430,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 431
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 477,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Solid",
+			"origin" : "1538.12390 948.98547 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "0.91211 0.91211 0.91211",
+			"size" : "2048.00000 2048.00000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "0.00000 0.11765 1.00000",
+			"colorBlendMode" : 9,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 471,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"A_SMOOTH_CURVE" : 1,
+								"BLENDMODE" : 0,
+								"CLIP_LOW" : 1,
+								"SHAPE" : 4
+							},
+							"constantshadervalues" : 
+							{
+								"Anti-alias blurring" : "1 1",
+								"Bar Color" : "0 0.8235294117647058 1",
+								"Lower/Upper Bar Bounds" : "0.6 0.8",
+								"ui_editor_properties_opacity" : 1.5
+							},
+							"id" : 472
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 458,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Solid",
+			"origin" : "1637.44922 1348.59814 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "1.76735 1.76735 1.76735",
+			"size" : "512.00000 512.00000",
 			"solid" : true,
 			"visible" : true
 		}

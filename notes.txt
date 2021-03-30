@@ -1,0 +1,8 @@
+SDF Shapes Effects
+
+Shape effect
+ - Read current distance from buffer A
+ 	- PROBLEM! How do we write a float value to a buffer? Only seems to support 8-bit integer values.
+ - Apply shape operation, write to buffer B
+ - Copy buffer B to buffer A
+ - 

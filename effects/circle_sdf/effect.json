@@ -1,0 +1,32 @@
+{
+	"dependencies" : 
+	[
+		"materials/effects/circle_sdf.json",
+		"shaders/effects/circle_sdf.frag",
+		"shaders/effects/circle_sdf.vert"
+	],
+	"editable" : true,
+	"fbos" :
+	[
+		{
+			"name" : "_rt_SDFBuffer1",
+			"scale" : 1,
+			"format" : "rgba8888"
+		},
+		{
+			"name" : "_rt_SDFBuffer2",
+			"scale" : 1,
+			"format" : "rgba8888"
+		}
+	],
+	"group" : "localeffects",
+	"name" : "Circle SDF",
+	"passes" : 
+	[
+		{
+			"material" : "materials/effects/circle_sdf.json"
+		}
+	],
+	"replacementkey" : "circle_sdf",
+	"version" : 1
+}

@@ -1,0 +1,19 @@
+{
+	"dependencies" : 
+	[
+		"materials/effects/2d_sdf_test.json",
+		"shaders/effects/2d_sdf_test.frag",
+		"shaders/effects/2d_sdf_test.vert"
+	],
+	"editable" : true,
+	"group" : "localeffects",
+	"name" : "2D SDF test",
+	"passes" : 
+	[
+		{
+			"material" : "materials/effects/2d_sdf_test.json"
+		}
+	],
+	"replacementkey" : "2d_sdf_test",
+	"version" : 1
+}

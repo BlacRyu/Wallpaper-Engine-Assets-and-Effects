@@ -14,12 +14,12 @@
 
 varying vec2 v_TexCoord;
 
-uniform float u_BarCount; // {"material":"Bar Count","default":16,"range":[1, 200]}
+uniform float u_BarCount; // {"material":"Bar Count","default":32,"range":[1, 200]}
 uniform vec2 u_BarBounds; // {"default":"0.0, 1.0","linked":true,"material":"Lower/Upper Bar Bounds","range":[0,1]}
 uniform vec3 u_BarColor; // {"default":"1 1 1","material":"Bar Color","type":"color"}
 uniform float u_BarOpacity; // {"default":"1","material":"ui_editor_properties_opacity"}
-uniform float u_BarSpacing; // {"default":"0","material":"Bar Spacing"}
-uniform float u_AASmoothness; // {"default":"0.025","material":"Anti-alias blurring","range":[0.01,0.10000000000000001]}
+uniform float u_BarSpacing; // {"default":"0.1","material":"Bar Spacing"}
+uniform vec2 u_AASmoothness; // {"default":"0.02, 0.02","linked":true,"material":"Anti-alias blurring","range":[0.01,0.10000000000000001]}
 
 
 uniform sampler2D g_Texture0; // {"material":"previous","label":"Prev","hidden":true}
@@ -147,16 +147,21 @@ void main() {
 	float barVolume2L = u_AudioSpectrumLeft[barFreq2];
 	float barVolume1R = u_AudioSpectrumRight[barFreq1];
 	float barVolume2R = u_AudioSpectrumRight[barFreq2];
+	float barVolumeLeft = lerp(barVolume1L, barVolume2L, smoothstep(0, 1, frac(frequency)));
+	float barVolumeRight = lerp(barVolume1R, barVolume2R, smoothstep(0, 1, frac(frequency)));
 
 	bool isLeftChannel = shapeCoord.y < 0.49;
 	bool isRightChannel = shapeCoord.y > 0.51;
 	
 	// bar = 1 if this pixel is inside a bar, 0 if outside
-	float barHeightLeft = 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1L, barVolume2L, smoothstep(0, 1, frac(frequency))));
-	float barHeightRight = 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1R, barVolume2R, smoothstep(0, 1, frac(frequency))));
+	float barHeightLeft = 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, barVolumeLeft);
+	float barHeightRight = 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, barVolumeRight);
 #if ANTIALIAS == 1
-	float barLeft = smoothstep(shapeCoord.y - u_AASmoothness * 0.1, shapeCoord.y + u_AASmoothness * 0.1, barHeightLeft);
-	float barRight = smoothstep(1 - shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, barHeightRight);
+	float verticalSmoothingLeft = u_AASmoothness.y * 0.05, verticalSmoothingRight = verticalSmoothingLeft;
+	verticalSmoothingLeft *= saturate(lerp(0, 1, barVolumeLeft * 100.0)); // Don't blur when near 0 volume
+	verticalSmoothingRight *= saturate(lerp(0, 1, barVolumeRight * 100.0));
+	float barLeft = smoothstep(shapeCoord.y - verticalSmoothingLeft, shapeCoord.y + verticalSmoothingLeft, barHeightLeft);
+	float barRight = smoothstep(1 - shapeCoord.y - verticalSmoothingRight, 1 - shapeCoord.y + verticalSmoothingRight, barHeightRight);
 #else
 	int barLeft = step(shapeCoord.y, barHeightLeft);
 	int barRight = step(1 - shapeCoord.y, barHeightRight);
@@ -169,8 +174,8 @@ void main() {
 	// Bounds Clipping (Stereo)
 #if CLIP_LOW == 1
 #if ANTIALIAS == 1
-	barLeft *= 1.0 - smoothstep(shapeCoord.y - u_AASmoothness * 0.1, shapeCoord.y + u_AASmoothness * 0.1, 0.5 * u_BarBounds.x);
-	barRight *= 1.0 - smoothstep(1.0 - shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, 0.5 * u_BarBounds.x);
+	barLeft *= 1.0 - smoothstep(shapeCoord.y - verticalSmoothingLeft, shapeCoord.y + verticalSmoothingLeft, 0.5 * u_BarBounds.x);
+	barRight *= 1.0 - smoothstep(1.0 - shapeCoord.y - verticalSmoothingRight, 1 - shapeCoord.y + verticalSmoothingRight, 0.5 * u_BarBounds.x);
 #else
 	barLeft *= 1.0 - step(shapeCoord.y, 0.5 * u_BarBounds.x);
 	barRight *= 1.0 - step(1.0 - shapeCoord.y, 0.5 * u_BarBounds.x);
@@ -178,8 +183,8 @@ void main() {
 #endif
 #if CLIP_HIGH == 1
 #if ANTIALIAS == 1
-	barLeft *= smoothstep(shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, u_BarBounds.y);
-	barRight *= smoothstep(1.0 - shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, u_BarBounds.y);
+	barLeft *= smoothstep(shapeCoord.y - verticalSmoothingLeft, 1 - shapeCoord.y + verticalSmoothingLeft, u_BarBounds.y);
+	barRight *= smoothstep(1.0 - shapeCoord.y - verticalSmoothingRight, 1 - shapeCoord.y + verticalSmoothingRight, u_BarBounds.y);
 #else
 	barLeft *= step(shapeCoord.y, u_BarBounds.y);
 	barRight *= step(1.0 - shapeCoord.y, u_BarBounds.y);
@@ -193,12 +198,15 @@ void main() {
 #else // NON-STEREO
 	float barVolume1 = (u_AudioSpectrumLeft[barFreq1] + u_AudioSpectrumRight[barFreq1]) * 0.5;
 	float barVolume2 = (u_AudioSpectrumLeft[barFreq2] + u_AudioSpectrumRight[barFreq2]) * 0.5;
+	float barVolume = lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency)));
 
 	// How tall the bar is in the current pixel's column
-	float barHeight = lerp(u_BarBounds.x, u_BarBounds.y, lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency))));
+	float barHeight = lerp(u_BarBounds.x, u_BarBounds.y, barVolume);
 	// bar = 1 if this pixel is inside a bar, 0 if outside
 #if ANTIALIAS == 1
-	float bar = smoothstep(1 - shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, barHeight);
+	float verticalSmoothing = u_AASmoothness.y * 0.05;
+	verticalSmoothing *= saturate(lerp(0, 1, barVolume * 100.0)); // Don't blur when near 0 volume
+	float bar = smoothstep(1 - shapeCoord.y - verticalSmoothing, 1 - shapeCoord.y + verticalSmoothing, barHeight);
 #else
 	int bar = step(1 - shapeCoord.y, barHeight);
 #endif
@@ -206,14 +214,14 @@ void main() {
 	// Bounds Clipping (Non-stereo)
 #if CLIP_LOW == 1
 #if ANTIALIAS == 1
-	bar *= 1.0 - smoothstep(1.0 - shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, u_BarBounds.x);
+	bar *= 1.0 - smoothstep(1.0 - shapeCoord.y - verticalSmoothing, 1 - shapeCoord.y + verticalSmoothing, u_BarBounds.x);
 #else
 	bar *= 1.0 - step(1.0 - shapeCoord.y, u_BarBounds.x);
 #endif
 #endif
 #if CLIP_HIGH == 1
 #if ANTIALIAS == 1
-	bar *= smoothstep(1.0 - shapeCoord.y - u_AASmoothness * 0.1, 1 - shapeCoord.y + u_AASmoothness * 0.1, u_BarBounds.y);
+	bar *= smoothstep(1.0 - shapeCoord.y - verticalSmoothing, 1 - shapeCoord.y + verticalSmoothing, u_BarBounds.y);
 #else
 	bar *= step(1.0 - shapeCoord.y, u_BarBounds.y);
 #endif
@@ -226,19 +234,19 @@ void main() {
 	// Bar spacing
 #if A_SMOOTH_CURVE != 1
 #if ANTIALIAS == 1
-	bar *= max(1 - step (0.01, u_BarSpacing), smoothstep(barDist - u_AASmoothness, barDist + u_AASmoothness, (1 - u_BarSpacing)));
+	bar *= max(1 - step (0.01, u_BarSpacing), smoothstep(barDist - u_AASmoothness.x, barDist + u_AASmoothness.x, (1 - u_BarSpacing)));
 #else
 	bar *= step(barDist, 1 - u_BarSpacing);
 #endif
 #endif
 
-	vec3 finalColor = bar * u_BarColor;
+	vec3 finalColor = u_BarColor;
 	
 	// Get the existing pixel color
 	vec4 scene = texSample2D(g_Texture0, v_TexCoord);
 
 	// Apply blend mode
-	finalColor = ApplyBlending(BLENDMODE, scene.rgb, finalColor.rgb, bar * u_BarOpacity);
+	finalColor = ApplyBlending(BLENDMODE, lerp(finalColor.rgb, scene.rgb, scene.a), finalColor.rgb, bar * u_BarOpacity);
 
 
 
