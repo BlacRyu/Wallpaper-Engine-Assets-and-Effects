@@ -10,12 +10,17 @@
 #include "common.h"
 #include "common_blending.h"
 
+#define DEG2RAD 2 * M_PI / 360.0
+#define DEG2PCT 1 / 360.0
 
+// Same as GLSL's modulo function. Return value's sign is equivalent to the y value's sign.
+float mod2(float x, float y) { return x - y * floor(x/y); }
 
 varying vec2 v_TexCoord;
 
 uniform float u_BarCount; // {"material":"Bar Count","default":32,"range":[1, 200]}
 uniform vec2 u_BarBounds; // {"material":"Lower/Upper Bar Bounds","linked":true,"default":"0.0, 1.0","range":[0,1]}
+uniform vec2 u_CircleAngles; // {"material":"Circle Start/End Angles","linked":true,"default":"0.0, 360.0","range":[0,360]}
 uniform vec3 u_BarColor; // {"default":"1 1 1","material":"Bar Color","type":"color"}
 uniform float u_BarOpacity; // {"default":"1","material":"ui_editor_properties_opacity"}
 uniform float u_BarSpacing; // {"default":"0.1","material":"Bar Spacing"}
@@ -119,7 +124,16 @@ void main() {
 #if SHAPE == CIRCLE_INNER || SHAPE == CIRCLE_OUTER
 	vec2 circleCoord = (v_TexCoord - 0.5) * 2;
 	vec2 shapeCoord;
+	float startAngle = u_CircleAngles.x * DEG2PCT;
+	float endAngle = u_CircleAngles.y * DEG2PCT;
 	shapeCoord.x = (atan2(circleCoord.y, circleCoord.x) + M_PI) / M_PI_2;
+	// Shift to start angle
+	shapeCoord.x = mod2(shapeCoord.x - min(startAngle, endAngle), 1.0);
+	// Scale to area between start and end angles
+	// y = 1 / (abs((x - 1) % 4 - 2) - 1)
+	shapeCoord.x = shapeCoord.x / (abs(mod2(endAngle - startAngle - 1.0, 4.0) - 2.0) - 1.0);
+	// Keep coordinates in 
+	shapeCoord.x += endAngle - startAngle < 0.0;
 	shapeCoord.y = sqrt(circleCoord.x * circleCoord.x + circleCoord.y * circleCoord.y);
 #if SHAPE == CIRCLE_INNER
 	shapeCoord.y = 1.0 - shapeCoord.y;
@@ -142,7 +156,8 @@ void main() {
 
 	
 	// Get the height of the bar
-#if SHAPE == STEREO_H || SHAPE == STEREO_V || SHAPE == CENTER_H || SHAPE == CENTER_V // STEREO
+// STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ******
+#if SHAPE == STEREO_H || SHAPE == STEREO_V || SHAPE == CENTER_H || SHAPE == CENTER_V
 	float barVolume1L = u_AudioSpectrumLeft[barFreq1];
 	float barVolume2L = u_AudioSpectrumLeft[barFreq2];
 	float barVolume1R = u_AudioSpectrumRight[barFreq1];
@@ -194,8 +209,8 @@ void main() {
 	float bar = max(barLeft, barRight);
 
 
-
-#else // NON-STEREO
+// NON-STEREO *********** NON-STEREO *********** NON-STEREO *********** NON-STEREO *********** NON-STEREO *********** NON-STEREO ***********
+#else
 	float barVolume1 = (u_AudioSpectrumLeft[barFreq1] + u_AudioSpectrumRight[barFreq1]) * 0.5;
 	float barVolume2 = (u_AudioSpectrumLeft[barFreq2] + u_AudioSpectrumRight[barFreq2]) * 0.5;
 	float barVolume = lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency)));
@@ -228,6 +243,17 @@ void main() {
 #endif
 
 #endif // End of stereo vs non-stereo
+
+
+
+	// Semi-circle clipping
+#if SHAPE == CIRCLE_INNER || SHAPE == CIRCLE_OUTER
+// #if ANTIALIAS == 1
+// 	bar *= smoothstep(0.0, u_AASmoothness * 0.1, shapeCoord.x) * smoothstep(1.0, 1.0 - u_AASmoothness, shapeCoord.x * sign(endAngle - startAngle));
+// #else
+	bar *= shapeCoord.x > 0.0 && shapeCoord.x * sign(endAngle - startAngle) < 1.0;
+// #endif
+#endif
 
 
 
@@ -272,4 +298,5 @@ void main() {
 
 
 	gl_FragColor = vec4(finalColor, alpha);
+	//gl_FragColor = vec4(CAST3(shapeCoord.x), alpha);
 }

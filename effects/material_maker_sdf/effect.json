@@ -1,0 +1,19 @@
+{
+	"dependencies" : 
+	[
+		"materials/effects/material_maker_sdf.json",
+		"shaders/effects/material_maker_sdf.frag",
+		"shaders/effects/material_maker_sdf.vert"
+	],
+	"editable" : true,
+	"group" : "localeffects",
+	"name" : "Material Maker SDF",
+	"passes" : 
+	[
+		{
+			"material" : "materials/effects/material_maker_sdf.json"
+		}
+	],
+	"replacementkey" : "material_maker_sdf",
+	"version" : 1
+}

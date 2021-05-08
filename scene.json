@@ -1,8 +1,8 @@
 {
 	"camera" : 
 	{
-		"center" : "0.00000 0.00000 0.00000",
-		"eye" : "0.00000 0.00000 1.00000",
+		"center" : "0.00000 0.00000 -1.00000",
+		"eye" : "0.00000 0.00000 0.00000",
 		"up" : "0.00000 1.00000 0.00000"
 	},
 	"general" : 
@@ -126,7 +126,7 @@
 							"textures" : [ null, "util/clouds_256" ]
 						}
 					],
-					"visible" : true
+					"visible" : false
 				},
 				{
 					"file" : "effects/nitro/effect.json",
@@ -151,7 +151,7 @@
 							"textures" : [ null, "util/clouds_256" ]
 						}
 					],
-					"visible" : true
+					"visible" : false
 				},
 				{
 					"file" : "effects/vhs/effect.json",
@@ -601,8 +601,8 @@
 			"ledsource" : false,
 			"locktransforms" : false,
 			"model" : null,
-			"name" : "3D Clock",
-			"opaquebackground" : false,
+			"name" : "FPS display",
+			"opaquebackground" : true,
 			"origin" : "1965.37598 1761.19299 0.00000",
 			"padding" : 32,
 			"parallaxDepth" : "1.00000 1.00000",
@@ -614,7 +614,7 @@
 			"solid" : true,
 			"text" : 
 			{
-				"script" : "'use strict';\n\nimport * as WEMath from 'WEMath';\n\n// This will be used to separate each element\nlet delimiter = ':';\n\n// Whether you want to see the seconds or not\nlet showSeconds = true;\n\n// Whether you want a 24h or 12h style format\nlet use24hFormat = true;\n\n/**\n * @param {String} value (for property 'text')\n */\nvar shadowLayer;\nexport function update(value) {\n\tlet time = new Date();\n\tvar hours;\n\tvar suffix = '';\n\tif (use24hFormat) {\n\t\thours = (\"00\" + time.getHours()).slice(-2);\n\t} else {\n\t\thours = time.getHours();\n\t\tsuffix = hours >= 12 ? 'PM' : 'AM';\n\t\thours %= 12;\n\t\tif (hours == 0) {\n\t\t\thours = 12;\n\t\t}\n\t}\n\tlet minutes = (\"00\" + time.getMinutes()).slice(-2);\n\tlet seconds = (\"00\" + time.getSeconds()).slice(-2);\n\tvalue = hours + delimiter + minutes;\n\tif (showSeconds) {\n\t\tvalue += delimiter + seconds;\n\t}\n\tif (!use24hFormat) {\n\t\tvalue += ' ' + suffix;\n\t}\n\n\tvar delta = thisLayer.origin.subtract(input.cursorWorldPosition);\n\tvar shadowOffset = delta.copy();\n\tshadowOffset.z = 0;\n\tdelta = delta.divide(new Vec3(engine.canvasSize, 1));\n\tdelta.z = 0;\n\tvar rotation = new Vec3(delta.y, -delta.x, 4 * WEMath.mix(delta.x, -delta.x, Math.min(1, Math.max(0, delta.y * 0.1 + 0.5)))).multiply(50);\n\tthisLayer.angles = rotation;\n\tshadowLayer.angles = rotation;\n\tshadowLayer.origin = thisLayer.origin.add(shadowOffset.multiply(0.01));\n\tshadowLayer.text = value;\n\treturn value;\n}\n\n/**\n * @param {String} value (for property 'text')\n */\nexport function init() {\n\tshadowLayer = thisScene.createLayer({\n\t\ttext: 'shadow',\n\t\tcolor: '0 0 0',\n\t\talpha: 1,\n\t\tpointsize: thisLayer.pointsize,\n\t\tfont: thisLayer.font,\n\t\tperspective: true\n\t});\n\tshadowLayer.origin = thisLayer.origin;\n\tshadowLayer.angles = thisLayer.angles;\n\tshadowLayer.scale = thisLayer.scale;\n\tthisScene.sortLayer(shadowLayer, thisScene.getLayerIndex(thisLayer));\n}\n",
+				"script" : "'use strict';\n\nfunction add(value1, value2) {return value1 + value2}\n\n/**\n * @param {String} value - for property 'text'\n * @return {String} - update current property value\n */\nlet frameTimes= [];\nlet timeWindow= 2.0; // in seconds\nlet min = undefined;\nlet max = undefined;\nlet lastTime = undefined;\nexport function update(value) {\n\tlet currentTime = Date.now() * 0.001;\n\t// min = Math.min(min, 1.0 / engine.frametime);\n\t// max = Math.max(max, 1.0 / engine.frametime);\n\tif (lastTime === undefined) {\n\t\tlastTime = currentTime;\n\t\treturn `FPS: 0.0`;\n\t}\n\tframeTimes.push(currentTime - lastTime);\n\tlastTime = currentTime;\n\tlet totalTime = frameTimes.reduce(add);\n\twhile (totalTime > timeWindow && frameTimes.length > 1) {\n\t\tframeTimes.shift();\n\t\ttotalTime = frameTimes.reduce(add);\n\t}\n\tmin = Math.min(...frameTimes);\n\tmax = Math.max(...frameTimes);\n\tlet framerate = frameTimes.length / totalTime;\n\treturn `FPS:${framerate.toFixed(1)}`;//\\nMin/Max: ${(1.0 / max).toFixed(1)}/${(1.0 / min).toFixed(1)}`;\n}\n\n\n// /**\n//  * @param {String} value - for property 'text'\n//  * @return {String} - update current property value\n//  */\n// export function init(value) {\n// \tmin = 1.0 / engine.frametime;\n// \tmax = 1.0 / engine.frametime;\n//\n",
 				"value" : "<3D Clock>"
 			},
 			"verticalalign" : "center",
@@ -714,12 +714,31 @@
 			"color" : "1.00000 1.00000 1.00000",
 			"colorBlendMode" : 0,
 			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 598,
+					"name" : "Tint",
+					"passes" : 
+					[
+						{
+							"id" : 599
+						}
+					],
+					"visible" : true
+				}
+			],
 			"id" : 642,
 			"image" : "models/preview.json",
 			"ledsource" : false,
 			"locktransforms" : false,
-			"name" : "preview",
-			"origin" : "1592.25500 774.59698 0.00000",
+			"name" : "Bouncy ps2",
+			"origin" : 
+			{
+				"script" : "'use strict';\n\nimport * as WEVector from 'WEVector';\nimport * as WEColor from 'WEColor';\n\n/**\n * Attach this script to the 'origin' property of an image layer to make it bounce around the screen.\n * The layer must be smaller than the wallpaper or this script won't work!\n */\n\nlet bounceSpeed = 1000;\n\n// Choose a random direction in 90 degree steps\nvar direction = new Vec3(WEVector.angleVector2(45 + Math.floor(Math.random() * 4) * 90));\n\n/**\n * @param {Vec3} value\n */\nexport function update(value) {\n\n\tlet bounced = false;\n\tlet scale = thisLayer.scale;\n\tlet imageSize = thisLayer.size;\n\tlet canvasSize = engine.canvasSize;\n\n\t// We need the size from the center to the bounds.\n\timageSize.x *= scale.x * 0.5;\n\timageSize.y *= scale.y * 0.5;\n\n\t// Move along the direction.\n\tvalue = value.add(direction.multiply(engine.frametime * bounceSpeed));\n\n\t// Hit the screen bounds and reflect the direction.\n\tif (value.x < imageSize.x) {\n\t\tvalue.x = imageSize.x;\n\t\tdirection = direction.reflect(new Vec3(1, 0));\n\t\tbounced = true;\n\t} else if (value.x > canvasSize.x - imageSize.x) {\n\t\tvalue.x = canvasSize.x - imageSize.x;\n\t\tdirection = direction.reflect(new Vec3(-1, 0));\n\t\tbounced = true;\n\t}\n\n\tif (value.y < imageSize.y) {\n\t\tvalue.y = imageSize.y;\n\t\tdirection = direction.reflect(new Vec3(0, 1));\n\t\tbounced = true;\n\t} else if (value.y > canvasSize.y - imageSize.y) {\n\t\tvalue.y = canvasSize.y - imageSize.y;\n\t\tdirection = direction.reflect(new Vec3(0, -1));\n\t\tbounced = true;\n\t}\n\n\tif (bounced === true) {\n\t\tthisLayer.getEffect(0).getMaterial(0).color = WEColor.hsv2rgb(new Vec3(Math.random(), 1.0, 1.0));\n\t}\n\n\treturn value;\n}",
+				"value" : "1592.25500 774.59698 0.00000"
+			},
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
 			"scale" : "1.00000 1.00000 1.00000",
@@ -973,7 +992,7 @@
 			"parallaxDepth" : "1.00000 1.00000",
 			"particle" : "particles/new_particle_system_1.json",
 			"scale" : "5.00000 5.00000 1.00000",
-			"visible" : false
+			"visible" : true
 		},
 		{
 			"angles" : "0.00000 0.00000 0.00000",
@@ -1249,7 +1268,7 @@
 			"visible" : 
 			{
 				"script" : "'use strict';\nconst Helpers = shared.OMGHelpers;\n\n/**\n * @param {Boolean} value - for property 'visible'\n * @return {Boolean} - update current property value\n */\nexport function update(value) {\n\treturn value;\n}\n\n/**\n * @param {Boolean} value - for property 'visible'\n * @return {Boolean} - update current property value\n */\nexport function init(value) {\n\t// console.log(\"spin values:\");\n\t// Helpers.printObjectValues(thisLayer.getEffect(0).getMaterial(0));\n\t// console.log(\"spin values end\");\n\tthisLayer.getEffect(0).getMaterial(0).speed = 0.1;\n\treturn value;\n}\n",
-				"value" : true
+				"value" : false
 			}
 		},
 		{
@@ -1295,7 +1314,7 @@
 			"scale" : "5.00000 5.00000 1.00000",
 			"size" : "64.00000 47.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -2475,7 +2494,7 @@
 			"ledsource" : false,
 			"locktransforms" : false,
 			"name" : "Acrid_small",
-			"origin" : "2069.01440 664.61206 0.00000",
+			"origin" : "1991.79810 681.42761 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
 			"scale" : "8.00000 8.00000 1.00000",
@@ -2486,7 +2505,7 @@
 		{
 			"alignment" : "center",
 			"alpha" : 1.0,
-			"angles" : "-0.00000 -0.00000 -0.00303",
+			"angles" : "0.00000 0.00000 0.00000",
 			"brightness" : 1.0,
 			"color" : "0.00000 0.07451 1.00000",
 			"colorBlendMode" : 31,
@@ -2557,6 +2576,56 @@
 							"id" : 474
 						}
 					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/workshop/2084198056/Simple_Audio_Bars/effect.json",
+					"id" : 506,
+					"name" : "Simple Audio Bars (Online)",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"CLIP_LOW" : 1,
+								"RESOLUTION" : 64,
+								"SHAPE" : 4,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Anti-alias blurring" : "0.5 0.1",
+								"Bar Color" : "1 1 1",
+								"Bar Count" : 256,
+								"Lower/Upper Bar Bounds" : "0.5 0.8"
+							},
+							"id" : 509
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 1106,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"CLIP_HIGH" : 0,
+								"CLIP_LOW" : 1,
+								"SHAPE" : 4
+							},
+							"constantshadervalues" : 
+							{
+								"Circle Start/End Angles" : "118.81 360",
+								"Lower/Upper Bar Bounds" : "0.5 0.8"
+							},
+							"id" : 1107
+						}
+					],
 					"visible" : true
 				}
 			],
@@ -2565,13 +2634,160 @@
 			"ledsource" : false,
 			"locktransforms" : false,
 			"name" : "Solid Audio Bars",
-			"origin" : "2356.18628 1338.83118 0.00000",
+			"origin" : "1814.55249 933.72955 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
-			"scale" : "1.00000 1.00000 9.80345",
+			"scale" : "1.78882 1.78882 1.78882",
 			"size" : "1024.00000 1024.00000",
 			"solid" : true,
 			"visible" : true
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "-0.00000 -0.00000 -0.00303",
+			"brightness" : 1.0,
+			"color" : "0.00000 0.07451 1.00000",
+			"colorBlendMode" : 31,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 780,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"AUDIO_SIMULATE" : 0,
+								"A_SMOOTH_CURVE" : 1,
+								"BLENDMODE" : 0,
+								"CLIP_HIGH" : 0,
+								"CLIP_LOW" : 1,
+								"RESOLUTION" : 64,
+								"SHAPE" : 5,
+								"SMOOTH_CURVE" : 1,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Anti-alias blurring" : "0.5 1",
+								"Bar Bounds" : "0 1",
+								"Bar Color" : "0.10196078431372549 0.6039215686274509 1",
+								"Bar Count" : 64,
+								"Bar Opacity" : 1,
+								"Bar Spacing" : 0.40000000000000002,
+								"Lower/Upper Bar Bounds" : "0.2 0.3",
+								"ui_editor_properties_opacity" : 2.5
+							},
+							"id" : 781
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 782,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"A_SMOOTH_CURVE" : 1,
+								"CLIP_LOW" : 1,
+								"RESOLUTION" : 32,
+								"SHAPE" : 4,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Anti-alias blurring" : "1 1",
+								"Bar Color" : "0.07451 0.91765 1.00000",
+								"Bar Count" : 128,
+								"Bar Spacing" : 0.80000000000000004,
+								"Lower/Upper Bar Bounds" : "0.6 0.8",
+								"ui_editor_properties_opacity" : 1.5
+							},
+							"id" : 783
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/workshop/2084198056/Simple_Audio_Bars/effect.json",
+					"id" : 784,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 1,
+								"CLIP_LOW" : 1,
+								"RESOLUTION" : 64,
+								"SHAPE" : 4
+							},
+							"constantshadervalues" : 
+							{
+								"Anti-alias blurring" : "0.5 0.1",
+								"Bar Count" : 256,
+								"Lower/Upper Bar Bounds" : "0.5 0.8"
+							},
+							"id" : 785
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/Simple_Audio_Bars/effect.json",
+					"id" : 786,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"ANTIALIAS" : 0,
+								"A_SMOOTH_CURVE" : 1,
+								"BLENDMODE" : 0,
+								"CLIP_HIGH" : 0,
+								"CLIP_LOW" : 1,
+								"RESOLUTION" : 64,
+								"SHAPE" : 4,
+								"TRANSPARENCY" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"Bar Color" : "1 1 1",
+								"Bar Count" : 64,
+								"Bar Spacing" : 0.10000000000000001,
+								"Lower/Upper Bar Bounds" : "0.4 0.7",
+								"Semi-Circle Start/End Angles" : "0 360",
+								"ui_editor_properties_opacity" : 1.0
+							},
+							"id" : 787
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 779,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Solid Audio Bars",
+			"origin" : "1260.96716 1084.54407 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "2.00000 2.00000 2.00000",
+			"size" : "1024.00000 1024.00000",
+			"solid" : true,
+			"visible" : false
 		},
 		{
 			"angles" : "0.00000 0.00000 0.00000",
@@ -2615,7 +2831,7 @@
 							"id" : 484
 						}
 					],
-					"visible" : true
+					"visible" : false
 				},
 				{
 					"file" : "effects/circle_sdf/effect.json",
@@ -2627,6 +2843,18 @@
 							"id" : 431
 						}
 					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/material_maker_sdf/effect.json",
+					"id" : 539,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"id" : 540
+						}
+					],
 					"visible" : true
 				}
 			],
@@ -2634,14 +2862,14 @@
 			"image" : "models/util/solidlayer.json",
 			"ledsource" : false,
 			"locktransforms" : false,
-			"name" : "Solid",
-			"origin" : "1538.12390 948.98547 0.00000",
+			"name" : "SDF test",
+			"origin" : "1352.96765 971.20422 0.00000",
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
 			"scale" : "0.91211 0.91211 0.91211",
 			"size" : "2048.00000 2048.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -2692,7 +2920,53 @@
 			"scale" : "1.76735 1.76735 1.76735",
 			"size" : "512.00000 512.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 470,
+			"image" : "models/util/solidlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Delete layers crash test",
+			"origin" : "2048.00000 948.00000 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "1.00000 1.00000 1.00000",
+			"size" : "512.00000 512.00000",
+			"solid" : true,
+			"visible" : 
+			{
+				"script" : "// 'use strict';\n\n// let nextTask = \"create\";\n// const layerCount = 500;\n// let layerContainer = [];\n\n// /**\n//  * @param {ICursorEvent} event\n//  */\n// export function cursorClick(event) {\n\n// \tif (nextTask === \"create\") {\n// \t\tconsole.log(`creating ${layerCount * 2} layers.`)\n\n// \t\tfor (let i = 0; i < layerCount; ++i) {\n\n// \t\t\tlet newLayer = thisScene.createLayer({\n// \t\t\t\t\"image\": \"models/util/solidlayer.json\",\n// \t\t\t\t\"name\": `crashtest layer ${i}`,\n// \t\t\t\t\"size\" : \"4.00000 4.00000\",\n// \t\t\t\t\"origin\" : `${Math.random() * engine.canvasSize.x} ${Math.random() * engine.canvasSize.y} 0`,\n// \t\t\t\t\"angles\" : `${Math.random() * 360.0} ${Math.random() * 360.0} ${Math.random() * 360.0}`\n// \t\t\t});\n// \t\t\tlayerContainer.push(newLayer);\n\t\t\t\n// \t\t\tnewLayer = thisScene.createLayer({\n// \t\t\t\t\"model\" : \"models/Arwing/Arwing.mdl\",\n// \t\t\t\t\"name\": `crashtest 3D layer ${i}`,\n// \t\t\t\t\"scale\" : \"1000.00000 1000.00000 1000.00000\",\n// \t\t\t\t\"origin\" : `${Math.random() * engine.canvasSize.x} ${Math.random() * engine.canvasSize.y} 0`,\n// \t\t\t\t\"angles\" : `${Math.random() * 360.0} ${Math.random() * 360.0} ${Math.random() * 360.0}`\n// \t\t\t})\n// \t\t\tlayerContainer.push(newLayer);\n\n// \t\t}\n// \t\tconsole.log(\"Finished creating.\")\n// \t\tnextTask = \"destroy\";\n// \t}\n// \telse if (nextTask === \"destroy\") {\n// \t\tconsole.log(`destroying ${layerContainer.length} layers.`)\n// \t\twhile (layerContainer.length > 0) {\n// \t\t\tthisScene.destroyLayer(layerContainer.pop());\n// \t\t}\n// \t\t// let layers = thisScene.enumerateLayers();\n// \t\t// layers.forEach(layer=>{\n// \t\t// \tif(layer.name.startsWith(\"crashtest\") ){\n// \t\t// \t\tthisScene.destroyLayer(layer);\n// \t\t// \t}\n// \t\t// });\n// \t\tconsole.log(\"Finished destroying.\")\n// \t\tnextTask = \"create\";\n// \t}\n// }\n",
+				"value" : false
+			}
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 513,
+			"image" : "models/preview.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "preview",
+			"origin" : "1081.56665 1182.36658 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "5.00000 5.00000 1.00000",
+			"size" : "256.00000 256.00000",
+			"solid" : true,
+			"visible" : false
 		}
 	],
 	"version" : 0
