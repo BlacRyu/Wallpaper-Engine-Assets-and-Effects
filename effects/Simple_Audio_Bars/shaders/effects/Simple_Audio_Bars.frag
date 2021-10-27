@@ -10,8 +10,8 @@
 #include "common.h"
 #include "common_blending.h"
 
-#define DEG2RAD 2 * M_PI / 360.0
-#define DEG2PCT 1 / 360.0
+#define DEG2RAD 0.01745329251994329576923690768489 // 2 * PI / 360
+#define DEG2PCT 0.0027777777777777777777777777777 // 1 / 360
 
 // Same as GLSL's modulo function. Return value's sign is equivalent to the y value's sign.
 float mod2(float x, float y) { return x - y * floor(x/y); }
@@ -47,7 +47,7 @@ uniform float g_AudioSpectrum64Right[64];
 
 
 
-// Position
+// Shape & Position
 #define BOTTOM 0
 #define TOP 1
 #define LEFT 2
@@ -98,11 +98,11 @@ void main() {
 #endif
 #if SHAPE == TOP
 	vec2 shapeCoord = v_TexCoord;
-	shapeCoord.y = 1 - shapeCoord.y;
+	shapeCoord.y = 1.0 - shapeCoord.y;
 #endif
 #if SHAPE == LEFT
 	vec2 shapeCoord = v_TexCoord.yx;
-	shapeCoord.y = 1 - shapeCoord.y;
+	shapeCoord.y = 1.0 - shapeCoord.y;
 #endif
 #if SHAPE == RIGHT
 	vec2 shapeCoord = v_TexCoord.yx;
@@ -122,7 +122,7 @@ void main() {
 	vec2 shapeCoord = v_TexCoord.xy;
 #endif
 #if SHAPE == CIRCLE_INNER || SHAPE == CIRCLE_OUTER
-	vec2 circleCoord = (v_TexCoord - 0.5) * 2;
+	vec2 circleCoord = (v_TexCoord - 0.5) * 2.0;
 	vec2 shapeCoord;
 	float startAngle = u_CircleAngles.x * DEG2PCT;
 	float endAngle = u_CircleAngles.y * DEG2PCT;
@@ -132,8 +132,8 @@ void main() {
 	// Scale to area between start and end angles
 	// y = 1 / (abs((x - 1) % 4 - 2) - 1)
 	shapeCoord.x = shapeCoord.x / (abs(mod2(endAngle - startAngle - 1.0, 4.0) - 2.0) - 1.0);
-	// Keep coordinates in 
-	shapeCoord.x += endAngle - startAngle < 0.0;
+	// Keep coordinates positive. Adds 1.0 if the end is before the start.
+	shapeCoord.x += float((endAngle - startAngle) < 0.0);
 	shapeCoord.y = sqrt(circleCoord.x * circleCoord.x + circleCoord.y * circleCoord.y);
 #if SHAPE == CIRCLE_INNER
 	shapeCoord.y = 1.0 - shapeCoord.y;
@@ -144,65 +144,66 @@ void main() {
 
 	// Get the frequency for this pixel, ie where we will sample from in the audio spectrum array. 0 == lowest frequency, RESOLUTION == highest frequency.
 #if A_SMOOTH_CURVE == 1
-	float frequency = shapeCoord.x * RESOLUTION;
+	float frequency = shapeCoord.x * float(RESOLUTION);
 #else
 	// BarDist == How far this pixel is from the center of the bar that it belongs to. 0 = right in the middle, 1 = right on the edge.
-	float barDist = abs(frac(shapeCoord.x * u_BarCount) * 2 - 1);
-	float frequency = floor(shapeCoord.x * u_BarCount) / u_BarCount * RESOLUTION;
+	float barDist = abs(frac(shapeCoord.x * u_BarCount) * 2.0 - 1.0);
+	float frequency = floor(shapeCoord.x * u_BarCount) / u_BarCount * float(RESOLUTION);
 #endif
-	uint barFreq1 = frequency % RESOLUTION;
-	uint barFreq2 = (barFreq1 + 1) % RESOLUTION;
+	float barFreq1 = mod2(frequency, float(RESOLUTION));
+	float barFreq2 = mod2((barFreq1 + 1.0), float(RESOLUTION));
 
 
 	
 	// Get the height of the bar
 // STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ****** STEREO ******
 #if SHAPE == STEREO_H || SHAPE == STEREO_V || SHAPE == CENTER_H || SHAPE == CENTER_V
-	float barVolume1L = u_AudioSpectrumLeft[barFreq1];
-	float barVolume2L = u_AudioSpectrumLeft[barFreq2];
-	float barVolume1R = u_AudioSpectrumRight[barFreq1];
-	float barVolume2R = u_AudioSpectrumRight[barFreq2];
-	float barVolumeLeft = lerp(barVolume1L, barVolume2L, smoothstep(0, 1, frac(frequency)));
-	float barVolumeRight = lerp(barVolume1R, barVolume2R, smoothstep(0, 1, frac(frequency)));
+	float barVolume1L = u_AudioSpectrumLeft[int(barFreq1)];
+	float barVolume2L = u_AudioSpectrumLeft[int(barFreq2)];
+	float barVolume1R = u_AudioSpectrumRight[int(barFreq1)];
+	float barVolume2R = u_AudioSpectrumRight[int(barFreq2)];
+	float barVolumeLeft = mix(barVolume1L, barVolume2L, smoothstep(0.0, 1.0, frac(frequency)));
+	float barVolumeRight = mix(barVolume1R, barVolume2R, smoothstep(0.0, 1.0, frac(frequency)));
 
 	bool isLeftChannel = shapeCoord.y < 0.49;
 	bool isRightChannel = shapeCoord.y > 0.51;
 	
 	// bar = 1 if this pixel is inside a bar, 0 if outside
-	float barHeightLeft = 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, barVolumeLeft);
-	float barHeightRight = 0.5 * lerp(u_BarBounds.x, u_BarBounds.y, barVolumeRight);
+	float barHeightLeft = 0.5 * mix(u_BarBounds.x, u_BarBounds.y, barVolumeLeft);
+	float barHeightRight = 0.5 * mix(u_BarBounds.x, u_BarBounds.y, barVolumeRight);
 #if ANTIALIAS == 1
 	float verticalSmoothingLeft = u_AASmoothness.y * 0.05, verticalSmoothingRight = verticalSmoothingLeft;
-	verticalSmoothingLeft *= saturate(lerp(0, 1, barVolumeLeft * 100.0)); // Don't blur when near 0 volume
-	verticalSmoothingRight *= saturate(lerp(0, 1, barVolumeRight * 100.0));
+	verticalSmoothingLeft *= saturate(mix(0.0, 1.0, barVolumeLeft * 100.0)); // Don't blur when near 0 volume
+	verticalSmoothingRight *= saturate(mix(0.0, 1.0, barVolumeRight * 100.0));
 	float barLeft = smoothstep(shapeCoord.y - verticalSmoothingLeft, shapeCoord.y + verticalSmoothingLeft, barHeightLeft);
-	float barRight = smoothstep(1 - shapeCoord.y - verticalSmoothingRight, 1 - shapeCoord.y + verticalSmoothingRight, barHeightRight);
+	float barRight = smoothstep(1.0 - shapeCoord.y - verticalSmoothingRight, 1.0 - shapeCoord.y + verticalSmoothingRight, barHeightRight);
 #else
-	int barLeft = step(shapeCoord.y, barHeightLeft);
-	int barRight = step(1 - shapeCoord.y, barHeightRight);
+	float barLeft = float(step(shapeCoord.y, barHeightLeft));
+	float barRight = float(step(1.0 - shapeCoord.y, barHeightRight));
 #endif
 #if SHAPE == CENTER_H || SHAPE == CENTER_V
 	// Clip the L/R channels for center, so they don't wrap around.
-	barLeft *= isLeftChannel; barRight *= isRightChannel;
+	barLeft *= float(isLeftChannel);
+	barRight *= float(isRightChannel);
 #endif
 
 	// Bounds Clipping (Stereo)
 #if CLIP_LOW == 1
 #if ANTIALIAS == 1
 	barLeft *= 1.0 - smoothstep(shapeCoord.y - verticalSmoothingLeft, shapeCoord.y + verticalSmoothingLeft, 0.5 * u_BarBounds.x);
-	barRight *= 1.0 - smoothstep(1.0 - shapeCoord.y - verticalSmoothingRight, 1 - shapeCoord.y + verticalSmoothingRight, 0.5 * u_BarBounds.x);
+	barRight *= 1.0 - smoothstep(1.0 - shapeCoord.y - verticalSmoothingRight, 1.0 - shapeCoord.y + verticalSmoothingRight, 0.5 * u_BarBounds.x);
 #else
-	barLeft *= 1.0 - step(shapeCoord.y, 0.5 * u_BarBounds.x);
-	barRight *= 1.0 - step(1.0 - shapeCoord.y, 0.5 * u_BarBounds.x);
+	barLeft *= 1.0 - float(step(shapeCoord.y, 0.5 * u_BarBounds.x));
+	barRight *= 1.0 - float(step(1.0 - shapeCoord.y, 0.5 * u_BarBounds.x));
 #endif
 #endif
 #if CLIP_HIGH == 1
 #if ANTIALIAS == 1
-	barLeft *= smoothstep(shapeCoord.y - verticalSmoothingLeft, 1 - shapeCoord.y + verticalSmoothingLeft, u_BarBounds.y);
-	barRight *= smoothstep(1.0 - shapeCoord.y - verticalSmoothingRight, 1 - shapeCoord.y + verticalSmoothingRight, u_BarBounds.y);
+	barLeft *= smoothstep(shapeCoord.y - verticalSmoothingLeft, 1.0 - shapeCoord.y + verticalSmoothingLeft, u_BarBounds.y);
+	barRight *= smoothstep(1.0 - shapeCoord.y - verticalSmoothingRight, 1.0 - shapeCoord.y + verticalSmoothingRight, u_BarBounds.y);
 #else
-	barLeft *= step(shapeCoord.y, u_BarBounds.y);
-	barRight *= step(1.0 - shapeCoord.y, u_BarBounds.y);
+	barLeft *= float(step(shapeCoord.y, u_BarBounds.y));
+	barRight *= float(step(1.0 - shapeCoord.y, u_BarBounds.y));
 #endif
 #endif
 
@@ -211,34 +212,34 @@ void main() {
 
 // NON-STEREO *********** NON-STEREO *********** NON-STEREO *********** NON-STEREO *********** NON-STEREO *********** NON-STEREO ***********
 #else
-	float barVolume1 = (u_AudioSpectrumLeft[barFreq1] + u_AudioSpectrumRight[barFreq1]) * 0.5;
-	float barVolume2 = (u_AudioSpectrumLeft[barFreq2] + u_AudioSpectrumRight[barFreq2]) * 0.5;
-	float barVolume = lerp(barVolume1, barVolume2, smoothstep(0, 1, frac(frequency)));
+	float barVolume1 = (u_AudioSpectrumLeft[int(barFreq1)] + u_AudioSpectrumRight[int(barFreq1)]) * 0.5;
+	float barVolume2 = (u_AudioSpectrumLeft[int(barFreq2)] + u_AudioSpectrumRight[int(barFreq2)]) * 0.5;
+	float barVolume = mix(barVolume1, barVolume2, smoothstep(0.0, 1.0, frac(frequency)));
 
 	// How tall the bar is in the current pixel's column
-	float barHeight = lerp(u_BarBounds.x, u_BarBounds.y, barVolume);
+	float barHeight = mix(u_BarBounds.x, u_BarBounds.y, barVolume);
 	// bar = 1 if this pixel is inside a bar, 0 if outside
 #if ANTIALIAS == 1
 	float verticalSmoothing = u_AASmoothness.y * 0.05;
-	verticalSmoothing *= saturate(lerp(0, 1, barVolume * 100.0)); // Don't blur when near 0 volume
-	float bar = smoothstep(1 - shapeCoord.y - verticalSmoothing, 1 - shapeCoord.y + verticalSmoothing, barHeight);
+	verticalSmoothing *= saturate(mix(0.0, 1.0, barVolume * 100.0)); // Don't blur when near 0 volume
+	float bar = smoothstep(1.0 - shapeCoord.y - verticalSmoothing, 1.0 - shapeCoord.y + verticalSmoothing, barHeight);
 #else
-	int bar = step(1 - shapeCoord.y, barHeight);
+	float bar = float(step(1.0 - shapeCoord.y, barHeight));
 #endif
 
 	// Bounds Clipping (Non-stereo)
 #if CLIP_LOW == 1
 #if ANTIALIAS == 1
-	bar *= 1.0 - smoothstep(1.0 - shapeCoord.y - verticalSmoothing, 1 - shapeCoord.y + verticalSmoothing, u_BarBounds.x);
+	bar *= 1.0 - smoothstep(1.0 - shapeCoord.y - verticalSmoothing, 1.0 - shapeCoord.y + verticalSmoothing, u_BarBounds.x);
 #else
-	bar *= 1.0 - step(1.0 - shapeCoord.y, u_BarBounds.x);
+	bar *= 1.0 - float(step(1.0 - shapeCoord.y, u_BarBounds.x));
 #endif
 #endif
 #if CLIP_HIGH == 1
 #if ANTIALIAS == 1
-	bar *= smoothstep(1.0 - shapeCoord.y - verticalSmoothing, 1 - shapeCoord.y + verticalSmoothing, u_BarBounds.y);
+	bar *= smoothstep(1.0 - shapeCoord.y - verticalSmoothing, 1.0 - shapeCoord.y + verticalSmoothing, u_BarBounds.y);
 #else
-	bar *= step(1.0 - shapeCoord.y, u_BarBounds.y);
+	bar *= float(step(1.0 - shapeCoord.y, u_BarBounds.y));
 #endif
 #endif
 
@@ -249,9 +250,9 @@ void main() {
 	// Semi-circle clipping
 #if SHAPE == CIRCLE_INNER || SHAPE == CIRCLE_OUTER
 // #if ANTIALIAS == 1
-// 	bar *= smoothstep(0.0, u_AASmoothness * 0.1, shapeCoord.x) * smoothstep(1.0, 1.0 - u_AASmoothness, shapeCoord.x * sign(endAngle - startAngle));
+// 	bar *= smoothstep(0.0, u_AASmoothness * 0.1, shapeCoord.x) * smoothstep(1.0, 1.0 - u_AASmoothness, shapeCoord.x * float(sign(endAngle - startAngle)));
 // #else
-	bar *= shapeCoord.x > 0.0 && shapeCoord.x * sign(endAngle - startAngle) < 1.0;
+	bar *= float((shapeCoord.x > 0.0) && (shapeCoord.x * float(sign(endAngle - startAngle)) < 1.0));
 // #endif
 #endif
 
@@ -260,9 +261,9 @@ void main() {
 	// Bar spacing
 #if A_SMOOTH_CURVE != 1
 #if ANTIALIAS == 1
-	bar *= max(1 - step (0.01, u_BarSpacing), smoothstep(barDist - u_AASmoothness.x, barDist + u_AASmoothness.x, (1 - u_BarSpacing)));
+	bar *= max(1.0 - float(step(0.01, u_BarSpacing)), smoothstep(barDist - u_AASmoothness.x, barDist + u_AASmoothness.x, (1.0 - u_BarSpacing)));
 #else
-	bar *= step(barDist, 1 - u_BarSpacing);
+	bar *= float(step(barDist, 1.0 - u_BarSpacing));
 #endif
 #endif
 
@@ -272,7 +273,7 @@ void main() {
 	vec4 scene = texSample2D(g_Texture0, v_TexCoord);
 
 	// Apply blend mode
-	finalColor = ApplyBlending(BLENDMODE, lerp(finalColor.rgb, scene.rgb, scene.a), finalColor.rgb, bar * u_BarOpacity);
+	finalColor = ApplyBlending(BLENDMODE, mix(finalColor.rgb, scene.rgb, scene.a), finalColor.rgb, bar * u_BarOpacity);
 
 
 
@@ -286,7 +287,7 @@ void main() {
 	float alpha = max(scene.a, bar * u_BarOpacity);
 #endif
 #if TRANSPARENCY == SUBTRACT
-	float alpha = max(0, scene.a - bar * u_BarOpacity);
+	float alpha = max(0.0, scene.a - bar * u_BarOpacity);
 #endif
 #if TRANSPARENCY == INTERSECT
 	float alpha = scene.a * bar * u_BarOpacity;
