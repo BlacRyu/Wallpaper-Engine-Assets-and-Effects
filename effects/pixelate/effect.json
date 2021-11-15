@@ -6,7 +6,7 @@
 		"shaders/effects/pixelate.vert"
 	],
 	"description" : "Selectively lower the resolution of the image123.",
-	"editable" : false,
+	"editable" : true,
 	"group" : "blur",
 	"name" : "Pixelate",
 	"passes" : 

@@ -7,6 +7,8 @@
 // [COMBO] {"material":"Hide Below Lower Bounds","combo":"CLIP_LOW","type":"options","default":0}
 // [COMBO] {"material":"Hide Above Upper Bounds","combo":"CLIP_HIGH","type":"options","default":0}
 
+#define SMOOTH_CURVE A_SMOOTH_CURVE // For compatability with old wallpapers that get ported to Android
+
 #include "common.h"
 #include "common_blending.h"
 

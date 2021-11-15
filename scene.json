@@ -10,17 +10,17 @@
 		"ambientcolor" : "0.30000 0.30000 0.30000",
 		"bloom" : false,
 		"bloomhdr" : false,
-		"bloomhdrfeather" : 0.10000000149011612,
+		"bloomhdrfeather" : 0.1,
 		"bloomhdriterations" : 8,
-		"bloomhdrscatter" : 1.6189999580383301,
+		"bloomhdrscatter" : 1.619,
 		"bloomhdrstrength" : 2.0,
 		"bloomhdrthreshold" : 1.0,
 		"bloomstrength" : 2.0,
-		"bloomthreshold" : 0.89999997615814209,
+		"bloomthreshold" : 0.89999998,
 		"camerafade" : false,
 		"cameraparallax" : false,
 		"cameraparallaxamount" : 0.5,
-		"cameraparallaxdelay" : 0.10000000149011612,
+		"cameraparallaxdelay" : 0.1,
 		"cameraparallaxmouseinfluence" : 0.0,
 		"camerapreview" : false,
 		"camerashake" : false,
@@ -32,7 +32,7 @@
 		"farz" : 10000.0,
 		"fov" : 50.0,
 		"hdr" : false,
-		"nearz" : 0.0099999997764825821,
+		"nearz" : 0.0099999998,
 		"orthogonalprojection" : 
 		{
 			"height" : 1896,
@@ -89,7 +89,7 @@
 								"bounds" : "0 1",
 								"friction" : "1.51 1.51",
 								"speed" : 1,
-								"strength" : 0.050000000000000003
+								"strength" : 0.050000001
 							},
 							"id" : 11,
 							"textures" : 
@@ -174,11 +174,11 @@
 							"constantshadervalues" : 
 							{
 								"artifacts" : 1.5,
-								"chromatic" : 0.10000000000000001,
+								"chromatic" : 0.1,
 								"distortionspeed" : 1.0,
 								"distortionstrength" : 1.0,
 								"distortionwidth" : 1.0,
-								"scale" : 0.10000000000000001,
+								"scale" : 0.1,
 								"strength" : 1.0
 							},
 							"id" : 20,
@@ -224,7 +224,7 @@
 									"script" : "'use strict';\n\nexport var scriptProperties = createScriptProperties()\n\t.addSlider({\n\t\tname: 'newSlider',\n\t\tlabel: 'New Slider',\n\t\tvalue: 50,\n\t\tmin: 0,\n\t\tmax: 100,\n\t\tinteger: false\n\t})\n\t.finish();\n\n/**\n * @param {Number} value (for property 'shift')\n */\nexport function update(value) {\n\t\n\treturn value;\n}\n",
 									"value" : 0
 								},
-								"shift_speed" : 10.720000000000001
+								"shift_speed" : 10.72
 							},
 							"id" : 23
 						}
@@ -246,8 +246,8 @@
 							{
 								"Bar Color" : "1 1 1",
 								"Bar Count" : 32.0,
-								"Bar Spacing" : 0.10000000000000001,
-								"Bar count" : 47.700000000000003,
+								"Bar Spacing" : 0.1,
+								"Bar count" : 47.700001,
 								"Lower/Upper Bar Bounds" : "0.0, 1.0",
 								"ui_editor_properties_opacity" : 1.0
 							},
@@ -529,7 +529,8 @@
 						{
 							"constantshadervalues" : 
 							{
-								"new_resolution" : "20 20"
+								"new_resolution" : "20 20",
+								"resolution_scale" : 0.125
 							},
 							"id" : 110
 						}
@@ -684,7 +685,7 @@
 							"constantshadervalues" : 
 							{
 								"Color" : "1 1 1",
-								"Number of bars" : 21.739999999999998,
+								"Number of bars" : 21.74,
 								"Offset" : 0
 							},
 							"id" : 134
@@ -707,7 +708,7 @@
 							{
 								"Bar Color" : "1 1 1",
 								"Bar Count" : 32.0,
-								"Bar Spacing" : 0.10000000000000001,
+								"Bar Spacing" : 0.1,
 								"Color" : "1 0.5019607843137255 0.5019607843137255",
 								"Lower/Upper Bar Bounds" : "0.0, 1.0",
 								"ui_editor_properties_opacity" : 1.0
@@ -825,7 +826,7 @@
 								"alpha" : 1.0,
 								"colorend" : "1 0 0",
 								"colorstart" : "1 1 1",
-								"feather" : 0.48999999999999999,
+								"feather" : 0.49000001,
 								"scale" : "1.3 1.3 0.5 0.5",
 								"smoothness" : 0.0,
 								"speed" : "0.01 -0.02",
@@ -884,95 +885,6 @@
 			"size" : "128.00000 128.00000",
 			"solid" : true,
 			"visible" : false
-		},
-		{
-			"alignment" : "center",
-			"alpha" : 1.0,
-			"brightness" : 1.0,
-			"color" : "1.00000 1.00000 1.00000",
-			"colorBlendMode" : 0,
-			"copybackground" : true,
-			"effects" : 
-			[
-				{
-					"file" : "effects/tint/effect.json",
-					"id" : 356,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"constantshadervalues" : 
-							{
-								"alpha" : 1.0,
-								"color" : "1.000 0.000 0.000"
-							},
-							"id" : 141
-						}
-					],
-					"visible" : false
-				},
-				{
-					"file" : "effects/godrays/effect.json",
-					"id" : 273,
-					"name" : "",
-					"passes" : 
-					[
-						{
-							"constantshadervalues" : 
-							{
-								"noiseamount" : 0.40000000000000002,
-								"noisescale" : 3.0,
-								"noisesmoothness" : 0.20000000000000001,
-								"noisespeed" : 0.14999999999999999,
-								"raythreshold" : 0.5
-							},
-							"id" : 142,
-							"textures" : [ null, "util/white", "util/clouds_256" ]
-						},
-						{
-							"constantshadervalues" : 
-							{
-								"center" : "0.5 0.5",
-								"color" : "1 1 1",
-								"rayintensity" : 2,
-								"raylength" : 0.5
-							},
-							"id" : 143
-						},
-						{
-							"constantshadervalues" : 
-							{
-								"blurscale" : "1 1"
-							},
-							"id" : 147
-						},
-						{
-							"combos" : 
-							{
-								"VERTICAL" : 1
-							},
-							"constantshadervalues" : 
-							{
-								"blurscale" : "1 1"
-							},
-							"id" : 148
-						},
-						{
-							"id" : 149
-						}
-					],
-					"visible" : false
-				}
-			],
-			"id" : 247,
-			"image" : "models/util/fullscreenlayer.json",
-			"ledsource" : false,
-			"locktransforms" : false,
-			"name" : "Fullscreen",
-			"parallaxDepth" : "1.00000 1.00000",
-			"perspective" : false,
-			"solid" : true,
-			"visible" : true
 		},
 		{
 			"alignment" : "center",
@@ -1116,7 +1028,7 @@
 							"constantshadervalues" : 
 							{
 								"multiply" : 1,
-								"size" : 0.42999999999999999
+								"size" : 0.43000001
 							},
 							"id" : 201,
 							"textures" : [ null, "particle/magic/glyph_0", "particle/halo_5" ]
@@ -1157,10 +1069,10 @@
 						{
 							"constantshadervalues" : 
 							{
-								"noiseamount" : 0.40000000000000002,
+								"noiseamount" : 0.40000001,
 								"noisescale" : 3.0,
-								"noisespeed" : 0.14999999999999999,
-								"raythreshold" : 0.29999999999999999
+								"noisespeed" : 0.15000001,
+								"raythreshold" : 0.30000001
 							},
 							"id" : 206,
 							"textures" : [ null, "util/white", "util/clouds_256" ]
@@ -1173,9 +1085,9 @@
 							"constantshadervalues" : 
 							{
 								"color" : "1 1 1",
-								"direction" : 0.71999999999999997,
+								"direction" : 0.72000003,
 								"rayintensity" : 2,
-								"raylength" : 0.14999999999999999,
+								"raylength" : 0.15000001,
 								"speed" : 0.0
 							},
 							"id" : 207
@@ -1244,7 +1156,7 @@
 							"constantshadervalues" : 
 							{
 								"multiply" : 1,
-								"size" : 0.82999999999999996
+								"size" : 0.82999998
 							},
 							"id" : 216,
 							"textures" : [ null, "_rt_imageLayerComposite_794_a", "workshop/2099648933/bar" ]
@@ -1261,9 +1173,9 @@
 						{
 							"constantshadervalues" : 
 							{
-								"noiseamount" : 0.40000000000000002,
+								"noiseamount" : 0.40000001,
 								"noisescale" : 3.0,
-								"noisespeed" : 0.14999999999999999,
+								"noisespeed" : 0.15000001,
 								"raythreshold" : 0.5
 							},
 							"id" : 219,
@@ -1275,7 +1187,7 @@
 								"color" : "1 1 1",
 								"direction" : 0.0,
 								"rayintensity" : 1.0,
-								"raylength" : 0.10000000000000001,
+								"raylength" : 0.1,
 								"speed" : 0.0
 							},
 							"id" : 220
@@ -1317,7 +1229,7 @@
 								"bounds" : "0 1",
 								"friction" : "1 1",
 								"speed" : 1.0,
-								"strength" : 0.10000000000000001
+								"strength" : 0.1
 							},
 							"id" : 225,
 							"textures" : [ null, "util/noflow", "util/white" ]
@@ -1335,7 +1247,7 @@
 							"constantshadervalues" : 
 							{
 								"multiply" : 1.0,
-								"size" : 0.20000000000000001
+								"size" : 0.2
 							},
 							"id" : 228,
 							"textures" : [ null, "particle/tech/tech_1", "particle/halo_6" ]
@@ -1521,13 +1433,13 @@
 						{
 							"constantshadervalues" : 
 							{
-								"rate" : 0.80000000000000004
+								"rate" : 0.80000001
 							},
 							"id" : 245,
 							"textures" : [ null, "_rt_FullCompoBuffer1_480_490" ]
 						},
 						{
-							"id" : 190
+							"id" : 174
 						}
 					],
 					"visible" : false
@@ -1777,7 +1689,7 @@
 								"compositealpha" : 
 								{
 									"script" : "'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.compositealpha = userProperties.crt_effect * 0.15;\n}\n",
-									"value" : 0.14999999999999999
+									"value" : 0.15000001
 								},
 								"compositecolor" : "1 1 1",
 								"compositeoffset" : "0 0"
@@ -1858,7 +1770,7 @@
 								"distortion" : 
 								{
 									"script" : "// Fisheye - Distortion\n'use strict';\nexport let __workshopId = '2098598602';\n\n/**\n * @param {Object} userProperties\n */\nexport function applyUserProperties(userProperties) {\n\tif (userProperties.crt_effect !== undefined)\n\t\tthisObject.distortion = userProperties.crt_effect * .3;\n}\n",
-									"value" : 0.30000001192092896
+									"value" : 0.30000001
 								},
 								"size" : 
 								{
@@ -2066,7 +1978,7 @@
 							{
 								"scale" : "1 1"
 							},
-							"id" : 181
+							"id" : 249
 						},
 						{
 							"combos" : 
@@ -2096,7 +2008,7 @@
 								"compositecolor" : "1 1 1",
 								"compositeoffset" : "0 0"
 							},
-							"id" : 183,
+							"id" : 251,
 							"textures" : [ null, "util/white", "_rt_imageLayerComposite_298_b" ]
 						}
 					],
@@ -2120,7 +2032,7 @@
 							{
 								"scale" : "1 1"
 							},
-							"id" : 187
+							"id" : 253
 						},
 						{
 							"combos" : 
@@ -2132,7 +2044,7 @@
 							{
 								"scale" : "1 1"
 							},
-							"id" : 188
+							"id" : 255
 						},
 						{
 							"combos" : 
@@ -2145,7 +2057,7 @@
 								"compositealpha" : 
 								{
 									"script" : "// Blur - Alpha\n'use strict';\n\n/**\n * @param {Number} value - for property 'compositealpha'\n * @return {Number} - update current property value\n */\nexport function update() {\n\treturn shared.crt_effect * 0.2;\n}\n",
-									"value" : 0.20000000298023224
+									"value" : 0.2
 								},
 								"compositecolor" : "1 1 1",
 								"compositeoffset" : "0 0"
@@ -2176,7 +2088,7 @@
 									"value" : 0.5
 								}
 							},
-							"id" : 191,
+							"id" : 258,
 							"textures" : [ null, "workshop/2098598602/Vignette" ]
 						}
 					],
@@ -2226,7 +2138,7 @@
 								"distortion" : 
 								{
 									"script" : "// Fisheye - Distortion\n'use strict';\n\n/**\n * @param {Number} value - for property 'distortion'\n * @return {Number} - update current property value\n */\nexport function update(value) {\n\treturn shared.crt_effect * .3;\n}\n",
-									"value" : 0.30000001192092896
+									"value" : 0.30000001
 								},
 								"size" : 
 								{
@@ -2456,7 +2368,7 @@
 							},
 							"constantshadervalues" : 
 							{
-								"Anti-alias blurring" : 0.025000000000000001,
+								"Anti-alias blurring" : 0.025,
 								"Bar Bounds" : "0 1",
 								"Bar Color" : "0 0 0",
 								"Bar Count" : 32,
@@ -2502,10 +2414,10 @@
 						{
 							"constantshadervalues" : 
 							{
-								"noiseamount" : 0.40000000000000002,
+								"noiseamount" : 0.40000001,
 								"noisescale" : 3.0,
-								"noisesmoothness" : 0.20000000000000001,
-								"noisespeed" : 0.14999999999999999,
+								"noisesmoothness" : 0.2,
+								"noisespeed" : 0.15000001,
 								"raythreshold" : 0.5
 							},
 							"id" : 408,
@@ -2732,7 +2644,7 @@
 								"Bar Color" : "0.10196078431372549 0.6039215686274509 1",
 								"Bar Count" : 64,
 								"Bar Opacity" : 1,
-								"Bar Spacing" : 0.40000000000000002,
+								"Bar Spacing" : 0.40000001,
 								"Circle Start/End Angles" : "0.0, 360.0",
 								"Lower/Upper Bar Bounds" : "0.2 0.3",
 								"ui_editor_properties_opacity" : 2.5
@@ -2763,7 +2675,7 @@
 								"Anti-alias blurring" : "1 1",
 								"Bar Color" : "0.07451 0.91765 1.00000",
 								"Bar Count" : 128,
-								"Bar Spacing" : 0.80000000000000004,
+								"Bar Spacing" : 0.80000001,
 								"Circle Start/End Angles" : "0.0, 360.0",
 								"Lower/Upper Bar Bounds" : "0.6 0.8",
 								"ui_editor_properties_opacity" : 1.5
@@ -2793,7 +2705,7 @@
 								"Anti-alias blurring" : "0.5 0.1",
 								"Bar Color" : "1 1 1",
 								"Bar Count" : 256,
-								"Bar Spacing" : 0.10000000000000001,
+								"Bar Spacing" : 0.1,
 								"Lower/Upper Bar Bounds" : "0.5 0.8",
 								"ui_editor_properties_opacity" : 1.0
 							},
@@ -2824,7 +2736,7 @@
 								"Bar Color" : "1 1 1",
 								"Bar Count" : 64,
 								"Bar Spacing" : 0.5,
-								"Circle Start/End Angles" : "0 360",
+								"Circle Start/End Angles" : "114.72 193.13",
 								"Lower/Upper Bar Bounds" : "0.5 0.75",
 								"ui_editor_properties_opacity" : 1
 							},
@@ -2884,7 +2796,7 @@
 								"Bar Color" : "0.10196078431372549 0.6039215686274509 1",
 								"Bar Count" : 64,
 								"Bar Opacity" : 1,
-								"Bar Spacing" : 0.40000000000000002,
+								"Bar Spacing" : 0.40000001,
 								"Circle Start/End Angles" : "0.0, 360.0",
 								"Lower/Upper Bar Bounds" : "0.2 0.3",
 								"ui_editor_properties_opacity" : 2.5
@@ -2915,7 +2827,7 @@
 								"Anti-alias blurring" : "1 1",
 								"Bar Color" : "0.07451 0.91765 1.00000",
 								"Bar Count" : 128,
-								"Bar Spacing" : 0.80000000000000004,
+								"Bar Spacing" : 0.80000001,
 								"Circle Start/End Angles" : "0.0, 360.0",
 								"Lower/Upper Bar Bounds" : "0.6 0.8",
 								"ui_editor_properties_opacity" : 1.5
@@ -2944,7 +2856,7 @@
 								"Anti-alias blurring" : "0.5 0.1",
 								"Bar Color" : "1 1 1",
 								"Bar Count" : 256,
-								"Bar Spacing" : 0.10000000000000001,
+								"Bar Spacing" : 0.1,
 								"Lower/Upper Bar Bounds" : "0.5 0.8",
 								"ui_editor_properties_opacity" : 1.0
 							},
@@ -2975,7 +2887,7 @@
 							{
 								"Bar Color" : "1 1 1",
 								"Bar Count" : 64,
-								"Bar Spacing" : 0.10000000000000001,
+								"Bar Spacing" : 0.1,
 								"Circle Start/End Angles" : "0.0, 360.0",
 								"Lower/Upper Bar Bounds" : "0.4 0.7",
 								"Semi-Circle Start/End Angles" : "0 360",
@@ -3037,7 +2949,7 @@
 							{
 								"Color" : "0.6313725490196078 0 1",
 								"Fuzziness" : 0.001,
-								"Smoothness" : 0.10000000149011612,
+								"Smoothness" : 0.1,
 								"ui_editor_properties_opacity" : 1.0
 							},
 							"id" : 484
@@ -3180,6 +3092,119 @@
 			"size" : "256.00000 256.00000",
 			"solid" : true,
 			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 356,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"alpha" : 1.0,
+								"color" : "1.000 0.000 0.000"
+							},
+							"id" : 141
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/godrays/effect.json",
+					"id" : 273,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"noiseamount" : 0.40000001,
+								"noisescale" : 3.0,
+								"noisesmoothness" : 0.2,
+								"noisespeed" : 0.15000001,
+								"raythreshold" : 0.5
+							},
+							"id" : 142,
+							"textures" : [ null, "util/white", "util/clouds_256" ]
+						},
+						{
+							"constantshadervalues" : 
+							{
+								"center" : "0.5 0.5",
+								"color" : "1 1 1",
+								"rayintensity" : 2,
+								"raylength" : 0.5
+							},
+							"id" : 143
+						},
+						{
+							"constantshadervalues" : 
+							{
+								"blurscale" : "1 1"
+							},
+							"id" : 147
+						},
+						{
+							"combos" : 
+							{
+								"VERTICAL" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"blurscale" : "1 1"
+							},
+							"id" : 148
+						},
+						{
+							"id" : 149,
+							"textures" : [ null, "_rt_imageLayerComposite_247_a" ]
+						}
+					],
+					"visible" : false
+				},
+				{
+					"file" : "effects/pixelate/effect.json",
+					"id" : 555,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"MULTIPLY" : 1,
+								"POINTFILTER" : 0,
+								"RESOLUTION" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"new_resolution" : "240 135",
+								"resolution_scale" : 0.12
+							},
+							"id" : 556
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 247,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Pixelate",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : true
 		}
 	],
 	"version" : 0
