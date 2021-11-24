@@ -2993,7 +2993,7 @@
 			"scale" : "0.91211 0.91211 0.91211",
 			"size" : "2048.00000 2048.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
 		},
 		{
 			"alignment" : "center",
@@ -3174,7 +3174,7 @@
 				},
 				{
 					"file" : "effects/pixelate/effect.json",
-					"id" : 555,
+					"id" : 491,
 					"name" : "",
 					"passes" : 
 					[
@@ -3182,15 +3182,14 @@
 							"combos" : 
 							{
 								"MULTIPLY" : 1,
-								"POINTFILTER" : 0,
-								"RESOLUTION" : 1
+								"POINTFILTER" : 1
 							},
 							"constantshadervalues" : 
 							{
-								"new_resolution" : "240 135",
-								"resolution_scale" : 0.12
+								"new_resolution" : "64 36",
+								"resolution_scale" : 0.050000001
 							},
-							"id" : 556
+							"id" : 492
 						}
 					],
 					"visible" : true
@@ -3203,6 +3202,56 @@
 			"name" : "Pixelate",
 			"parallaxDepth" : "1.00000 1.00000",
 			"perspective" : false,
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"alignment" : "center",
+			"alpha" : 1.0,
+			"angles" : "0.00000 0.00000 0.00000",
+			"brightness" : 1.0,
+			"color" : "1.00000 1.00000 1.00000",
+			"colorBlendMode" : 0,
+			"config" : 
+			{
+				"passthrough" : true
+			},
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/pixelate/effect.json",
+					"id" : 612,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"MULTIPLY" : 0,
+								"POINTFILTER" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"new_resolution" : "16 16",
+								"resolution_scale" : 0.125
+							},
+							"id" : 613
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 593,
+			"image" : "models/util/composelayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Compose",
+			"origin" : "2422.48608 999.92822 0.00000",
+			"parallaxDepth" : "1.00000 1.00000",
+			"perspective" : false,
+			"scale" : "4.00000 4.00000 1.00000",
+			"size" : "128.00000 128.00000",
 			"solid" : true,
 			"visible" : true
 		}

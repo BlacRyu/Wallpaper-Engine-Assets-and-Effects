@@ -5,7 +5,7 @@
 		"shaders/workshop/2078835426/effects/pixelate.frag",
 		"shaders/workshop/2078835426/effects/pixelate.vert"
 	],
-	"description" : "Selectively lower the resolution of the image.",
+	"description" : "Selectively lower the resolution of the image123.",
 	"editable" : false,
 	"group" : "blur",
 	"name" : "Pixelate",

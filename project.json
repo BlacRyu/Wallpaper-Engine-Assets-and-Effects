@@ -13,7 +13,7 @@
 				"min" : 0,
 				"order" : 101,
 				"precision" : 2,
-				"step" : 0.10000000000000001,
+				"step" : 0.1,
 				"text" : "Bounce Speed",
 				"type" : "slider",
 				"value" : 5000
@@ -26,7 +26,7 @@
 				"min" : 0,
 				"order" : 104,
 				"precision" : 3,
-				"step" : 0.010000000000000002,
+				"step" : 0.01,
 				"text" : "CRT Color Bleed",
 				"type" : "slider",
 				"value" : 1
@@ -39,7 +39,7 @@
 				"min" : 0,
 				"order" : 103,
 				"precision" : 2,
-				"step" : 0.10000000000000001,
+				"step" : 0.1,
 				"text" : "CRT Strength",
 				"type" : "slider",
 				"value" : 0
@@ -82,7 +82,7 @@
 				"min" : -1000,
 				"order" : 100,
 				"precision" : 2,
-				"step" : 0.10000000000000001,
+				"step" : 0.1,
 				"text" : "Slide up",
 				"type" : "slider",
 				"value" : 0

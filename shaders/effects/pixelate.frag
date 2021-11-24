@@ -4,8 +4,10 @@
 uniform vec4 g_Texture0Resolution;
 uniform vec2 g_TexelSize;
 
-varying vec2 v_PixelCoord; // Pixel/subpixel coordinate within the virtual shrunken screen space
-varying vec2 v_PixelSize; // 1 / virtual screen resolution
+// The coordinates of the current pixel within the space spanning (0, 0) to (new x, new y).
+varying vec2 v_PixelCoord;
+// x and y are the width and height of a 'new' pixel in 0 to 1 coordinate space. z and w are the same for an old pixel
+varying vec4 v_PixelSize;
 
 uniform sampler2D g_Texture0; // {"material":"framebuffer","label":"ui_editor_properties_framebuffer","hidden":true}
 
@@ -15,13 +17,13 @@ uniform sampler2D g_Texture0; // {"material":"framebuffer","label":"ui_editor_pr
 
 void main() {
 #if POINTFILTER
-    // Sample the nearest pixel
-    vec2 texCoord00 = round(v_PixelCoord) * v_PixelSize;
-    texCoord00 = round(texCoord00 * g_Texture0Resolution.xy) * g_TexelSize + g_TexelSize * 0.5;
-    vec4 finalColor = texSample2D(g_Texture0, texCoord00);
+    // Sample the 'old' pixel nearest to the center of the 'new' pixel
+    vec2 texCoord = floor(v_PixelCoord) + vec2(0.5, 0.5); // Center of new 'pixel'
+    texCoord *= v_PixelSize.xy; // Normalize
+    vec4 finalColor = texSample2D(g_Texture0, texCoord); // Sample
 #else
     // Bilinear Filtering
-    vec2 texCoord00 = floor(v_PixelCoord) * v_PixelSize; // Top-left
+    vec2 texCoord00 = floor(v_PixelCoord) * v_PixelSize.xy; // Top-left
     vec2 texCoord01 = texCoord00 + vec2(0.0, v_PixelSize.y); // Bottom-left
     vec2 texCoord10 = texCoord00 + vec2(v_PixelSize.x, 0.0); // Top-right
     vec2 texCoord11 = texCoord00 + vec2(v_PixelSize.x, v_PixelSize.y); // Bottom-right
