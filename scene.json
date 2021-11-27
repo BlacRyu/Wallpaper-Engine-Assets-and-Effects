@@ -2744,6 +2744,27 @@
 						}
 					],
 					"visible" : true
+				},
+				{
+					"file" : "effects/pixelate/effect.json",
+					"id" : 504,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"MULTIPLY" : 0,
+								"POINTFILTER" : 1
+							},
+							"constantshadervalues" : 
+							{
+								"new_resolution" : "960 540"
+							},
+							"id" : 510
+						}
+					],
+					"visible" : true
 				}
 			],
 			"id" : 590,
@@ -3228,8 +3249,8 @@
 						{
 							"combos" : 
 							{
-								"MULTIPLY" : 0,
-								"POINTFILTER" : 1
+								"MULTIPLY" : 1,
+								"POINTFILTER" : 0
 							},
 							"constantshadervalues" : 
 							{
@@ -3253,7 +3274,7 @@
 			"scale" : "4.00000 4.00000 1.00000",
 			"size" : "128.00000 128.00000",
 			"solid" : true,
-			"visible" : true
+			"visible" : false
 		}
 	],
 	"version" : 0

@@ -17,13 +17,13 @@ uniform sampler2D g_Texture0; // {"material":"framebuffer","label":"ui_editor_pr
 
 void main() {
 #if POINTFILTER
-    // Sample the 'old' pixel nearest to the center of the 'new' pixel
-    vec2 texCoord = floor(v_PixelCoord) + vec2(0.5, 0.5); // Center of new 'pixel'
-    texCoord *= v_PixelSize.xy; // Normalize
-    vec4 finalColor = texSample2D(g_Texture0, texCoord); // Sample
+    // Sample the nearest 'old' pixel
+    vec2 texCoord00 = round(v_PixelCoord) * v_PixelSize;
+    texCoord00 = round(texCoord00 * g_Texture0Resolution.xy) * v_PixelSize.zw + v_PixelSize.zw * 0.5;
+    vec4 finalColor = texSample2D(g_Texture0, texCoord00);
 #else
     // Bilinear Filtering
-    vec2 texCoord00 = floor(v_PixelCoord) * v_PixelSize.xy; // Top-left
+    vec2 texCoord00 = floor(v_PixelCoord) * v_PixelSize; // Top-left
     vec2 texCoord01 = texCoord00 + vec2(0.0, v_PixelSize.y); // Bottom-left
     vec2 texCoord10 = texCoord00 + vec2(v_PixelSize.x, 0.0); // Top-right
     vec2 texCoord11 = texCoord00 + vec2(v_PixelSize.x, v_PixelSize.y); // Bottom-right

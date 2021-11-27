@@ -22,6 +22,5 @@ void main() {
 	v_PixelCoord = a_TexCoord * u_NewResolution;
 	v_PixelSize.xy = 1.0 / (u_NewResolution);
 #endif
-	
 	v_PixelSize.zw = 1.0 / g_Texture0Resolution.xy;
 }
